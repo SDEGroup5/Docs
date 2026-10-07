@@ -1,0 +1,59 @@
+on:
+  push:
+    branches: ["main"]
+    tags:
+      - "*"
+
+jobs:
+    compile:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+            - name: Cache initialization
+              id: typst-install-cache
+              uses: actions/cache@v6
+              with:
+                path: ./typst
+                key: ${{runner.os}}-typst-compiler-0.15.1
+            - name: Typst compiler download
+              if: steps.typst-install-cache.outputs.cache-hit != 'true'
+              run: |
+                wget https://github.com/typst/typst/releases/download/v0.15.1/typst-x86_64-unknown-linux-musl.tar.xz
+                mkdir typst
+                tar -xf typst-x86_64-unknown-linux-musl.tar.xz
+                mv ./typst-x86_64-unknown-linux-musl/typst ./typst/typst
+            - name: Compile typst files
+              run: |
+                mkdir compiled
+                for file in docs/*.typ;
+                do 
+                file=${file#"docs/"}
+                ./typst/typst compile ./docs/$file ./compiled/${file%".typ"}.pdf --root ./;
+                done
+            - name: Upload artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: compiled
+                path: "./compiled"
+    release:
+      runs-on: ubuntu-latest
+      if: github.ref_type == 'tag'
+      permissions:
+        contents: write
+      needs: compile
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v6
+        - name: Recover PDF files
+          uses: actions/download-artifact@v8
+          with:
+            name: compiled
+            path: ./compiled
+        - name: Release
+          uses: softprops/action-gh-release@v3
+          with:
+            files: |
+              ./compiled/*.pdf
+
+
