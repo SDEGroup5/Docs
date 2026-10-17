@@ -80,7 +80,8 @@ columns: (0.9fr, 1.6fr),
 gutter: 1.5em,
 align: (center + horizon, left + horizon),
 [
-#image("image_2.png", height: 78%)
+#image("/img/image_2.png", height: 78%)
+
 ],
 [
 #set text(size: 0.88em)
