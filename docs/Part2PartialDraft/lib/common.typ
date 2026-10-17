@@ -1,0 +1,12 @@
+#let course = "Service Design and Engineering"
+#let mainColor = rgb("B10B25")
+#let university = "University of Trento"
+#let date = "November 25th, 2026"
+#let labName = "Github Actions"
+#let labNumber = "5"
+#let linkColor = blue
+
+#let authors = (
+  matteo: (name: "Matteo", surname: "Schievano", stid: "265989"),
+  lorenzo: (name: "Lorenzo", surname: "Caraffini", stid: "267428"),
+)
