@@ -24,29 +24,29 @@
   radius: 0.4pt,
 )[#code]
 
-#slide("Docker image delivery with GitHub Actions")[
+#slide("Docker image building with GitHub Actions")[
   #body[
-   
+
   ]
 ]
 
-#slide("Packaging our application")[
+#slide("Packaging application")[
   #body[
    .
   ]
 ]
 
-#slide("Our publication workflow")[
+#slide("Publication workflow")[
   #body[
 
   ]
 ]
-#slide("GitHub Container Registry and image tags")[
+#slide("GitHub Container Registry")[
   #body[
    
   ]
 ]
-#slide("Running the published application")[
+#slide("Running the published image")[
   #body[
    
   ]
