@@ -1,7 +1,4 @@
-#import "../Part2PartialDraft/lib/common.typ": course, labNumber, labName
-#import "../Part2PartialDraft/lib/commonSlide.typ": cover, slide
-
-#cover([Laboratory #labNumber: #labName])
+#import "../lib/commonSlide.typ": slide
 
 #let body(content) = {
   set text(size: 19pt)
@@ -34,10 +31,10 @@
   ]
 ]
 */
-#slide("Building Docker images with GitHub Actions")[
+#slide("Building Docker images with GitHub Actions", 3)[
   #body[
     GitHub Actions automates the building of Docker images
-    and their publication to a container registry, such as GHCR.
+    and their publication to a container registry, such as GitHub Container Registry (GHCR).
 
     #v(12pt)
 
@@ -51,18 +48,15 @@
       [Build the image using a Dockerfile.],
       [Push the image to GitHub Container Registry.],
     )
+  ]
 
-    #v(14pt)
+  #move(dx: 53%, dy: -55%)[
+    #show figure.caption: set text(size: 1.3em)
+    #figure(
+      caption: "The Docker logo",
+      image("../../img/dockerCheatSheet/mdi--docker.svg", width: 50%),
+    )
 
-    The automation is defined in a YAML workflow stored
-    in the repository's `.github/workflows/` directory.
-
-    #v(12pt)
-
-    #text(size: 17pt)[
-      The workflow runs when a configured event occurs,
-      such as a push, pull request or release.
-    ]
   ]
 ]
 /*
@@ -75,38 +69,47 @@
 ]
 */
 
-#slide("Containerizing the application")[
+#slide("Containerizing the application", 3)[
   #body[
-  A DockerFile describes how to build an image containing the application and its runtime dependencies.
-  #v(12pt)
 
-  #list(
-    spacing: 9pt,
-    [Select a base image.],
-    [Install dependencies and include the applicaiton code],
-    [Build the application.],
-    [Define the comand used when the container is run.],
-  )
-  #v(14pt)
+    #grid(
+      columns: (40%, 60%),
+      align: (x, y) => if (x == 0) {
+        left + horizon
+      } else {
+        center + horizon
+      },
+      [
+        A DockerFile describes how to build an image containing the application and its runtime dependencies.
+        #v(12pt)
 
-  #text(size: 17pt)[
-      *In our project:* the backend uses a multi-stage build.
-      Nuitka produces the executable, which is copied
-      into a separate runtime image.
-    ]
+        #list(
+          spacing: 9pt,
+          [Select a base image.],
+          [Install dependencies and include the applicaiton code],
+          [Build the application.],
+          [Define the comand used when the container is run.],
+        )
+        #v(14pt)
 
-  #align(center)[
-    #image(
-      "/img/dockerCheatSheet/docker-sq.png",
-      width: 100%,
-      height: 100pt,
-      fit: "contain",
+        #text(size: 17pt)[
+          *In our project:* the backend uses a multi-stage build.
+          Nuitka produces the executable, which is copied
+          into a separate runtime image.
+        ]
+      ],
+      [
+        #show figure.caption: set text(size: 0.8em)
+        #figure(
+          caption: "Docker process by " + link("javacodehouse.com"),
+          image(
+            "/img/dockerCheatSheet/docker-sq.png",
+            width: 120%,
+          ),
+        )
+      ],
     )
-  ] 
 
-  #align(center)[
-    #text(size: 9pt)[Source: javacodehouse.com]
-  ]
   ]
 ]
 /*
@@ -119,7 +122,7 @@
   ]
 ]
 */
-#slide("GitHub Container Registry")[
+#slide("GitHub Container Registry", 3)[
   #body[
     GitHub Container Registry (GHCR) is GitHub's service
     for storing and distributing Docker and OCI images,
@@ -129,7 +132,11 @@
     #grid(
       columns: (1.2fr, 1fr),
       column-gutter: 20pt,
-      align: left + top,
+      align: (x, y) => if (x == 0) {
+        left + horizon
+      } else {
+        center + horizon
+      },
 
       [
         #list(
@@ -153,7 +160,10 @@
       ],
 
       [
-       Immagine da aggiungere?
+        #figure(
+          caption: "The GitHub logo",
+          image("../../img/topic1/mdi--github.svg", width: 50%),
+        )
       ],
     )
     #v(16pt)
@@ -172,52 +182,57 @@
   ]
 ]
 */
-#slide("Publication workflow")[
+#slide("Publication workflow", 3)[
   #body[
     The publication process is defined in a GitHub Actions
     YAML workflow stored in `.github/workflows/`.
 
-    #v(14pt)
+    #v(-1em)
 
-        #v(14pt)
+    #align(center + horizon)[
+      #show figure.caption: set text(size: 0.8em)
+      #figure(
+        caption: "Image upload with GitHub Action example",
 
-    #text(size: 15pt)[
-      ```yaml
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v7
+        text(size: 15pt)[
+          ```yaml
+          steps:
+            - name: Checkout code
+              uses: actions/checkout@v7
 
-        # Intermediate steps omitted
+            # Intermediate steps omitted
 
-        - name: Build and push image
-          uses: docker/build-push-action@v5
-          with:
-            context: ./backend
-            file: ./backend/Dockerfile.backend
-            push: true
-            tags: ghcr.io/sdegroup5/github-actions/backend:<tag>
-      ```
+            - name: Build and push image
+              uses: docker/build-push-action@v5
+              with:
+                context: ./backend
+                file: ./backend/Dockerfile.backend
+                push: true
+                tags: ghcr.io/sdegroup5/github-actions/backend:<tag>
+          ```
+        ],
+      )
     ]
 
- #text(size: 17pt)[
-  #list(
-    spacing: 8pt,
+    #text(size: 17pt)[
+      #list(
+        spacing: 8pt,
 
-    [
-      *Checkout:* downloads the repository files
-      to the runner.
-    ],
+        [
+          *Checkout:* downloads the repository files
+          to the runner.
+        ],
 
-    [
-      *Build:* uses the specified Dockerfile and
-      the files in `./backend` to create the image.
-    ],
+        [
+          *Build:* uses the specified Dockerfile and
+          the files in `./backend` to create the image.
+        ],
 
-    [
-      *Publish:* `push: true` uploads the image
-      to GHCR using the name and tag specified in `tags`.
-    ],
-  )
+        [
+          *Publish:* `push: true` uploads the image
+          to GHCR using the name and tag specified in `tags`.
+        ],
+      )
     ]
   ]
 ]
@@ -229,7 +244,7 @@
   ]
 ]
 */
-#slide("Running the published image")[
+#slide("Running the published image", 3)[
   #body[
     Once published to GHCR, an image can be downloaded
     and run in a compatible Docker environment.
@@ -255,22 +270,27 @@
       ],
     )
 
-    #v(12pt)
+    #v(-2em)
 
-    #text(size: 15pt)[
-      ```bash
-      docker pull <image>:<tag>
+    #align(center + horizon)[
+      #show figure.caption: set text(size: 0.8em)
+      #figure(
+        caption: "Docker commands example",
+        text(size: 15pt)[
+          ```bash
+          docker pull <image>:<tag>
 
-      docker run -d --name my-app \
-        -p <host-port>:<container-port> \
-        <image>:<tag>
+          docker run -d --name my-app \
+            -p <host-port>:<container-port> \
+            <image>:<tag>
 
-      docker ps
-      docker logs my-app
-      ```
+          docker ps
+          docker logs my-app
+          ```
+        ],
+      )
+
     ]
-
-    #v(12pt)
 
     #text(size: 17pt)[
       Use `docker ps` to check whether the container is running
@@ -280,6 +300,7 @@
     ]
   ]
 ]
+
 /*
 #slide("Docker Compose demonstration")[
   #body[
@@ -288,57 +309,77 @@
   ]
 ]
 */
-#slide("Docker Compose demonstration")[
+#slide("Docker Compose demonstration", 3)[
   #body[
-    Docker Compose defines and runs multi-container
-    applications using a single YAML configuration file.
 
-    #v(12pt)
-
-    #list(
-      spacing: 10pt,
-
+    #grid(
+      columns: (40%, 60%),
+      align: (x, y) => if (x == 0) {
+        left + horizon
+      } else {
+        center + horizon
+      },
       [
-        *Services:* define the application components,
-        their images and runtime configuration.
+        Docker Compose defines and runs multi-container
+        applications using a single YAML configuration file.
+
+        #list(
+          spacing: 10pt,
+
+          [
+            *Services:* define the application components,
+            their images and \ runtime configuration.
+          ],
+
+          [
+            *Networks:* allow the service containers
+            to communicate with \ each other.
+          ],
+
+          [
+            *Volumes:* provide persistent \ storage
+            when mounted into the containers.
+          ],
+        )
+
+        #align(center)[
+          #show figure.caption: set text(size: 0.8em)
+          #figure(
+            caption: "Docker compose commands example",
+            text(size: 15pt)[
+              ```bash
+              docker compose up -d
+              docker compose ps
+              docker compose logs
+              docker compose down
+              ```
+            ],
+          )
+        ]
+
       ],
-
       [
-        *Networks:* allow the service containers
-        to communicate with each other.
-      ],
-
-      [
-        *Volumes:* provide persistent storage
-        when mounted into the containers.
+        #align(center)[
+          #show figure.caption: set text(size: 0.8em)
+          #figure(
+            caption: "Example architecture",
+            image(
+              "/img/dockerCheatSheet/compose-application.webp",
+              width: 120%,
+            ),
+          )
+        ]
       ],
     )
 
-    #v(14pt)
-
-    #text(size: 15pt)[
-      ```bash
-      docker compose up -d
-      docker compose ps
-      docker compose logs
-      docker compose down
-      ```
-    ]
-
-  
-   #align(center)[
-    #image(
-      "/img/dockerCheatSheet/compose-application.webp",
-      width: 75%,
-      height: 150pt,
-      fit: "contain",
-    )
-    ]
   ]
 ]
-#slide("Exercise")[
+
+#slide("Exercise", 3)[
   #body[
-   
+    #text(size: 1.2em, weight: "bold")[This will be on the website!!!!!]
+
+    Complete the workflow to make the github action publish a new image. Verify that the changes can be pulled. Optionally, the docker registry could also be used.
   ]
 ]
 
