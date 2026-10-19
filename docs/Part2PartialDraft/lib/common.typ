@@ -10,4 +10,5 @@
   lorenzoc: (name: "Lorenzo", surname: "Caraffini", stid: "267428"),
   lorenzor: (name: "Lorenzo", surname: "Radice", stid: "267646"),
   matteo: (name: "Matteo", surname: "Schievano", stid: "265989"),
+  david: (name: "David", surname: "Stanicel", stid: "274785")
 )

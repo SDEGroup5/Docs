@@ -38,7 +38,7 @@
       [*Team members*],[],
       [],[#authors.lorenzoc.name #authors.lorenzoc.surname (#authors.lorenzoc.stid)],
       [], [#authors.lorenzor.name #authors.lorenzor.surname (#authors.lorenzor.stid)],
-      [], [#authors.matteo.name #authors.matteo.surname (#authors.matteo.stid)],
+      [], [#authors.matteo.name #authors.matteo.surname (#authors.matteo.stid)],[],[#authors.david.name #authors.david.surname (#authors.david.stid)]
     )
   ]
 
