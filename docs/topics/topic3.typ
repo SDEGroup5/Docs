@@ -49,7 +49,7 @@
       [Push the image to GitHub Container Registry.],
     )
   ]
-
+// Place here the YML snippet of the workflow, and a diagram showing the process
   #move(dx: 53%, dy: -55%)[
     #show figure.caption: set text(size: 1.3em)
     #figure(
@@ -80,14 +80,15 @@
         center + horizon
       },
       [
-        A DockerFile describes how to build an image containing the application and its runtime dependencies.
+        A Dockerfile describes how to build an image containing the application and its runtime dependencies.
         #v(12pt)
-
+// Make the image vertical and more meaningful
         #list(
           spacing: 9pt,
           [Select a base image.],
           [Install dependencies and include the applicaiton code],
           [Build the application.],
+          [Place the application in the runtime environment.],
           [Define the comand used when the container is run.],
         )
         #v(14pt)
