@@ -5,8 +5,10 @@
     title: [#title - #course - #university],
     author: (
       authors.lorenzoc.name + " " + authors.lorenzoc.surname + " - Student Id " + authors.lorenzoc.stid,
+      authors.filippo.name + " " + authors.filippo.surname + " - Student Id " + authors.filippo.stid,
       authors.lorenzor.name + " " + authors.lorenzor.surname + " - Student Id " + authors.lorenzor.stid,
       authors.matteo.name + " " + authors.matteo.surname + " - Student Id " + authors.matteo.stid,
+      authors.david.name + " " + authors.david.surname + " - Student Id " + authors.david.stid,
     ),
     description: [Laboratory presentation for the Service Design and Engineering course at #university],
   )
@@ -37,6 +39,7 @@
       inset: 0.4em,
       [*Team members*],
       [#authors.lorenzoc.name #authors.lorenzoc.surname (#authors.lorenzoc.stid)],
+      [], [#authors.filippo.name #authors.filippo.surname (#authors.filippo.stid)],
       [], [#authors.lorenzor.name #authors.lorenzor.surname (#authors.lorenzor.stid)],
       [],
       [#authors.matteo.name #authors.matteo.surname (#authors.matteo.stid)],
