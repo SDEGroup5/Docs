@@ -49,7 +49,7 @@
       [Push the image to GitHub Container Registry.],
     )
   ]
-// Place here the YML snippet of the workflow, and a diagram showing the process
+  // Place here the YML snippet of the workflow, and a diagram showing the process
   #move(dx: 53%, dy: -55%)[
     #show figure.caption: set text(size: 1.3em)
     #figure(
@@ -82,7 +82,7 @@
       [
         A Dockerfile describes how to build an image containing the application and its runtime dependencies.
         #v(12pt)
-// Make the image vertical and more meaningful
+        // Make the image vertical and more meaningful
         #list(
           spacing: 9pt,
           [Select a base image.],
@@ -104,7 +104,7 @@
         #figure(
           caption: "Docker process by " + link("javacodehouse.com"),
           image(
-            "/img/dockerCheatSheet/docker-sq.png",
+            "../../img/dockerCheatSheet/docker-sq.png",
             width: 120%,
           ),
         )
@@ -365,7 +365,7 @@
           #figure(
             caption: "Example architecture",
             image(
-              "/img/dockerCheatSheet/compose-application.webp",
+              "../../img/dockerCheatSheet/compose-application.webp",
               width: 120%,
             ),
           )
