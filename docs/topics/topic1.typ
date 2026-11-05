@@ -55,23 +55,29 @@
 
 // Slide 2: What we'll do in this lab
 #slide("What we'll do in this laboratory", 1)[
-  #show list: set text(size: 1.3em)
+  #text(size: 1.6em, weight: "bold")[Laboratory Overview:]
 
-  #align(center + horizon)[
-    *Laboratory Overview:*
+  #v(0.8em)
 
-    - Learn GitHub Actions basics and syntax
-    - Automate testing with a simple Python application
-      - *Note:* Python is just an example - the concepts apply to any language!
-    - Build and compile executables automatically
-    - Create and publish Docker containers
-    - Put it all together: CI/CD pipeline from code to deployment
+  #set list(spacing: 0.7em)
+  #show list: set text(size: 2.2em)
 
-    #v(1em)
-    #hint(txtSize: 1.1em)[
-      *Focus:* We'll concentrate on *GitHub-hosted runners* (cloud execution) throughout this lab.
+  - Learn GitHub Actions basics and syntax
+  - Automate testing with a simple Python application
+  - Build and compile executables automatically
+  - Create and publish Docker containers
+  - Put it all together: CI/CD pipeline from code to deployment
+
+  #v(1em)
+
+  #align(center)[
+    #hint(txtSize: 1.2em)[
+      📝 *Note:* We'll use Python as our example language — but the same concepts apply to any language!
     ]
   ]
+
+  #v(0.5em)
+
 
 ]
 
@@ -103,7 +109,7 @@
         - *Fast Feedback:* Immediate notification of success or failure before merging.
       ],
       [
-        #figure(caption: "CI/CD representation", image("../../img/topic1/mdi--gear.svg", width: 80%))
+        #figure(caption: "CI/CD representation", image("../../img/topic1/mdi--gear.svg", width: 60%))
 
       ],
     )
@@ -151,13 +157,11 @@
 ]
 
 
-// Slide 5: Workflow Anatomy
-#slide("Anatomy of a Workflow", 1)[
-
-  #show grid.cell.where(x: 1): set text(size: 1.15em)
+// Slide 5a: Workflow Anatomy - High Level
+#slide("Anatomy of a Workflow: The Big Picture", 1)[
 
   #grid(
-    columns: (1fr, 1fr),
+    columns: (1fr, 1.1fr),
     align: (x, y) => if (x == 0) {
       center + horizon
     } else {
@@ -168,94 +172,139 @@
       #figure(
         caption: "Scheme of GitHub actions' workflow",
       )[
-        #image("../../img/topic1/image_2.png", width: 70%)
+        #image("../../img/topic1/image_2.png", width: 80%)
       ]
-
     ],
     [
-      #set list(spacing: 0.5em)
-      #v(1em)
+      #set list(spacing: 0.6em)
+      #show list: set text(size: 1.1em)
+      #v(0.5em)
 
-      *The fundamental hierarchy of GitHub Actions:*
+      *Three layers, from trigger to execution:*
 
-      - Events: Triggers that start the automation (push, pull_request).
-      - Workflows: Top-level automated processes defined in .yml files.
-      - Jobs: Units executed on a dedicated, isolated runner.
-      - Run in parallel by default, or sequentially via needs: (e.g., deploy after test).
-      - New Job = Fresh environment: Files or packages do not persist between jobs!
-      - Actions (Steps): Individual tasks or reusable blocks executed on the same runner (sharing files and state).
-    ],
-  )
-]
+      - *Event:* Something happens on GitHub (a push, a pull request, a tag...) and *triggers* the automation.
 
+      - *Workflow:* A YAML file in `.github/workflows/` that describes *what to do* when an event fires. A repo can have multiple workflows for different purposes (CI, release, deploy...).
 
-
-// Slide 6: General Syntax Example - Overview
-#slide("General Syntax Example: Automatic Document Compilation", 1)[
-  #show grid.cell.where(x: 0): set text(size: 1.15em)
-  #grid(
-    columns: (1.2fr, 1fr),
-    align: (x, y) => if (x == 0) {
-      left + horizon
-    } else {
-      center + horizon
-    },
-    inset: 1.2em,
-    [
-      *Goal:* Automatically compile Typst documents whenever code is pushed to the `main` branch.
-
-      *Key Components:*
-      - *Event (`on:`):* Trigger that starts the workflow
-      - *Job (`jobs:`):* Unit of work running on a dedicated runner
-      - *Steps:* Sequential tasks executed on the same runner
+      - *Job:* A workflow contains one or more jobs. Each job runs on its own *isolated, fresh machine* (the runner). Jobs run *in parallel by default*.
 
       #v(0.5em)
       #hint(txtSize: 1em)[
-        💡 *Remember:* Each job gets a fresh, isolated environment. Steps within a job share files and state!
-      ]
-    ],
-    [
-      #figure(
-        caption: "Workflow execution flow",
-      )[
-        #image("../../img/topic1/image_2.png", width: 85%)
+        💡 Jobs can be made sequential using `needs:` — e.g. run `deploy` only after `test` passes.
       ]
     ],
   )
 ]
 
-// Slide 6a: General Syntax - Detailed Code
-#slide("General Syntax: Step-by-Step Breakdown", 1)[
-  #set text(size: 0.9em)
-  #raw(
-    "name: Typst Compiler Workflow    # Name displayed in GitHub's 'Actions' tab
+
+
+// Slide 5b: Workflow Anatomy - Jobs and Steps
+#slide("Anatomy of a Workflow: Jobs and Steps", 1)[
+
+  #grid(
+    columns: (1fr, 1fr),
+    align: left + top,
+    inset: 1.2em,
+    [
+      #set list(spacing: 0.55em)
+      #show list: set text(size: 1.1em)
+
+      *Inside a Job: Steps*
+
+      A job contains a sequence of *Steps*, executed one after another on the *same runner*:
+
+      - Each step is either a shell command (`run:`) or a pre-built Action (`uses:`).
+      - Steps *share the filesystem* — files created in step 1 are available in step 2.
+      - If one step fails (exit code ≠ 0), the job stops immediately.
+
+      #v(0.8em)
+
+      *Key isolation rule:*
+
+      - *Between jobs:* completely isolated. A fresh machine, no shared files.
+      - *Within a job:* shared environment. All steps see the same working directory.
+    ],
+    [
+      #set list(spacing: 0.55em)
+      #show list: set text(size: 1.1em)
+
+      *A concrete example:*
+
+      #v(0.4em)
+
+      #raw(
+"jobs:
+  compile:
+    runs-on: ubuntu-latest  # fresh machine
+
+    steps:
+      - uses: actions/checkout@v4
+        # Step 1: repo files now available
+
+      - run: ./typst compile doc.typ
+        # Step 2: can use files from step 1!",
+        block: true,
+        lang: "yaml",
+      )
+
+      #v(0.6em)
+      #hint(txtSize: 1em)[
+        💡 The runner starts *completely empty* — without `checkout`, your files don't exist on it!
+      ]
+    ],
+  )
+]
+
+// Slide 8a: General Syntax - Trigger and Job
+#slide("General Syntax: Trigger and Job Structure", 1)[
+  #set text(size: 1.5em)
+  #align(center + horizon)[
+    #raw(
+      "name: Typst Compiler Workflow    # Name displayed in GitHub's 'Actions' tab
+                                 # Shown in the repository's Actions tab
 
 on:                              # 1. EVENT: What triggers this workflow?
   push:                          # Reacts when commits are pushed...
-    branches: [ \"main\" ]         # ...ONLY if pushed to the 'main' branch
+    branches: [ \"main\" ]         # ...ONLY if pushed to 'main'
+                                 # (other branches are ignored)
 
-jobs:                            # 2. JOBS: Units of work (run in parallel by default)
-  compile:                       # Unique Job ID (you can name it freely)
-    runs-on: ubuntu-latest       # Spins up a fresh Ubuntu virtual machine
-                                 # (the isolated Runner in GitHub's cloud)
-    steps:                       # 3. STEPS: Sequential tasks on the SAME runner
-      
-      - name: Checkout code      # Step 1: Get the repository files
+jobs:                            # 2. JOBS: Units of work
+                                 # Multiple jobs run in PARALLEL by default
+  compile:                       # Unique Job ID — you choose the name freely
+    runs-on: ubuntu-latest       # Spins up a FRESH Ubuntu virtual machine
+                                 # in GitHub's cloud for every run
+                                 # Other options: windows-latest, macos-latest",
+      block: true,
+      lang: "yaml",
+    )
+  ]
+]
+
+// Slide 8b: General Syntax - Steps
+#slide("General Syntax: Steps Inside a Job", 1)[
+  #set text(size: 1.5em)
+  #align(center + horizon)[
+    #raw(
+      "    steps:                       # 3. STEPS: Sequential tasks on the SAME runner
+
+      - name: Checkout code      # Step 1: label shown in GitHub UI
         uses: actions/checkout@v4
                                  # 'uses:' imports a pre-built Action
-                                 # This clones your repo into the empty runner!
+                                 # Without this, the runner is EMPTY —
+                                 # your repo files do not exist yet!
                                  # Format: 'owner/repo@version'
-                                 # - 'actions/' = official GitHub organization
-                                 # - '@v4' = pinned major version (stable API)
+                                 #   'actions/' = official GitHub org
+                                 #   '@v4'      = pinned major version
 
-      - name: Compile document   # Step 2: Run the compilation
+      - name: Compile document   # Step 2: runs after Step 1 completes
         run: ./typst compile ./docs/main.typ
-                                 # 'run:' executes shell commands
-                                 # Both './typst' and repo files from Step 1
+                                 # 'run:' executes any shell command
+                                 # './typst' and all repo files from Step 1
                                  # are available in the same working directory",
-    block: true,
-    lang: "yaml",
-  )
+      block: true,
+      lang: "yaml",
+    )
+  ]
 ]
 
 
@@ -306,52 +355,6 @@ jobs:                            # 2. JOBS: Units of work (run in parallel by de
 
 
 
-// Slide 6c: Registering a Self-Hosted Runner (Reference Only)
-#slide("Self-Hosted Runner Setup (Reference)", 1)[
-  
-  #hint(txtSize: 1em)[
-    *Important:* This slide is for reference only. *We will NOT use self-hosted runners in this lab* — we focus on GitHub-hosted runners instead.
-  ]
-
-  #v(0.6em)
-
-  #show grid.cell.where(x: 0): set text(size: 1.05em)
-
-  #grid(
-    columns: (1.2fr, 1fr),
-    inset: 1em,
-    [
-      *How the Handshake & Polling work (for self-hosted):*
-      
-      1. *Generate Token:* In the repo, go to *Settings → Actions → Runners → New self-hosted runner*.
-      
-      2. *Register ( `./config.sh` ):* Authenticate your machine with the repo using the temporary token.
-      
-      3. *Listen ( `./run.sh` ):* The local agent opens a bidirectional HTTPS connection, polling GitHub for `[self-hosted]` jobs and sending back live logs/exit codes.
-
-      #v(0.5em)
-      #text(size: 0.9em, style: "italic")[This is shown for completeness — we concentrate on cloud-based GitHub-hosted runners.]
-    ],
-    [
-      #figure(
-        caption: "Self-hosted runner configuration",
-        text(size: 0.95em)[
-          #raw(
-            "# 1. Register the machine to the repo
-./config.sh \
-  --url https://github.com/repo \
-  --token <REGISTRATION_TOKEN>
-
-# 2. Start the agent (must stay active!)
-./run.sh",
-            block: true,
-            lang: "bash",
-          )],
-      )
-    ],
-  )
-]
-
 
 
 // Slide 7: How does an Action fail?
@@ -382,6 +385,7 @@ jobs:                            # 2. JOBS: Units of work (run in parallel by de
       - Missing required files or invalid configuration
     ],
     [
+        #show raw: set text(size: 1.4em)
       #figure(
         caption: "Exit codes example",
         raw(
@@ -401,18 +405,17 @@ jobs:                            # 2. JOBS: Units of work (run in parallel by de
     ],
   )
 
-  #hint(txtSize: 1.1em)[
+  #hint(txtSize: 1.075em)[
     💡 *Link to the next module:* `pytest` returns a non-zero exit code if even a single test fails, automatically turning your workflow red!
   ]
 ]
 
 
 // Slide 8: Pre-built Actions - Part 1
-#slide("Pre-built Actions: Don't reinvent the wheel", 1)[
-  Besides `run:` commands, we can use predefined blocks with the `uses:` directive.
+#slide("Pre-built Actions", 1)[
 
   #v(1em)
-  #show grid.cell.where(x: 0): set text(size: 1.3em)
+  #show grid.cell.where(x: 0): set text(size: 1.5em)
   #grid(
     columns: (1.2fr, 1fr),
     align: (x, y) => if (x == 0) {
@@ -420,7 +423,7 @@ jobs:                            # 2. JOBS: Units of work (run in parallel by de
     } else {
       center + horizon
     },
-    inset: 1.5em,
+    inset: 1em,
     [
       *The two indispensable Actions:*
 
@@ -433,6 +436,7 @@ jobs:                            # 2. JOBS: Units of work (run in parallel by de
         - Manages pip package caching to speed up runs.
     ],
     [
+      #show raw: set text(size: 1.4em)
       #figure(
         caption: "Reusable action example",
         raw(
@@ -454,62 +458,73 @@ jobs:                            # 2. JOBS: Units of work (run in parallel by de
 
 
 // Slide 9: Understanding Action Versioning
-#slide("Understanding Action Versioning", 1)[
-
-  #show list: set text(size: 1.25em)
-
-  *How to read Action versions:*
-
-  - *Format:* `owner/repository@version`
-  
-  - *`@v4`* = Major version (recommended for stability)
-    - Automatically uses the latest v4.x release
-    - Stable API within major version 4
-  
-  - *Repository location:* Imports from the official GitHub Actions repository
-  
-  - *Example:* `actions/checkout@v4` 
-    - Pulls from `github.com/actions/checkout`
-    - Uses the latest version 4.x
+#slide("Action Versioning", 1)[
 
   #v(0.8em)
-  #hint(txtSize: 1.1em)[
-    💡 Using major versions (`@v4`) instead of exact versions (`@v4.1.2`) ensures you automatically get bug fixes and improvements while maintaining API compatibility.
-  ]
+  #show grid.cell.where(x: 0): set text(size: 1.1em)
+  #grid(
+    columns: (1.2fr, 1fr),
+    align: (x, y) => if (x == 0) {
+      left + horizon
+    } else {
+      center + horizon
+    },
+    inset: 1.5em,
+    [
+      *Format:* `owner/repository@version`
+
+      - *`owner/repository`:* the GitHub org and repo where the Action lives.
+        - `actions/` = official GitHub organization
+        - Any public repo can publish an Action
+
+      - *`@v4`:* pins to a major version — automatically gets the latest `v4.x` patch while keeping a stable API.
+
+      - *Alternative:* `@v4.1.2` pins to an exact release (more predictable, but no auto bug fixes).
+    ],
+    [
+      #show raw: set text(size: 1.4em)
+      #figure(
+        caption: "Version syntax examples",
+        raw(
+          "# Major version (recommended)
+uses: actions/checkout@v4
+uses: actions/setup-python@v4
+
+# Exact version (fully pinned)
+uses: actions/checkout@v4.1.2
+
+# Commit SHA (most secure)
+uses: actions/checkout@abc1234",
+          block: true,
+          lang: "yaml",
+        ),
+      )
+    ],
+  )
+
+
 ]
 
 
 
 // Slide 10: Theoretical Exercise (Extra)
-#slide("Quick Theoretical Exercise (Extra)", 1)[
-
-  #text(size: 1.2em, weight: "bold")[This will be on the website!!!!!]
-
-  What happens when running this workflow? Are there any issues?
+#slide("Theoretical Exercise)", 1)[
 
   #align(center + horizon)[
-    #raw(
-      "name: Exercise
-on: [push]
+    #text(size: 2.5em, weight: "bold")[ This will be on the website!]
 
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check files
-        run: ls -la
+    #v(2em)
 
-      - name: Read config
-        run: cat config.json
+    #text(size: 2.3em)[
+      Go to: #link("https://sdegroup5.github.io/")[#text(fill: rgb("1565c0"))[*sdegroup5.github.io*]]
+    ]
 
-      - uses: actions/checkout@v4",
-      block: true,
-      lang: "yaml",
-    )
+    #v(1em)
+
+    
   ]
 
-
-  #text(fill: rgb("d32f2f"), weight: "bold")[Answer:] It fails on `cat config.json` with `exit code 1`. The runner is an empty machine and `checkout` was placed *after*, meaning the working directory still lacks the repository files.]
+]
 
 
 
