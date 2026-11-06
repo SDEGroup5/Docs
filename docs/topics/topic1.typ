@@ -190,7 +190,7 @@
 
       #v(0.5em)
       #hint(txtSize: 1em)[
-        💡 Jobs can be made sequential using `needs:` e.g. run `deploy` only after `test` passes.
+        Jobs can be made sequential using `needs`: e.g. run `deploy` only after `test` passes.
       ]
     ],
   )
@@ -340,7 +340,7 @@ jobs:                            # 2. JOBS: Units of work
         - *Your Hardware:* Runs on your own PC, local server, or private container.
         - *Persistent State:* Files, caches, and custom packages remain on disk between runs.
         - *Custom Access:* Can reach local LAN resources, private DBs, or dedicated GPUs.
-        #v(0.3em)
+        #v(1em)
         #raw("runs-on: self-hosted", block: true, lang: "yaml")
       ],
     )
