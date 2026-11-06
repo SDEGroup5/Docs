@@ -48,7 +48,7 @@
 
   #v(-1em)
   #hint(txtSize: 1em)[
-    *Note:* be sure to be able to create python environment.
+    *Note:* be sure to be able to create python environment. Additionally, the library `psycopg2`, used for postgres, requires `libpq-dev` to be installed. To avoid the issue, modify the backend `requirements.txt` files to use `psycopg2-binary==2.9.13` instead of `psycopg2==2.9.13` .
   ]
 
 ]
@@ -72,7 +72,7 @@
 
   #align(center)[
     #hint(txtSize: 1.2em)[
-      📝 *Note:* We'll use Python as our example language — but the same concepts apply to any language!
+       *Note:* We'll use Python as our example language, but the same concepts apply to any language!
     ]
   ]
 
@@ -141,7 +141,7 @@
         *Event-Driven* — Reacts to any action on GitHub:
         - `push` or `pull_request` on specific branches.
         - Tag or release creation.
-        - Manual triggers via UI (`workflow_dispatch`).
+        - Manual triggers via UI ( `workflow_dispatch` ).
 
         *Runners:* Clean, ephemeral environment (Ubuntu, macOS, Windows) hosted in the GitHub cloud.
       ],
@@ -190,7 +190,7 @@
 
       #v(0.5em)
       #hint(txtSize: 1em)[
-        💡 Jobs can be made sequential using `needs:` — e.g. run `deploy` only after `test` passes.
+        💡 Jobs can be made sequential using `needs:` e.g. run `deploy` only after `test` passes.
       ]
     ],
   )
@@ -213,8 +213,8 @@
 
       A job contains a sequence of *Steps*, executed one after another on the *same runner*:
 
-      - Each step is either a shell command (`run:`) or a pre-built Action (`uses:`).
-      - Steps *share the filesystem* — files created in step 1 are available in step 2.
+      - Each step is either a shell command ( `run:` ) or a pre-built Action ( `uses:` ).
+      - Steps *share the filesystem*: files created in step 1 are available in step 2.
       - If one step fails (exit code ≠ 0), the job stops immediately.
 
       #v(0.8em)
@@ -249,14 +249,14 @@
 
       #v(0.6em)
       #hint(txtSize: 1em)[
-        💡 The runner starts *completely empty* — without `checkout`, your files don't exist on it!
+         The runner starts *completely empty*: without `checkout`, your files don't exist on it!
       ]
     ],
   )
 ]
 
 // Slide 8a: General Syntax - Trigger and Job
-#slide("General Syntax: Trigger and Job Structure", 1)[
+#slide("General Syntax (1/2): Trigger and Job Structure", 1)[
   #set text(size: 1.5em)
   #align(center + horizon)[
     #raw(
@@ -270,7 +270,7 @@ on:                              # 1. EVENT: What triggers this workflow?
 
 jobs:                            # 2. JOBS: Units of work
                                  # Multiple jobs run in PARALLEL by default
-  compile:                       # Unique Job ID — you choose the name freely
+  compile:                       # Unique Job ID: you choose the name freely
     runs-on: ubuntu-latest       # Spins up a FRESH Ubuntu virtual machine
                                  # in GitHub's cloud for every run
                                  # Other options: windows-latest, macos-latest",
@@ -281,7 +281,7 @@ jobs:                            # 2. JOBS: Units of work
 ]
 
 // Slide 8b: General Syntax - Steps
-#slide("General Syntax: Steps Inside a Job", 1)[
+#slide("General Syntax (2/2): Steps Inside a Job", 1)[
   #set text(size: 1.5em)
   #align(center + horizon)[
     #raw(
@@ -348,7 +348,7 @@ jobs:                            # 2. JOBS: Units of work
 
   #v(1em)
   #hint(txtSize: 1.1em)[
-    💡 *Note:* Self-hosted runners exist and are useful for advanced scenarios, but *we will focus exclusively on GitHub-hosted runners* in this laboratory.
+     *Note:* Self-hosted runners exist and are useful for advanced scenarios, but *we will focus exclusively on GitHub-hosted runners* in this laboratory.
   ]
 
 ]
@@ -406,7 +406,7 @@ jobs:                            # 2. JOBS: Units of work
   )
 
   #hint(txtSize: 1.075em)[
-    💡 *Link to the next module:* `pytest` returns a non-zero exit code if even a single test fails, automatically turning your workflow red!
+    *Link to the next module:* `pytest` returns a non-zero exit code if even a single test fails, automatically turning your workflow red!
   ]
 ]
 
@@ -438,7 +438,6 @@ jobs:                            # 2. JOBS: Units of work
     [
       #show raw: set text(size: 1.4em)
       #figure(
-        caption: "Reusable action example",
         raw(
           "steps:
   - uses: actions/checkout@v4
@@ -477,14 +476,13 @@ jobs:                            # 2. JOBS: Units of work
         - `actions/` = official GitHub organization
         - Any public repo can publish an Action
 
-      - *`@v4`:* pins to a major version — automatically gets the latest `v4.x` patch while keeping a stable API.
+      - *`@v4`:* pins to a major version  automatically gets the latest `v4.x` patch while keeping a stable API.
 
       - *Alternative:* `@v4.1.2` pins to an exact release (more predictable, but no auto bug fixes).
     ],
     [
       #show raw: set text(size: 1.4em)
       #figure(
-        caption: "Version syntax examples",
         raw(
           "# Major version (recommended)
 uses: actions/checkout@v4
@@ -527,7 +525,7 @@ uses: actions/checkout@abc1234",
 ]
 
 
-
+/*
 // Slide 11: Execution Strategy (Matrix) - Optional Advanced Topic
 #slide("Matrix Builds", 1)[
   
@@ -577,3 +575,4 @@ uses: actions/checkout@abc1234",
     ],
   )
 ]
+*/
