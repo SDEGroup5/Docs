@@ -3,7 +3,7 @@
 
 #cover([Laboratory #labNumber: #labName])
 
-#show raw: code => box(
+#show raw.where(block: false): code => box(
   fill: luma(90%),
   outset: 0.3em,
   radius: 0.4pt,
