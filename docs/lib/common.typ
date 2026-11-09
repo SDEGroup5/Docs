@@ -1,7 +1,9 @@
 #let course = "Service Design and Engineering"
 #let mainColor = rgb("B10B25")
+#let groupColor = rgb("d15f07")
 #let university = "University of Trento"
 #let date = "November 25th, 2026"
+#let academicYear = "2026 - 2027"
 #let labName = "Github Actions"
 #let labNumber = "5"
 #let linkColor = blue
