@@ -72,7 +72,7 @@
 
   #align(center)[
     #hint(txtSize: 1.2em)[
-       *Note:* We'll use Python as our example language, but the same concepts apply to any language!
+      *Note:* We'll use Python as our example language, but the same concepts apply to any language!
     ]
   ]
 
@@ -233,7 +233,7 @@
       #v(0.4em)
 
       #raw(
-"jobs:
+        "jobs:
   compile:
     runs-on: ubuntu-latest  # fresh machine
 
@@ -249,7 +249,7 @@
 
       #v(0.6em)
       #hint(txtSize: 1em)[
-         The runner starts *completely empty*: without `checkout`, your files don't exist on it!
+        The runner starts *completely empty*: without `checkout`, your files don't exist on it!
       ]
     ],
   )
@@ -348,7 +348,7 @@ jobs:                            # 2. JOBS: Units of work
 
   #v(1em)
   #hint(txtSize: 1.1em)[
-     *Note:* Self-hosted runners exist and are useful for advanced scenarios, but *we will focus exclusively on GitHub-hosted runners* in this laboratory.
+    *Note:* Self-hosted runners exist and are useful for advanced scenarios, but *we will focus exclusively on GitHub-hosted runners* in this laboratory.
   ]
 
 ]
@@ -385,7 +385,7 @@ jobs:                            # 2. JOBS: Units of work
       - Missing required files or invalid configuration
     ],
     [
-        #show raw: set text(size: 1.4em)
+      #show raw: set text(size: 1.4em)
       #figure(
         caption: "Exit codes example",
         raw(
@@ -506,10 +506,10 @@ uses: actions/checkout@abc1234",
 
 
 // Slide 10: Theoretical Exercise (Extra)
-#slide("Theoretical Exercise)", 1)[
+#slide("Theoretical Exercises", 1)[
 
   #align(center + horizon)[
-    #text(size: 2.5em, weight: "bold")[ This will be on the website!]
+    #text(size: 2.5em, weight: "bold")[On the website!]
 
     #v(2em)
 
@@ -519,7 +519,7 @@ uses: actions/checkout@abc1234",
 
     #v(1em)
 
-    
+
   ]
 
 ]
