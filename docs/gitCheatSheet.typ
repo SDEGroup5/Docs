@@ -1,10 +1,8 @@
-#set page(margin: (top: 1.2em, bottom: 1.2em))
-#set text(size: 1.1em)
+#import "lib/commonCheatSheet.typ": cover
 
-#align(center)[
-  #image("./../img/gitCheatSheet/mdi--git.svg", width: 15%)
-  #title("The Git cheat sheet")
-]
+#set page(margin: (top: 1.2em, bottom: 1.2em))
+
+#cover("The Git cheat sheet", "/img/gitCheatSheet/mdi--git.svg")
 
 #show table.cell.where(x: 0): set text(weight: "bold")
 
