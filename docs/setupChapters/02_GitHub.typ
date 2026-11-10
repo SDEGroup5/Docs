@@ -151,7 +151,7 @@ For displayed steps, take a look at @repo-creation
   #rect(stroke: 2pt + red, width: 13%, height: 4%)
 ]
 
-#place(dy: -19%, dx: 56%)[
+#place(dy: -18.5%, dx: 56%)[
   #rect(stroke: 2pt + red, width: 42%, height: 3.5%)
 ]
 
