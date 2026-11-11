@@ -574,5 +574,81 @@ uses: actions/checkout@abc1234",
       )
     ],
   )
+
+  
 ]
 */
+
+// Slide 11: Theoretical Exercise - Solutions (1/2)
+#slide("Solutions: Multiple Choice", 1)[
+
+  #set list(spacing: 0.8em)
+  #show grid: set text(size: 1.15em)
+
+  #grid(
+    columns: (1fr, 1fr),
+    align: left + top,
+    inset: 1em,
+    row-gutter: 1.5em,
+    [
+      *Q1 — Answer: B* \
+      `./dist` does not exist in the `package` job.
+      - `needs` only controls the *execution order*.
+      - Each job runs on its own *fresh runner*: `checkout` downloads only the repo files, not the files created by other jobs.
+    ],
+    [
+      *Q2 — Answer: C* \
+      The trigger reacts only to a `push` on `main`.
+      - `feature/login` is ignored by the `branches` filter.
+      - A pull request needs the `pull_request` event.
+      - The "Run workflow" button needs `workflow_dispatch`.
+    ],
+    [
+      *Q3 — Answer: C* \
+      `self-hosted` runs on *your own hardware*.
+      - Persistent state: packages stay on disk between runs.
+      - It can reach the company LAN and private DBs.
+      - GitHub-hosted runners are ephemeral and live in GitHub's cloud.
+    ],
+    [
+      *Q4 — Answer: B* \
+      - `@v4` follows the latest `v4.x` patches with a stable API, but never jumps to `v5`.
+      - `@v4.1.2` is fully predictable, but gets no automatic fixes.
+      - A commit SHA is the *most secure* option, so D is wrong.
+    ],
+  )
+
+]
+
+// Slide 12: Theoretical Exercise - Solutions (2/2)
+#slide("Solutions: Fill in the Gaps", 1)[
+
+  #set list(spacing: 0.8em)
+  #show grid: set text(size: 1.15em)
+
+  #grid(
+    columns: (1fr, 1fr),
+    align: left + top,
+    inset: 1em,
+    row-gutter: 1.5em,
+    [
+      *Gap 1 — `needs`* \
+      `needs: build` in the `test` job makes it start only after `build` has completed successfully. Without it, jobs run *in parallel* by default.
+    ],
+    [
+      *Gap 2 — `uses` / `run`* \
+      - `uses:` imports a pre-built Action (`owner/repo@version`), e.g. `actions/checkout@v4`.
+      - `run:` executes a shell command, e.g. `echo "Hello"`.
+      - A step has one or the other, never both: here they are two separate steps.
+    ],
+    [
+      *Gap 3 — `0`* \
+      Exit code `0` means *success* (green). Any non-zero exit code stops the job immediately and turns it *red*.
+    ],
+    [
+      *Gap 4 — `.github/workflows`* \
+      GitHub detects workflow files only if they are in `.github/workflows/`. In the snippet, `runs-on: ubuntu-latest` selects a fresh GitHub-hosted Ubuntu machine.
+    ],
+  )
+
+]
