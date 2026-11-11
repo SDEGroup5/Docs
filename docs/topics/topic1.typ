@@ -1,8 +1,6 @@
 #import "../lib/commonSlide.typ": hint, slide
 
-#show par: set text(size: 1.2em)
-
-#slide("Environment setup", 1)[
+/*#slide("Environment setup", 1)[
   First, connect to the laboratory website:
 
   #align(center)[#link("https://sdegroup5.github.io/")[#text(size: 1.2em)[sdegroup5.github.io]]]
@@ -51,7 +49,7 @@
     *Note:* be sure to be able to create python environment. Additionally, the library `psycopg2`, used for postgres, requires `libpq-dev` to be installed. To avoid the issue, modify the backend `requirements.txt` files to use `psycopg2-binary==2.9.13` instead of `psycopg2==2.9.13` .
   ]
 
-]
+]*/
 
 // Slide 2: What we'll do in this lab
 #slide("What we'll do in this laboratory", 1)[
@@ -71,7 +69,7 @@
   #v(1em)
 
   #align(center)[
-    #hint(txtSize: 1.2em)[
+    #hint(txtSize: 1.5em)[
       *Note:* We'll use Python as our example language, but the same concepts apply to any language!
     ]
   ]
@@ -83,7 +81,7 @@
 
 // Slide 3: The Problem
 #slide("Why do we need CI/CD?", 1)[
-
+  #set text(size: 1.3em)
   #show grid.cell.where(x: 0): set text(size: 1.3em)
 
   #align(center + horizon)[
@@ -118,7 +116,7 @@
 
 // Slide 4: Event-Driven Paradigm
 #slide("What are GitHub Actions?", 1)[
-
+  #set text(size: 1.3em)
   #show grid.cell.where(x: 0): set text(size: 1.1em)
 
   #align(center + horizon)[
@@ -159,7 +157,7 @@
 
 // Slide 5a: Workflow Anatomy - High Level
 #slide("Anatomy of a Workflow: The Big Picture", 1)[
-
+  #set text(size: 1.3em)
   #grid(
     columns: (1fr, 1.1fr),
     align: (x, y) => if (x == 0) {
@@ -189,7 +187,7 @@
       - *Job:* A workflow contains one or more jobs. Each job runs on its own *isolated, fresh machine* (the runner). Jobs run *in parallel by default*.
 
       #v(0.5em)
-      #hint(txtSize: 1em)[
+      #hint(txtSize: 1.3em)[
         Jobs can be made sequential using `needs`: e.g. run `deploy` only after `test` passes.
       ]
     ],
@@ -200,7 +198,7 @@
 
 // Slide 5b: Workflow Anatomy - Jobs and Steps
 #slide("Anatomy of a Workflow: Jobs and Steps", 1)[
-
+  #set text(size: 1.3em)
   #grid(
     columns: (1fr, 1fr),
     align: left + top,
@@ -226,7 +224,7 @@
     ],
     [
       #set list(spacing: 0.55em)
-      #show list: set text(size: 1.1em)
+      #set text(size: 1.2em)
 
       *A concrete example:*
 
@@ -257,7 +255,7 @@
 
 // Slide 8a: General Syntax - Trigger and Job
 #slide("General Syntax (1/2): Trigger and Job Structure", 1)[
-  #set text(size: 1.5em)
+  #set text(size: 1.7em)
   #align(center + horizon)[
     #raw(
       "name: Typst Compiler Workflow    # Name displayed in GitHub's 'Actions' tab
@@ -282,7 +280,7 @@ jobs:                            # 2. JOBS: Units of work
 
 // Slide 8b: General Syntax - Steps
 #slide("General Syntax (2/2): Steps Inside a Job", 1)[
-  #set text(size: 1.5em)
+  #set text(size: 1.7em)
   #align(center + horizon)[
     #raw(
       "    steps:                       # 3. STEPS: Sequential tasks on the SAME runner
@@ -311,6 +309,7 @@ jobs:                            # 2. JOBS: Units of work
 
 // Slide 6b: GitHub-hosted vs Self-hosted Runners
 #slide("Runners: GitHub-Hosted vs. Self-Hosted", 1)[
+  #set text(size: 1.3em)
   The `runs-on:` keyword defines *where* your job executes:
 
   #v(0.5em)
@@ -359,9 +358,7 @@ jobs:                            # 2. JOBS: Units of work
 
 // Slide 7: How does an Action fail?
 #slide("How does an Action fail?", 1)[
-  GitHub Actions evaluates the status of each step using *Unix Exit Codes*:
-
-  #v(0.5em)
+  #set text(size: 1.3em)
   #show grid.cell.where(x: 0): set text(size: 1.2em)
   #grid(
     columns: (1.2fr, 1fr),
@@ -370,8 +367,10 @@ jobs:                            # 2. JOBS: Units of work
     } else {
       center + horizon
     },
-    inset: 1.2em,
+    inset: 1em,
     [
+      GitHub Actions evaluates the status of each step using *Unix Exit Codes*:
+
       - *Exit Code = 0:* *Success*. The step passes and the workflow moves to the next one.
 
       #v(0.5em)
@@ -385,6 +384,9 @@ jobs:                            # 2. JOBS: Units of work
       - Missing required files or invalid configuration
     ],
     [
+      #hint(txtSize: 1em)[
+        *Link to the next module:* `pytest` returns a non-zero exit code if even a single test fails, automatically turning your workflow red!
+      ]
       #show raw: set text(size: 1.4em)
       #figure(
         caption: "Exit codes example",
@@ -404,16 +406,12 @@ jobs:                            # 2. JOBS: Units of work
       )
     ],
   )
-
-  #hint(txtSize: 1.075em)[
-    *Link to the next module:* `pytest` returns a non-zero exit code if even a single test fails, automatically turning your workflow red!
-  ]
 ]
 
 
 // Slide 8: Pre-built Actions - Part 1
 #slide("Pre-built Actions", 1)[
-
+  #set text(size: 1.2em)
   #v(1em)
   #show grid.cell.where(x: 0): set text(size: 1.5em)
   #grid(
@@ -438,6 +436,7 @@ jobs:                            # 2. JOBS: Units of work
     [
       #show raw: set text(size: 1.4em)
       #figure(
+        caption: "Pre-built action example",
         raw(
           "steps:
   - uses: actions/checkout@v4
@@ -458,7 +457,7 @@ jobs:                            # 2. JOBS: Units of work
 
 // Slide 9: Understanding Action Versioning
 #slide("Action Versioning", 1)[
-
+  #set text(size: 1.42em)
   #v(0.8em)
   #show grid.cell.where(x: 0): set text(size: 1.1em)
   #grid(
@@ -483,6 +482,7 @@ jobs:                            # 2. JOBS: Units of work
     [
       #show raw: set text(size: 1.4em)
       #figure(
+        caption: "Pre-built action example",
         raw(
           "# Major version (recommended)
 uses: actions/checkout@v4
@@ -518,8 +518,6 @@ uses: actions/checkout@abc1234",
     ]
 
     #v(1em)
-
-
   ]
 
 ]
@@ -581,7 +579,7 @@ uses: actions/checkout@abc1234",
 
 // Slide 11: Theoretical Exercise - Solutions (1/2)
 #slide("Solutions: Multiple Choice", 1)[
-
+  #set text(1.3em)
   #set list(spacing: 0.8em)
   #show grid: set text(size: 1.15em)
 
@@ -603,6 +601,7 @@ uses: actions/checkout@abc1234",
       - A pull request needs the `pull_request` event.
       - The "Run workflow" button needs `workflow_dispatch`.
     ],
+
     [
       *Q3 — Answer: C* \
       `self-hosted` runs on *your own hardware*.
@@ -622,7 +621,7 @@ uses: actions/checkout@abc1234",
 
 // Slide 12: Theoretical Exercise - Solutions (2/2)
 #slide("Solutions: Fill in the Gaps", 1)[
-
+  #set text(1.3em)
   #set list(spacing: 0.8em)
   #show grid: set text(size: 1.15em)
 
@@ -641,6 +640,7 @@ uses: actions/checkout@abc1234",
       - `run:` executes a shell command, e.g. `echo "Hello"`.
       - A step has one or the other, never both: here they are two separate steps.
     ],
+
     [
       *Gap 3 — `0`* \
       Exit code `0` means *success* (green). Any non-zero exit code stops the job immediately and turns it *red*.
