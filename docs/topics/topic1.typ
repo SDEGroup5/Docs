@@ -475,7 +475,7 @@ jobs:                            # 2. JOBS: Units of work
     - `actions/` = official GitHub organization
     - Any public repo can publish an Action
 
-  - *`@version`:* which version of that Action to run. Three options:
+  - *`@version`:* which version of that Action to run.
     - *`@v4`* (major version): automatically gets the latest `v4.x` patch while keeping a stable API. Recommended.
     - *`@v4.1.2`* (exact release): more predictable, but no auto bug fixes.
     - *`@<commit-sha>`* (commit SHA): most secure, because a commit cannot be changed.
