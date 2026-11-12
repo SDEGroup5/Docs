@@ -469,15 +469,16 @@ jobs:                            # 2. JOBS: Units of work
     },
     inset: 1.5em,
     [
-      *Format:* `owner/repository@version`
+     *Format:* `owner/repository@version`
 
-      - *`owner/repository`:* the GitHub org and repo where the Action lives.
-        - `actions/` = official GitHub organization
-        - Any public repo can publish an Action
+  - *`owner/repository`:* which Action to use, i.e. the GitHub org and repo where it lives.
+    - `actions/` = official GitHub organization
+    - Any public repo can publish an Action
 
-      - *`@v4`:* pins to a major version  automatically gets the latest `v4.x` patch while keeping a stable API.
-
-      - *Alternative:* `@v4.1.2` pins to an exact release (more predictable, but no auto bug fixes).
+  - *`@version`:* which version of that Action to run. Three options:
+    - *`@v4`* (major version): automatically gets the latest `v4.x` patch while keeping a stable API. Recommended.
+    - *`@v4.1.2`* (exact release): more predictable, but no auto bug fixes.
+    - *`@<commit-sha>`* (commit SHA): most secure, because a commit cannot be changed.
     ],
     [
       #show raw: set text(size: 1.4em)
