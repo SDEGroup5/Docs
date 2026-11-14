@@ -117,7 +117,7 @@
     [
       ```py
       def test_server_get_successful():
-          json_path: str = "./app/json/data.json"
+          json_path: str = "./json/data.json"
           json_data: str = ""
 
           try:
@@ -152,7 +152,7 @@
     [
       ```py
       def test_server_get_successful():
-          json_path: str = "./app/json/data.json"
+          json_path: str = "./json/data.json"
           json_data: str = ""
 
           try:
@@ -188,7 +188,7 @@
     [
       ```py
       def test_server_get_successful():
-          json_path: str = "./app/json/data.json"
+          json_path: str = "./json/data.json"
           json_data: str = ""
 
           try:
@@ -576,19 +576,19 @@
     #align(left)[
       Activate the virtual environment:
       ```sh
-      source app/.venv/bin/activate
+      source .venv/bin/activate
       ```
 
       \
       Install missing requirements:
       ```sh
-      pip install -r app/requirements.txt
+      pip install -r requirements.txt
       ```
 
       \
       Run the tests:
       ```sh
-      python3 -m pytest app/test/test.py
+      python3 -m pytest test/test.py
       ```
 
       \
@@ -666,7 +666,7 @@
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        if [ -f app/requirements.txt ]; then pip install -r app/requirements.txt; fi
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Test with testing script
       run: python3 .github/scripts/execute_tests.py
@@ -702,7 +702,7 @@
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        if [ -f app/requirements.txt ]; then pip install -r app/requirements.txt; fi
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Test with testing script
       run: python3 .github/scripts/execute_tests.py
@@ -744,7 +744,7 @@
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        if [ -f app/requirements.txt ]; then pip install -r app/requirements.txt; fi
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Test with testing script
       run: python3 .github/scripts/execute_tests.py
@@ -787,7 +787,7 @@
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        if [ -f app/requirements.txt ]; then pip install -r app/requirements.txt; fi
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Test with testing script
       run: python3 .github/scripts/execute_tests.py

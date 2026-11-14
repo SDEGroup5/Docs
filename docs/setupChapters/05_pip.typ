@@ -46,7 +46,7 @@ and then:
 Finally, run:
 
 ```sh
-pip install -r app/requirements.txt
+pip install -r requirements.txt
 ```
 
 === Verify the installation in Linux and MacOS
@@ -66,5 +66,5 @@ source .venv/bin/activate
 Finally, run:
 
 ```sh
-pip install -r app/requirements.txt
+pip install -r requirements.txt
 ```
