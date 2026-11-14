@@ -588,7 +588,7 @@
       \
       Run the tests:
       ```sh
-      python3 -m pytest test/test.py
+      python -m pytest test/test.py
       ```
 
       \
@@ -716,8 +716,8 @@
       + Checkout and python installation using external actions
     ],
   )
-  #place(dy: -27.5em, dx: 1em)[
-    #rect(stroke: 2pt + red, width: 57%, height: 35%)
+  #place(dy: -27.5em, dx: 2.5em)[
+    #rect(stroke: 2pt + red, width: 53%, height: 35%)
   ]
 ]
 
@@ -756,11 +756,11 @@
     ],
     [
       + Checkout and python installation using external actions
-      + Installing pytest
+      + Installing pytest from a requirements file
     ],
   )
-  #place(dy: -15em, dx: 1em)[
-    #rect(stroke: 2pt + red, width: 57%, height: 30%)
+  #place(dy: -15em, dx: 2.5em)[
+    #rect(stroke: 2pt + red, width: 53%, height: 30%)
   ]
 ]
 
@@ -799,13 +799,13 @@
     ],
     [
       + Checkout and python installation using external actions
-      + Installing pytest
+      + Installing pytest from a requirements file
       + Running the test script
     ],
   )
 
-  #place(dy: -5em, dx: 1em)[
-    #rect(stroke: 2pt + red, width: 57%, height: 11%)
+  #place(dy: -5em, dx: 2.5em)[
+    #rect(stroke: 2pt + red, width: 53%, height: 11%)
   ]
 ]
 
@@ -822,8 +822,7 @@
         - *Move* to the `part-2` branch by running:
           ```sh git checkout part-2```
 
-        - *Complete* the `.github/scripts/execute_tests.py` script to
-          automatically run the test and the coverage.
+        - *Complete* the `.github/scripts/execute_tests.py` script and the GitHub action ( `.github/workflows/python-app.yml`)
 
         - *Test* the script locally with both a valid and invalid JSON file like
           in the previous exercise to ensure it works. Use:
@@ -832,6 +831,7 @@
         - *Commit* and *push* the changes to see the tests running in your GitHub repository. Use:
           ```sh
           git add .
+          git commit -m "Modified test scripts"
           git push --set-upstream origin part-2
           ```
 
@@ -853,5 +853,42 @@
 
 
 #slide("Solutions: exercise", 2)[
-  TODO: slide about solutions of the exercise
+  #show text: set text(size: 1.7em)
+  #grid(
+    columns: (70%, 30%),
+    inset: 1em,
+    [
+        In `execute_tests.py`:
+        ```py
+      # 0 if they pass, 1 if they don't
+      test_result = execute_test()                  
+      
+      # 0 if the threshold is met, 1 if it isn't
+      test_coverage_result = read_coverage_result() 
+
+      # Exit with 0 if all ok, with 1 otherwise
+      sys.exit(test_result or test_coverage_result) 
+        ```
+        When this is run as an action the exit code is used to
+        determine whether or not this step was successful.
+
+        \
+        In `python-app.yml`:
+        ```yaml
+        on:
+          push:
+            branches: [ "part-2" ]
+
+        ```
+        This ensures the action is run automatically whenever a
+        _push_ happens on the `part-2` branch.
+    ],
+    [
+      #align(center + horizon)[
+        #image("../../img/topic2/python.png")
+        This script will be used in the rest of the exercises
+        for this lab, if there's any problems raise your hand.
+      ]
+    ]
+  )
 ]
