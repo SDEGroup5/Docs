@@ -853,5 +853,42 @@
 
 
 #slide("Solutions: exercise", 2)[
-  TODO: slide about solutions of the exercise
+  #show text: set text(size: 1.7em)
+  #grid(
+    columns: (70%, 30%),
+    inset: 1em,
+    [
+        In `execute_tests.py`:
+        ```py
+      # 0 if they pass, 1 if they don't
+      test_result = execute_test()                  
+      
+      # 0 if the threshold is met, 1 if it isn't
+      test_coverage_result = read_coverage_result() 
+
+      # Exit with 0 if all ok, with 1 otherwise
+      sys.exit(test_result or test_coverage_result) 
+        ```
+        When this is run as an action the exit code is used to
+        determine whether or not this step was successful.
+
+        \
+        In `python-app.yml`:
+        ```yaml
+        on:
+          push:
+            branches: [ "part-2" ]
+
+        ```
+        This ensures the action is run automatically whenever a
+        _push_ happens on the `part-2` branch.
+    ],
+    [
+      #align(center + horizon)[
+        #image("../../img/topic2/python.png")
+        This script will be used in the rest of the exercises
+        for this lab, if there's any problems raise your hand.
+      ]
+    ]
+  )
 ]
