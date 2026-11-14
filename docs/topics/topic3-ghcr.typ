@@ -20,7 +20,6 @@
 #let ghcrPage(title, time, lead, picture, content) = slide(title, 3)[
   #set text(size: 18pt)
   #set par(leading: 0.38em)
-  #text(size: 13pt, fill: mainColor, weight: "bold")[GHCR WALKTHROUGH · #time]
   #v(9pt)
   #text(size: 22pt, weight: "bold")[#lead]
   #v(15pt)
@@ -33,7 +32,7 @@
   )
 ]
 
-#ghcrPage("The 10-minute goal", "0:35", [One GitHub release creates a pullable Docker image.], "../../img/topic3/ghcr/pipeline.svg", [
+#ghcrPage("Github Container Registry", "0:35", [One GitHub release creates a pullable Docker image.], "../../img/topic3/ghcr/pipeline.svg", [
   #v(8pt)
   + Code is stored in *GitHub*.
   + *Actions* runs the workflow in a fresh Ubuntu runner.
