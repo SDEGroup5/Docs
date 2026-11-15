@@ -32,30 +32,39 @@
   )
 ]
 
-#ghcrPage("Github Container Registry", "0:35", [One GitHub release can create a pullable Docker image], "../../img/topic3/ghcr/pipeline.svg", [
+#ghcrPage("GitHub Action to create a Docker image",
+"0:35",
+[GitHub release can create a pullable Docker image],
+"../../img/topic3/ghcr/pipeline.svg",
+[
   #v(8pt)
   + Code is stored in *GitHub*.
   + *Actions* runs the workflow in a fresh Ubuntu runner.
   + *Buildx* builds the image
-  + *GHCR* stores it.
+  + *GitHub Container Registry* stores it.
   #v(16pt)
   *Output:* `ghcr.io/<owner>/<repo>/app:<tag>`
 ])
 
-#ghcrPage("Github Container Registry", "0:40", [We already have everything needed in this repository], "../../img/topic3/ghcr/repo.svg", [
+#ghcrPage("File overview", "0:40",
+[We already have everything needed in this repository],
+"../../img/topic3/ghcr/repo.svg",
+[
   #v(8pt)
-  *`Dockerfile.app`* tells Docker how to create our application image (Nuitka build, then Alpine runtime).
+  *`Dockerfile.build`* docker image builds the application binary with Nuitka.
+  #v(8pt)
+  *`Dockerfile.app`* runs the binary in a minimal image.
+  #v(8pt)
+  *`compose.yml`* runs the application pulling the image from the GHCR.
   #v(14pt)
   *`.github/workflows/docker-image.yml`* tells GitHub when and how to build and publish it.
   #v(14pt)
 ])
 
-#ghcrPage("Github Container Registry", "0:50", [When does the workflow run?], "../../img/topic3/ghcr/triggers.svg", [
+#ghcrPage("Workflow trigger", "0:50", [When does the workflow run?], "../../img/topic3/ghcr/triggers.svg", [
   #ghcrBox[
     ```yaml
     on:
-      pull_request:
-        branches: ["master"]
       release:
         types: [published]
     ```
