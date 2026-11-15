@@ -669,7 +669,7 @@
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Test with testing script
-      run: python3 .github/scripts/execute_tests.py
+      run: python3 script.py
 ",
             block: true,
             lang: "yaml",
@@ -705,7 +705,7 @@
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Test with testing script
-      run: python3 .github/scripts/execute_tests.py
+      run: python3 script.py
 ",
             block: true,
             lang: "yaml",
@@ -747,7 +747,7 @@
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Test with testing script
-      run: python3 .github/scripts/execute_tests.py
+      run: python3 script.py
 ",
             block: true,
             lang: "yaml",
@@ -790,7 +790,7 @@
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Test with testing script
-      run: python3 .github/scripts/execute_tests.py
+      run: python3 script.py
 ",
             block: true,
             lang: "yaml",
