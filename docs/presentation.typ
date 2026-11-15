@@ -12,4 +12,4 @@
 #include "topics/topic1.typ"
 #include "topics/topic2.typ"
 #include "topics/topic3.typ"
-#include "topics/finalAssignment.typ"
+#include "topics/final-assignment.typ"
