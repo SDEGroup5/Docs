@@ -70,12 +70,10 @@
     ```
   ]
   #v(12pt)
-  This workflow is triggered when a pull request is opened against `master` or when a release is published.
-  #v(10pt)
-  *Caution:* the current workflow also tries to push on PRs; forks often lack package write permission.
+  This workflow is triggered when a release is *published* in the repository.
 ])
 
-#ghcrPage("Github Container Registry", "0:45", [Permissions], "../../img/topic3/ghcr/permissions.svg", [
+#ghcrPage("Give the right access to the workflow", "0:45", [Permissions], "../../img/topic3/ghcr/permissions.svg", [
   #ghcrBox[
     ```yaml
     permissions:
@@ -85,13 +83,14 @@
   ]
   #v(12pt)
   `contents: read` lets checkout fetch the code.
+  It's the default permission, but we declare it explicitly for clarity.
   #v(12pt)
   `packages: write` allows the workflow to publish to GHCR.
   #v(12pt)
   No *Personal Access Token* is needed to push from this workflow.
 ])
 
-#ghcrPage("Github Container Registry", "0:40", [Checkout], "../../img/topic3/ghcr/builder.svg", [
+#ghcrPage("As always...", "0:40", [Checkout], "../../img/topic3/ghcr/builder.svg", [
   #ghcrBox[
     ```yaml
     runs-on: ubuntu-latest
@@ -106,7 +105,7 @@
   The workflow uses the repository root as the build context.
 ])
 
-#ghcrPage("Github Container Registry", "0:45", [Authentication], "../../img/topic3/ghcr/login.svg", [
+#ghcrPage("Authentication", "0:45", [GitHub handles the authentication], "../../img/topic3/ghcr/login.svg", [
   #ghcrBox[
     ```yaml
     - uses: docker/login-action@v4
@@ -122,7 +121,7 @@
   Since the workflow runs in the context of the repository, it can push to the registry without needing a *Personal Access Token*.
 ])
 
-#ghcrPage("Github Container Registry", "0:55", [Nomenclature], "../../img/topic3/ghcr/tag.svg", [
+#ghcrPage("Nomenclature", "0:55", [Each image has a unique path], "../../img/topic3/ghcr/tag.svg", [
   #v(8pt)
   *Image path:* `ghcr.io/<owner>/<repo>/app:<tag>`
   #v(15pt)
@@ -135,7 +134,7 @@
   The value is passed to the build step through `$GITHUB_OUTPUT`.
 ])
 
-#ghcrPage("Github Container Registry", "0:50", [Image uploading], "../../img/topic3/ghcr/build.svg", [
+#ghcrPage("Build and push image", "0:50", [Image uploading], "../../img/topic3/ghcr/build.svg", [
   #ghcrBox[
     ```yaml
     - name: Build and push image
@@ -152,37 +151,12 @@
   `push: true` sends the result to `ghcr.io`.
 ])
 
-#ghcrPage("Github Container Registry", "0:45", [Use two places in GitHub to prove publication succeeded.], "../../img/topic3/ghcr/monitor.svg", [
+#ghcrPage("Exercise", "0:45", [Publish a new release and verify the run the image], "../../img/topic3/ghcr/monitor.svg", [
   #v(5pt)
-  + Open the repository's *Actions* tab.
-  + Choose *Docker Image* and the run for the published release.
-  + Verify the *Build and push image* step passed.
-  + Open the owner or repository *Packages* section and find `app` with the release tag.
+  + Open your Repository on Github.
+  + In *Releases*, create a new release with tag `v1.0.0` (or a fresh tag).
+  + Wait for the *Actions → Docker Image* workflow to complete.
+  + In `compose.yml`, change the image to match your registry path and tag.
+  + Run `docker compose up` and check application running.
   #v(8pt)
-  *Reminder:* an Actions run is not proof of a package until the push step succeeds.
-])
-
-#ghcrPage("Github Container Registry", "0:45", [Pull and run the result], "../../img/topic3/ghcr/run.svg", [
-  #v(6pt)
-  #ghcrBox[
-    ```sh
-    docker pull ghcr.io/sdegroup5/github-actions/app:v1.0.0
-    ```
-  ]
-  #v(11pt)
-  Run the image with port `5000:5000`, then open:
-  #v(8pt)
-  `http://localhost:5000/json/getData`
-  #v(13pt)
-  Public packages pull anonymously. Private packages require appropriate authentication.
-])
-
-#ghcrPage("Github Container Registry", "1:25", [One tiny change, one release, two pieces of evidence.], "../../img/topic3/ghcr/exercise.svg", [
-  #v(4pt)
-  + In your fork, fix the wrong JSON `COPY --from=0` path in `Dockerfile.app` and commit it.
-  + Create a *new published release* with tag `v1.0.0` (or a fresh tag).
-  + In *Actions → Docker Image*, check the successful publish step.
-  + In *Packages → app*, find the tag matching your release.
-  #v(9pt)
-  *Submit:* the Actions run URL and a screenshot of the GHCR version. *Bonus:* pull and run it.
 ])
