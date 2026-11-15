@@ -1,17 +1,3 @@
-// Teaching segment: run the app with Docker, then explain the binary CI workflow.
-// Source of truth: SDEGroup5/github-actions, branch docker-build.
-// Paths below are relative to that application repository, not to Docs:
-// Dockerfile.app, .github/workflows/build-binary.yml, src/main.py,
-// src/service/json_service.py and json/data.json.
-// Live walkthrough: Docker startup and HTTP response, followed by CI logs and artifact.
-// Students observe; no binary download, native setup or copying is required.
-// TODO: add an exercise after its scope has been agreed with the group.
-// Official references:
-// https://nuitka.net/user-documentation/user-manual.html
-// https://docs.docker.com/build/building/multi-stage/
-// https://docs.docker.com/build/exporters/local-tar/
-// https://github.com/actions/upload-artifact
-
 #import "../lib/commonSlide.typ": slide
 #import "../lib/common.typ": mainColor
 
@@ -90,83 +76,42 @@
   radius: 0.4pt,
 )[#code]
 
-#slide("From a running app to an automated build", 3)[
+
+#slide("From source code to a downloadable executable", 3)[
   #body(compact: true)[
-    First, we run the application with Docker and check its response.
-    Then we follow the workflow that compiles and saves its executable.
+    In Part 2, GitHub Actions tested the application on every push.
+    Now we let it compile the application and keep the result.
     #v(22pt)
     #grid(columns: (1fr, 1fr, 1fr), column-gutter: 16pt,
-      card("Docker", [Builds the application image and runs the service in its runtime environment.]),
-      card("Nuitka", [Compiles the Python application into a Linux executable during the build.]),
-      card("GitHub Actions", [Automates compilation and preserves the executable as a workflow artifact.]),
+      card("Nuitka", [Compiles the Python application into a single Linux executable.]),
+      card("Docker", [Provides the build environment: Python, Nuitka and a C compiler.]),
+      card("GitHub Actions", [Runs the build on every push and keeps the executable as an artifact.]),
     )
     #v(22pt)
-    #result[Run with Docker → inspect the workflow → observe the build result.]
+    #result[Dockerfile → workflow → artifact → run the executable.]
   ]
 ]
 
-#slide("Run the application with Docker", 3)[
+#slide("Why compile with GitHub Actions?", 3)[
   #body(compact: true)[
-    With Docker running, we build the image from the application repository root and start a container:
-    #v(18pt)
-    #workflowPanel()[
-      ```sh
-      docker build --platform linux/amd64 \
-        -f Dockerfile.app -t lab-app:local .
-
-      docker run --rm -it --platform linux/amd64 \
-        -p 5000:5000 lab-app:local
-      ```
-    ]
-    #v(20pt)
+    Part 1 showed why CI helps: clean, automatic and reproducible runs.
+    For a compiled program, it also means:
+    #v(22pt)
     #list(
-      [`docker build` compiles the program and prepares the image.],
-      [`docker run` starts the application already contained in that image.],
-      [`-p 5000:5000` connects the host port to the service in the container.],
-    )
-    #v(18pt)
-    #result[The service is available on localhost:5000 while the container runs.]
-  ]
-]
-
-#slide("Check the application response", 3)[
-  #body(compact: true)[
-    We open the application's endpoint in the browser:
-    #v(16pt)
-    #workflowPanel(size: 20pt)[
-      ```text
-      http://localhost:5000/json/getData
-      ```
-    ]
-    #v(20pt)
-    #grid(columns: (1fr, 1fr), column-gutter: 24pt,
-      card("Data in the image", [The image includes `json/data.json` from the repository: Mario, Rossi, Luigi and Verdi.]),
-      card("Expected response", [HTTP 200 and a JSON object. Its `data` field contains the file contents serialized as a string.]),
-    )
-    #v(20pt)
-    #text(size: 18pt)[This checks startup, access to the data and HTTP handling. Ctrl+C stops the app; `--rm` removes the stopped container.]
-  ]
-]
-
-#slide("Automate the build with GitHub Actions", 3)[
-  #body(compact: true)[
-    The application works in the container. We now look at how CI produces its executable.
-    #v(22pt)
-    #grid(columns: (1fr, 1fr), column-gutter: 24pt,
-      card("Local demonstration", [Docker builds an image and starts the service so we can see its behavior.]),
-      card("Binary workflow", [A runner builds the same source, exports `app` and uploads that file as an artifact.]),
+      [*No local toolchain:* Nuitka and the C compiler live in the build image, not on our laptops.],
+      [*Same output for everyone:* any developer, even on macOS or Windows, gets the same Linux executable.],
+      [*Traceable:* each executable is linked to its commit, and the run keeps the build logs.],
+      [*Early feedback:* if compilation breaks, the run fails and the commit is marked as failed.],
     )
     #v(22pt)
-    #text(size: 18pt)[The workflow lives in `.github/workflows/build-binary.yml`. We will follow its configuration and inspect a run in Actions.]
-    #v(18pt)
-    #result[Checkout → compile and export → upload the executable.]
+    #result[`.github/workflows/build-binary.yml`: checkout → compile and export → upload.]
   ]
 ]
 
 #slide("Dockerfile: compile with Nuitka", 3)[
   #body(compact: true)[
-    The `builder` stage uses `python:3.14-slim-bookworm`.
-    It installs Nuitka, `python-dotenv`, a C compiler and `patchelf`.
+    `Dockerfile.app` has several stages: each `FROM` starts one. `builder`
+    (`python:3.14-slim-bookworm`) installs Nuitka, a C compiler and `patchelf`.
     #v(18pt)
     #workflowPanel(focus: (5, 6, 7, 8, 9))[
       ```dockerfile
@@ -188,30 +133,9 @@
   ]
 ]
 
-#slide("Dockerfile: the runtime image", 3)[
-  #body(compact: true)[
-    The `runtime` stage creates the image used in our opening demonstration.
-    #v(18pt)
-    #workflowPanel(focus: (1, 3, 4))[
-      ```dockerfile
-      FROM debian:bookworm-slim AS runtime
-      WORKDIR /app
-      COPY --from=builder /app/bin/app /app/app
-      COPY json/data.json /app/json/data.json
-      RUN chmod +x /app/app
-      CMD ["/app/app"]
-      ```
-    ]
-    #v(20pt)
-    #text(size: 18pt)[This image contains the executable, the repository's example data and a Debian runtime. The compiler stays in the builder stage.]
-    #v(20pt)
-    #result[Without --target, Docker builds this final stage to produce the application image.]
-  ]
-]
-
 #slide("Dockerfile: export the executable", 3)[
   #body(compact: true)[
-    Each `FROM` starts a stage. The `binary` stage collects the executable produced by the build.
+    The `binary` stage keeps only the file we want to distribute.
     #v(22pt)
     #workflowPanel(focus: (1, 2), size: 20pt)[
       ```dockerfile
@@ -226,7 +150,7 @@
       [`/app` is the exported file's path, not a directory here.],
     )
     #v(22pt)
-    #result[This stage contains only the executable; it is used for file export.]
+    #result[This stage contains only the executable; the compiler stays in `builder`.]
   ]
 ]
 
@@ -264,7 +188,7 @@
 
 #slide("Workflow (2/3): build and export", 3)[
   #body(compact: true)[
-    In `.github/workflows/build-binary.yml`, the runner executes our build command.
+    In `.github/workflows/build-binary.yml`, the runner builds `Dockerfile.app` with Docker.
     #v(20pt)
     #workflowPanel(focus: (5, 6))[
       ```yaml
@@ -292,7 +216,7 @@
 
 #slide("Understanding the export command", 3)[
   #body(compact: true)[
-    These options select the binary output instead of the runtime image:
+    These options produce a file on the runner instead of a Docker image:
     #v(18pt)
     #workflowPanel(focus: (3, 4))[
       ```sh
@@ -350,30 +274,57 @@
       [*Upload:* the saved file appears in the run's *Artifacts* section.],
     )
     #v(22pt)
-    #text(size: 18pt)[The build may take time. A completed run lets us inspect the logs and artifact together. Cached steps may appear as CACHED.]
+    #text(size: 18pt)[Each run starts on a clean runner with no Docker layer cache, so Nuitka compiles from scratch: the build takes a few minutes. A completed run lets us inspect the logs and artifact together.]
     #v(18pt)
     #result[We can connect each workflow step to its visible output.]
   ]
 ]
 
-#slide("What did the workflow produce?", 3)[
+
+#slide("Run the executable", 3)[
   #body(compact: true)[
-    The artifact contains the compiled `app` file from the selected source revision.
+    I download `app` from the run's *Artifacts*, move it to the repository root
+    and start it on my Linux laptop:
+    #v(16pt)
+    #workflowPanel(focus: (2,), size: 15pt)[
+      ```sh
+      $ chmod +x app       # browser downloads drop the executable bit
+      $ ./app
+      Server has started!
+
+      $ curl http://localhost:5000/json/getData    # in a second terminal
+      {"data": "{\"characters\": [\"Mario\", \"Rossi\", \"Luigi\", \"Verdi\"]}"}
+      ```
+    ]
+    #v(18pt)
+    #list(
+      [No Python, Nuitka or Docker is needed to run it.],
+      [The program reads `./json/data.json` from the current directory: the repository root has it.],
+      [`data` holds the file contents serialized as a string.],
+    )
+    #v(16pt)
+    #result[The file produced by GitHub Actions works on its own.]
+  ]
+]
+
+#slide("What are the limits of the executable?", 3)[
+  #body(compact: true)[
+    The artifact is a single file, but it does not run everywhere on its own.
     #v(22pt)
     #grid(columns: (1fr, 1fr), column-gutter: 24pt,
-      card("Build output", [A Linux AMD64 executable. The JSON remains external; the artifact contains only the program.]),
-      card("Build status", [A successful run confirms compilation, export and upload. This workflow does not start the server.]),
+      card("Where it runs", [Linux x86-64 with a C library compatible with Debian 12, the builder's base.]),
+      card("What it needs", [`json/data.json` in the directory it is started from: the data is not inside the file.]),
     )
     #v(22pt)
-    #text(size: 18pt)[The opening Docker demo checks application behavior. Native execution of the artifact would also require compatible Linux system libraries.]
+    #text(size: 18pt)[Users on macOS or Windows cannot run it, and everyone must provide the data separately.]
     #v(18pt)
-    #result[The CI build result and the running application are separate checks.]
+    #result[To share a ready-to-run application, a file is not enough.]
   ]
 ]
 
 #slide("From an artifact to a published image", 3)[
   #body(compact: true)[
-    We have seen the application run and the executable produced by CI.
+    We have compiled the application and run the executable produced by CI.
     Next, we publish the application image to GHCR.
     #v(24pt)
     #grid(columns: (1fr, 1fr), column-gutter: 24pt,
@@ -381,7 +332,7 @@
       card("GHCR image", [Distributes the executable together with example data and a runtime environment, ready to start as a container.]),
     )
     #v(24pt)
-    #text(size: 18pt)[`docker-image.yml` builds the runtime image from the Dockerfile and publishes it. It does not download the binary artifact.]
+    #text(size: 18pt)[`docker-image.yml` builds the last stage of the Dockerfile, `runtime`, and publishes it. It does not download the binary artifact.]
     #v(18pt)
     #result[Same application and Dockerfile; two different build outputs.]
   ]
