@@ -70,12 +70,23 @@
   #text(size: 17pt)[#content]
 ]
 
+
+#let screenshot(path, width: 100%) = box(
+  stroke: 1pt + luma(75%), radius: 6pt, clip: true,
+)[#image(path, width: width)]
+
 #show raw: code => box(
   fill: luma(90%),
   outset: 0.3em,
   radius: 0.4pt,
 )[#code]
 
+
+#slide("Building and Publishing with GitHub Actions", 3)[
+  #align(center + horizon)[
+    #text(size: 3em)[*Part 3*\ *Building and Publishing with GitHub Actions*]
+  ]
+]
 
 #slide("From source code to a downloadable executable", 3)[
   #body(compact: true)[
@@ -99,12 +110,12 @@
     #v(22pt)
     #list(
       [*No local toolchain:* Nuitka and the C compiler live in the build image, not on our laptops.],
-      [*Same output for everyone:* any developer, even on macOS or Windows, gets the same Linux executable.],
+      [*Same output for everyone:* any developer gets the same Linux executable.],
       [*Traceable:* each executable is linked to its commit, and the run keeps the build logs.],
       [*Early feedback:* if compilation breaks, the run fails and the commit is marked as failed.],
     )
     #v(22pt)
-    #result[`.github/workflows/build-binary.yml`: checkout → compile and export → upload.]
+    #result[The executable is built by GitHub, not by one of us: same recipe, every push.]
   ]
 ]
 
@@ -241,50 +252,53 @@
 #slide("Workflow (3/3): upload the artifact", 3)[
   #body(compact: true)[
     Upload the output so it remains downloadable after the runner finishes.
-    #v(20pt)
-    #workflowPanel(focus: (4, 5))[
-      ```yaml
-      - name: Upload binary artifact
-        uses: actions/upload-artifact@v7
-        with:
-          path: dist/app
-          archive: false
-          if-no-files-found: error
-      ```
-    ]
-    #v(20pt)
-    #list(
-      [`path` selects the executable produced by the build.],
-      [`archive: false` uploads the single file directly.],
-      [`if-no-files-found: error` fails the step if that file is missing.],
+    #v(16pt)
+    #grid(columns: (1fr, 1fr), column-gutter: 24pt, align: horizon,
+      workflowPanel(focus: (4, 5))[
+        ```yaml
+        - name: Upload binary artifact
+          uses: actions/upload-artifact@v7
+          with:
+            path: dist/app
+            archive: false
+            if-no-files-found: error
+        ```
+      ],
+      list(
+        [`path` selects the executable produced by the build.],
+        [`archive: false` uploads the single file directly.],
+        [`if-no-files-found: error` fails the step if that file is missing.],
+      ),
     )
-    #v(20pt)
-    #result[The artifact preserves `app` from this workflow run for later verification.]
+    #v(14pt)
+    #show figure.caption: set text(size: 14pt)
+    #figure(
+      screenshot("../../img/topic3/exec/artifact.png", width: 80%),
+      caption: [The `app` artifact in the run's summary, ready to download.],
+    )
   ]
 ]
 
 #slide("Follow the workflow in Actions", 3)[
   #body(compact: true)[
     We open *Build Linux binary* in Actions and inspect a run on `docker-build`.
-    #v(22pt)
-    #enum(
-      [*Source:* the run identifies the branch and commit being built.],
-      [*Build:* the log shows the Docker stages and Nuitka compilation.],
-      [*Export:* the build writes `app` into the runner's `dist` directory.],
-      [*Upload:* the saved file appears in the run's *Artifacts* section.],
+    #v(16pt)
+    #grid(columns: (1fr, 1.5fr), column-gutter: 20pt, align: horizon,
+      enum(
+        [*Source:* the run shows the commit that triggered it.],
+        [*Build:* the longest step: a clean runner has no Docker cache, so Nuitka compiles everything again.],
+        [*Export:* the build writes `app` into the runner's `dist` directory.],
+        [*Upload:* the file appears in the run's *Artifacts* section.],
+      ),
+      screenshot("../../img/topic3/exec/build_complete.png"),
     )
-    #v(22pt)
-    #text(size: 18pt)[Each run starts on a clean runner with no Docker layer cache, so Nuitka compiles from scratch: the build takes a few minutes. A completed run lets us inspect the logs and artifact together.]
-    #v(18pt)
-    #result[We can connect each workflow step to its visible output.]
   ]
 ]
 
 
 #slide("Run the executable", 3)[
   #body(compact: true)[
-    I download `app` from the run's *Artifacts*, move it to the repository root
-    and start it on my Linux laptop:
+    Download `app` from the run's *Artifacts*, move it to the repository root and start it:
     #v(16pt)
     #workflowPanel(focus: (2,), size: 15pt)[
       ```sh
@@ -316,24 +330,52 @@
       card("What it needs", [`json/data.json` in the directory it is started from: the data is not inside the file.]),
     )
     #v(22pt)
-    #text(size: 18pt)[Users on macOS or Windows cannot run it, and everyone must provide the data separately.]
+    #text(size: 18pt)[It runs only on that system: supporting other operating systems or CPU architectures requires one executable for each, built on a matching runner.]
     #v(18pt)
     #result[To share a ready-to-run application, a file is not enough.]
   ]
 ]
 
-#slide("From an artifact to a published image", 3)[
-  #body(compact: true)[
-    We have compiled the application and run the executable produced by CI.
-    Next, we publish the application image to GHCR.
-    #v(24pt)
-    #grid(columns: (1fr, 1fr), column-gutter: 24pt,
-      card("Actions artifact", [Preserves the compiled file as an output of a specific workflow run.]),
-      card("GHCR image", [Distributes the executable together with example data and a runtime environment, ready to start as a container.]),
-    )
-    #v(24pt)
-    #text(size: 18pt)[`docker-image.yml` builds the last stage of the Dockerfile, `runtime`, and publishes it. It does not download the binary artifact.]
-    #v(18pt)
-    #result[Same application and Dockerfile; two different build outputs.]
+
+#slide("Exercises", 3)[
+
+  #align(center + horizon)[
+    #text(size: 2.5em, weight: "bold")[On the website!]
+
+    #v(2em)
+
+    #text(size: 2.3em)[
+      Go to: #link("https://sdegroup5.github.io/")[#text(fill: rgb("1565c0"))[*sdegroup5.github.io*]]
+    ]
+
+    #v(1em)
   ]
+
+]
+
+#slide("Solutions: Exercises", 3)[
+  #set text(1.3em)
+  #set list(spacing: 0.8em)
+  #show grid: set text(size: 1.15em)
+
+  #grid(
+    columns: (1fr, 1fr),
+    align: left + top,
+    inset: 1em,
+    row-gutter: 1.5em,
+    [
+      *Multiple choice — Answer: C* \
+      `dist` contains only the `app` executable.
+      - `--target binary` stops at the `binary` stage, which starts `FROM scratch` and copies just that file.
+      - It is not an image (A): `--output` writes files to the runner.
+      - The repository files (B) stay in `builder`.
+      - `--output` does not need `docker push` (D).
+    ],
+    [
+      *Fill in the gaps — `binary` / `upload-artifact`* \
+      - `--target binary` builds only up to the stage that contains the executable.
+      - `actions/upload-artifact` saves `dist/app` in the run, because the runner is destroyed when the job ends.
+    ],
+  )
+
 ]
