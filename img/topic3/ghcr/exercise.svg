@@ -1,2 +1,47 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><rect fill="#FFFFFF" height="570" rx="24" width="900" x="0" y="0" /><text fill="#B10B25" font-family="DejaVu Sans,Arial" font-size="30" font-weight="bold" text-anchor="start" x="43" y="68">BEGINNER PROOF  •  3 CHECKMARKS</text><rect fill="#F7F9FC" height="257" rx="18" stroke="#D7DFE8" stroke-width="2" width="265" x="46" y="147" /><circle cx="176" cy="209" fill="#B10B25" r="25" /><text fill="white" font-family="DejaVu Sans,Arial" font-size="24" font-weight="bold" text-anchor="middle" x="176" y="217">1</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="25" font-weight="bold" text-anchor="middle" x="176" y="283">1  RELEASE</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="18" font-weight="normal" text-anchor="middle" x="176" y="326">Publish v1.0.0</text><rect fill="#F7F9FC" height="257" rx="18" stroke="#D7DFE8" stroke-width="2" width="265" x="329" y="147" /><circle cx="459" cy="209" fill="#168657" r="25" /><text fill="white" font-family="DejaVu Sans,Arial" font-size="24" font-weight="bold" text-anchor="middle" x="459" y="217">2</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="25" font-weight="bold" text-anchor="middle" x="459" y="283">2  ACTIONS</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="18" font-weight="normal" text-anchor="middle" x="459" y="326">Find the green run</text><rect fill="#F7F9FC" height="257" rx="18" stroke="#D7DFE8" stroke-width="2" width="265" x="612" y="147" /><circle cx="742" cy="209" fill="#168657" r="25" /><text fill="white" font-family="DejaVu Sans,Arial" font-size="24" font-weight="bold" text-anchor="middle" x="742" y="217">3</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="25" font-weight="bold" text-anchor="middle" x="742" y="283">3  GHCR</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="18" font-weight="normal" text-anchor="middle" x="742" y="326">See /app:v1.0.0</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="22" font-weight="bold" text-anchor="middle" x="450" y="475">Evidence: workflow run link + package version screenshot.</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px">
+  <defs/>
+  <rect fill="white" height="570" width="900" x="0" y="0"/>
+  <text fill="#B10B25" font-family="DejaVu Sans" font-size="29" font-weight="bold" text-anchor="start" x="40" y="60">YOUR PROOF: BUILD → PULL → TEST</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="start" x="41" y="96">Follow the existing workflow; no YAML rewrite required</text>
+  <line stroke="#D6E0EA" stroke-width="2" x1="40" x2="858" y1="110" y2="110"/>
+  <rect fill="#F4F7FB" height="206" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="160" x="31" y="178"/>
+  <rect fill="#B10B25" height="36" rx="17" ry="17" width="55" x="85" y="199"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="19" font-weight="bold" text-anchor="middle" x="112.5" y="224">1</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="21" font-weight="bold" text-anchor="middle" x="111" y="282">Publish</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="middle" x="111" y="324">release</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="193" x2="199" y1="290" y2="290"/>
+  <polygon fill="#B10B25" points="194,281 208,290 194,299"/>
+  <rect fill="#F4F7FB" height="206" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="160" x="207" y="178"/>
+  <rect fill="#B10B25" height="36" rx="17" ry="17" width="55" x="261" y="199"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="19" font-weight="bold" text-anchor="middle" x="288.5" y="224">2</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="21" font-weight="bold" text-anchor="middle" x="287" y="282">Check</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="middle" x="287" y="324">Actions</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="369" x2="375" y1="290" y2="290"/>
+  <polygon fill="#B10B25" points="370,281 384,290 370,299"/>
+  <rect fill="#F4F7FB" height="206" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="160" x="383" y="178"/>
+  <rect fill="#B10B25" height="36" rx="17" ry="17" width="55" x="437" y="199"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="19" font-weight="bold" text-anchor="middle" x="464.5" y="224">3</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="21" font-weight="bold" text-anchor="middle" x="463" y="282">Find</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="middle" x="463" y="324">GHCR tags</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="545" x2="551" y1="290" y2="290"/>
+  <polygon fill="#B10B25" points="546,281 560,290 546,299"/>
+  <rect fill="#F4F7FB" height="206" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="160" x="559" y="178"/>
+  <rect fill="#B10B25" height="36" rx="17" ry="17" width="55" x="613" y="199"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="19" font-weight="bold" text-anchor="middle" x="640.5" y="224">4</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="21" font-weight="bold" text-anchor="middle" x="639" y="282">Update</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="middle" x="639" y="324">compose.yml</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="721" x2="727" y1="290" y2="290"/>
+  <polygon fill="#B10B25" points="722,281 736,290 722,299"/>
+  <rect fill="#F4F7FB" height="206" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="160" x="735" y="178"/>
+  <rect fill="#B10B25" height="36" rx="17" ry="17" width="55" x="789" y="199"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="19" font-weight="bold" text-anchor="middle" x="816.5" y="224">5</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="21" font-weight="bold" text-anchor="middle" x="815" y="282">Run</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="middle" x="815" y="324">Compose</text>
+  <rect fill="#EAF7EE" height="58" rx="13" ry="13" width="590" x="156" y="427"/>
+  <circle cx="196" cy="456" fill="#188357" r="14"/>
+  <polyline fill="none" points="189,456 195,462 204,449" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/>
+  <text fill="#188357" font-family="DejaVu Sans" font-size="22" font-weight="bold" text-anchor="start" x="230" y="464">HTTP 200 from /json/getData = proof!</text>
+  <line stroke="#D6E0EA" stroke-linecap="round" stroke-width="2" x1="40" x2="860" y1="522" y2="522"/>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="44" y="551">This exercise uses a published release and your own owner/repo path</text>
+</svg>

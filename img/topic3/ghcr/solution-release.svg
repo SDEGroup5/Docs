@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px">
+  <defs/>
+  <rect fill="white" height="570" width="900" x="0" y="0"/>
+  <text fill="#B10B25" font-family="DejaVu Sans" font-size="29" font-weight="bold" text-anchor="start" x="40" y="60">ANSWER KEY 1: RELEASE → ACTION</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="start" x="41" y="96">Example only: do not mistake this for a captured run</text>
+  <line stroke="#D6E0EA" stroke-width="2" x1="40" x2="858" y1="110" y2="110"/>
+  <rect fill="#F4F7FB" height="302" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="356" x="42" y="149"/>
+  <rect fill="#172538" height="36" rx="17" ry="17" width="186" x="65" y="171"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="20" font-weight="bold" text-anchor="middle" x="158.0" y="196">Releases</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="27" font-weight="bold" text-anchor="start" x="70" y="255">Release v1.0.0</text>
+  <text fill="#188357" font-family="DejaVu Sans" font-size="21" font-weight="normal" text-anchor="start" x="70" y="310">Status: published</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="21" font-weight="normal" text-anchor="start" x="70" y="360">Event: release</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="410" x2="457" y1="297" y2="297"/>
+  <polygon fill="#B10B25" points="452,288 466,297 452,306"/>
+  <rect fill="#F4F7FB" height="302" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="380" x="478" y="149"/>
+  <rect fill="#172538" height="36" rx="17" ry="17" width="332" x="500" y="171"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="19" font-weight="bold" text-anchor="middle" x="666.0" y="196">Actions / Docker Image</text>
+  <circle cx="528" cy="253" fill="#188357" r="14"/>
+  <polyline fill="none" points="521,253 527,259 536,246" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="21" font-weight="bold" text-anchor="start" x="557" y="261">Export executable</text>
+  <circle cx="528" cy="315" fill="#188357" r="14"/>
+  <polyline fill="none" points="521,315 527,321 536,308" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="21" font-weight="bold" text-anchor="start" x="557" y="323">Login to GHCR</text>
+  <circle cx="528" cy="377" fill="#188357" r="14"/>
+  <polyline fill="none" points="521,377 527,383 536,370" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="21" font-weight="bold" text-anchor="start" x="557" y="385">Build and push</text>
+  <line stroke="#D6E0EA" stroke-linecap="round" stroke-width="2" x1="40" x2="860" y1="522" y2="522"/>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="44" y="551">Expected evidence: a release-triggered run with all three critical steps green</text>
+</svg>

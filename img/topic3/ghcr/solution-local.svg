@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px">
+  <defs/>
+  <rect fill="white" height="570" width="900" x="0" y="0"/>
+  <text fill="#B10B25" font-family="DejaVu Sans" font-size="29" font-weight="bold" text-anchor="start" x="40" y="60">ANSWER KEY 3: CONTAINER RESPONDS</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="start" x="41" y="96">Illustrative expected console result, not executed here</text>
+  <line stroke="#D6E0EA" stroke-width="2" x1="40" x2="858" y1="110" y2="110"/>
+  <rect fill="#172538" height="331" rx="17" ry="17" width="808" x="46" y="143"/>
+  <circle cx="79" cy="171" fill="#E26460" r="9"/>
+  <circle cx="107" cy="171" fill="#E9BF58" r="9"/>
+  <circle cx="135" cy="171" fill="#54C37D" r="9"/>
+  <text fill="#D9ECFF" font-family="DejaVu Sans Mono" font-size="21" font-weight="normal" text-anchor="start" x="77" y="236">$ cp .env.example .env</text>
+  <text fill="#D9ECFF" font-family="DejaVu Sans Mono" font-size="21" font-weight="normal" text-anchor="start" x="77" y="283">$ docker compose up -d</text>
+  <text fill="#D9ECFF" font-family="DejaVu Sans Mono" font-size="20" font-weight="normal" text-anchor="start" x="77" y="330">$ curl -i http://localhost:5000/json/getData</text>
+  <text fill="#72E0AB" font-family="DejaVu Sans Mono" font-size="23" font-weight="bold" text-anchor="start" x="77" y="394">HTTP/1.0 200 OK</text>
+  <text fill="#D9ECFF" font-family="DejaVu Sans Mono" font-size="20" font-weight="normal" text-anchor="start" x="77" y="436">{"data": "{...}"}</text>
+  <line stroke="#D6E0EA" stroke-linecap="round" stroke-width="2" x1="40" x2="860" y1="522" y2="522"/>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="44" y="551">Submit run status + GHCR tags + HTTP response. Private package? Log in first.</text>
+</svg>

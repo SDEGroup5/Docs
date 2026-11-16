@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px">
+  <defs/>
+  <rect fill="white" height="570" width="900" x="0" y="0"/>
+  <text fill="#B10B25" font-family="DejaVu Sans" font-size="29" font-weight="bold" text-anchor="start" x="40" y="60">PUSH RIGHTS ≠ PULL RIGHTS</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="start" x="41" y="96">Newly published GHCR packages are private by default</text>
+  <line stroke="#D6E0EA" stroke-width="2" x1="40" x2="858" y1="110" y2="110"/>
+  <rect fill="#F4F7FB" height="272" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="361" x="60" y="159"/>
+  <rect fill="#172538" height="36" rx="17" ry="17" width="284" x="97" y="195"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="239.0" y="220">PRIVATE PACKAGE</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="25" font-weight="bold" text-anchor="start" x="103" y="276">Pull requires access</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="103" y="323">Docker must be logged in</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="103" y="352">with read permission</text>
+  <rect fill="#EAF7EE" height="272" rx="18" ry="18" stroke="#188357" stroke-width="2" width="361" x="478" y="159"/>
+  <rect fill="#188357" height="36" rx="17" ry="17" width="283" x="518" y="195"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="659.5" y="220">PUBLIC PACKAGE</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="24" font-weight="bold" text-anchor="start" x="522" y="276">Anonymous pull works</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="522" y="323">No docker login needed</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="522" y="352">to download the image</text>
+  <line stroke="#D6E0EA" stroke-linecap="round" stroke-width="2" x1="40" x2="860" y1="522" y2="522"/>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="44" y="551">Use package settings intentionally — making a package public is a visibility change</text>
+</svg>

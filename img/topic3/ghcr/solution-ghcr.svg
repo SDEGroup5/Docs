@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px">
+  <defs/>
+  <rect fill="white" height="570" width="900" x="0" y="0"/>
+  <text fill="#B10B25" font-family="DejaVu Sans" font-size="29" font-weight="bold" text-anchor="start" x="40" y="60">ANSWER KEY 2: THE TWO PUBLISHED TAGS</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="start" x="41" y="96">The same path is used in compose.yml</text>
+  <line stroke="#D6E0EA" stroke-width="2" x1="40" x2="858" y1="110" y2="110"/>
+  <rect fill="#F4F7FB" height="155" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="798" x="50" y="146"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="23" font-weight="bold" text-anchor="start" x="81" y="199">ghcr.io/&lt;owner&gt;/&lt;repo&gt;/app</text>
+  <rect fill="#156AAB" height="36" rx="17" ry="17" width="150" x="82" y="230"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="157.0" y="255">1.0.0</text>
+  <rect fill="#188357" height="36" rx="17" ry="17" width="150" x="251" y="230"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="326.0" y="255">latest</text>
+  <rect fill="#E67E22" height="36" rx="17" ry="17" width="150" x="420" y="230"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="495.0" y="255">sha</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="451" x2="442" y1="315" y2="356"/>
+  <polygon fill="#B10B25" points="437,347 451,356 437,365"/>
+  <rect fill="#FFFFFF" height="99" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="714" x="94" y="369"/>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="122" y="404">compose.yml  →  services.app.image:</text>
+  <text fill="#156AAB" font-family="DejaVu Sans Mono" font-size="22" font-weight="bold" text-anchor="start" x="122" y="446">ghcr.io/&lt;owner&gt;/&lt;repo&gt;/app:1.0.0</text>
+  <line stroke="#D6E0EA" stroke-linecap="round" stroke-width="2" x1="40" x2="860" y1="522" y2="522"/>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="44" y="551">Replace owner/repo with your repository path. Actual tags depend on your release.</text>
+</svg>

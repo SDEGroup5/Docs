@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
-<defs />
-<rect fill="#FFFFFF" height="570" rx="24" width="900" x="0" y="0" />
-<text fill="#B10B25" font-family="DejaVu Sans,Arial" font-size="30" font-weight="bold" text-anchor="start" x="45" y="62">BUILD THE IMAGE, THEN PUSH IT</text>
-<rect fill="#F7FAFC" height="280" rx="22" stroke="#D7DFE8" stroke-width="2" width="240" x="55" y="140" /><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="25" font-weight="bold" text-anchor="middle" x="175" y="191">Dockerfile.app</text>
-<text fill="#1677BB" font-family="DejaVu Sans,Arial" font-size="23" font-weight="bold" text-anchor="middle" x="175" y="251">STAGE 1</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="20" font-weight="normal" text-anchor="middle" x="175" y="291">Python + Nuitka</text>
-<text fill="#168657" font-family="DejaVu Sans,Arial" font-size="23" font-weight="bold" text-anchor="middle" x="175" y="340">STAGE 2</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="20" font-weight="normal" text-anchor="middle" x="175" y="379">FROM scratch</text>
-<line stroke="#B10B25" stroke-linecap="round" stroke-width="6" x1="302" x2="370" y1="283" y2="283" /><line stroke="#B10B25" stroke-linecap="round" stroke-width="6" x1="370" x2="356" y1="283" y2="272" /><line stroke="#B10B25" stroke-linecap="round" stroke-width="6" x1="370" x2="356" y1="283" y2="294" />
-<rect fill="#E9F4FD" height="188" rx="22" stroke="#1677BB" stroke-width="2" width="190" x="386" y="182" /><text fill="#1677BB" font-family="DejaVu Sans,Arial" font-size="32" font-weight="bold" text-anchor="middle" x="481" y="249">IMAGE</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="18" font-weight="bold" text-anchor="middle" x="481" y="299">app:v1.0.0</text><line stroke="#B10B25" stroke-linecap="round" stroke-width="6" x1="586" x2="648" y1="283" y2="283" /><line stroke="#B10B25" stroke-linecap="round" stroke-width="6" x1="648" x2="634" y1="283" y2="272" /><line stroke="#B10B25" stroke-linecap="round" stroke-width="6" x1="648" x2="634" y1="283" y2="294" /><rect fill="#EAF6EF" height="185" rx="22" stroke="#168657" stroke-width="2" width="200" x="655" y="183" /><text fill="#168657" font-family="DejaVu Sans,Arial" font-size="31" font-weight="bold" text-anchor="middle" x="755" y="245">GHCR</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="21" font-weight="bold" text-anchor="middle" x="755" y="293">published</text><rect fill="#B10B25" height="42" rx="21" stroke="none" stroke-width="2" width="320" x="295" y="466" /><text fill="white" font-family="DejaVu Sans,Arial" font-size="19" font-weight="bold" text-anchor="middle" x="455.0" y="495">push: true</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px">
+  <defs/>
+  <rect fill="white" height="570" width="900" x="0" y="0"/>
+  <text fill="#B10B25" font-family="DejaVu Sans" font-size="29" font-weight="bold" text-anchor="start" x="40" y="60">BUILD #2: PACKAGE AND PUSH</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="start" x="41" y="96">Dockerfile.app uses a named context created by Build #1</text>
+  <line stroke="#D6E0EA" stroke-width="2" x1="40" x2="858" y1="110" y2="110"/>
+  <rect fill="#F4F7FB" height="268" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="254" x="42" y="152"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="23" font-weight="bold" text-anchor="middle" x="169" y="205">Local output</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="middle" x="169" y="267">app-only-context/</text>
+  <text fill="#156AAB" font-family="DejaVu Sans" font-size="27" font-weight="bold" text-anchor="middle" x="169" y="307">app</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="300" x2="340" y1="283" y2="283"/>
+  <polygon fill="#B10B25" points="335,274 349,283 335,292"/>
+  <rect fill="#FFFFFF" height="268" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="232" x="360" y="152"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="23" font-weight="bold" text-anchor="middle" x="476" y="204">Dockerfile.app</text>
+  <text fill="#156AAB" font-family="DejaVu Sans" font-size="28" font-weight="bold" text-anchor="middle" x="476" y="263">COPY</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="middle" x="476" y="310">--from=app-only</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="middle" x="476" y="357">linux/amd64</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="597" x2="636" y1="283" y2="283"/>
+  <polygon fill="#B10B25" points="631,274 645,283 631,292"/>
+  <rect fill="#EAF7EE" height="268" rx="18" ry="18" stroke="#188357" stroke-width="2" width="207" x="654" y="152"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="28" font-weight="bold" text-anchor="middle" x="757" y="208">GHCR</text>
+  <rect fill="#156AAB" height="36" rx="17" ry="17" width="150" x="680" y="254"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="755.0" y="279">1.0.0</text>
+  <rect fill="#188357" height="36" rx="17" ry="17" width="150" x="680" y="315"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="755.0" y="340">latest</text>
+  <line stroke="#D6E0EA" stroke-linecap="round" stroke-width="2" x1="40" x2="860" y1="522" y2="522"/>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="44" y="551">build-contexts: app-only=./app-only-context · push: true</text>
+</svg>

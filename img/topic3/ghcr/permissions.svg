@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><rect fill="#FFFFFF" height="570" rx="24" width="900" x="0" y="0" /><text fill="#B10B25" font-family="DejaVu Sans,Arial" font-size="29" font-weight="bold" text-anchor="start" x="44" y="64">GITHUB_TOKEN: A KEY FOR THIS WORKFLOW</text><rect fill="#F7FAFC" height="325" rx="20" stroke="#D7DFE8" stroke-width="2" width="350" x="70" y="120" /><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="27" font-weight="bold" text-anchor="start" x="100" y="183">permissions:</text><rect fill="#F4F7FB" height="80" rx="20" stroke="#D7DFE8" stroke-width="2" width="302" x="94" y="222" /><rect fill="#1677BB" height="80" rx="4" stroke="none" stroke-width="2" width="10" x="94" y="222" /><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="25" font-weight="bold" text-anchor="start" x="119" y="266">contents: read</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="17" font-weight="normal" text-anchor="start" x="119" y="298">fetch repository</text><rect fill="#F4F7FB" height="80" rx="20" stroke="#D7DFE8" stroke-width="2" width="302" x="94" y="327" /><rect fill="#168657" height="80" rx="4" stroke="none" stroke-width="2" width="10" x="94" y="327" /><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="25" font-weight="bold" text-anchor="start" x="119" y="371">packages: write</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="17" font-weight="normal" text-anchor="start" x="119" y="403">upload GHCR image</text><rect fill="#ECF7F1" height="218" rx="22" stroke="#AED3BD" stroke-width="2" width="290" x="520" y="166" /><circle cx="665" cy="242" fill="#CDEAD8" r="56" stroke="#168657" stroke-width="5" /><text fill="#168657" font-family="DejaVu Sans,Arial" font-size="32" font-weight="bold" text-anchor="middle" x="665" y="254">KEY</text><text fill="#168657" font-family="DejaVu Sans,Arial" font-size="21" font-weight="bold" text-anchor="middle" x="666" y="332">No personal token</text><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="440" x2="492" y1="263" y2="263" /><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="492" x2="478" y1="263" y2="252" /><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="492" x2="478" y1="263" y2="274" /></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px">
+  <defs/>
+  <rect fill="white" height="570" width="900" x="0" y="0"/>
+  <text fill="#B10B25" font-family="DejaVu Sans" font-size="29" font-weight="bold" text-anchor="start" x="40" y="60">THE GITHUB_TOKEN HAS TWO JOBS</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="start" x="41" y="96">The workflow declares its required permissions</text>
+  <line stroke="#D6E0EA" stroke-width="2" x1="40" x2="858" y1="110" y2="110"/>
+  <rect fill="#F4F7FB" height="295" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="363" x="51" y="147"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="26" font-weight="bold" text-anchor="start" x="80" y="207">permissions:</text>
+  <rect fill="#FFFFFF" height="36" rx="17" ry="17" width="294" x="77" y="248"/>
+  <text fill="#156AAB" font-family="DejaVu Sans" font-size="22" font-weight="bold" text-anchor="middle" x="224.0" y="273">contents: read</text>
+  <rect fill="#FFFFFF" height="36" rx="17" ry="17" width="294" x="77" y="311"/>
+  <text fill="#188357" font-family="DejaVu Sans" font-size="22" font-weight="bold" text-anchor="middle" x="224.0" y="336">packages: write</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="431" x2="483" y1="281" y2="281"/>
+  <polygon fill="#B10B25" points="478,272 492,281 478,290"/>
+  <rect fill="#FFFFFF" height="279" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="338" x="504" y="157"/>
+  <circle cx="543" cy="216" fill="#188357" r="14"/>
+  <polyline fill="none" points="536,216 542,222 551,209" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="23" font-weight="bold" text-anchor="start" x="575" y="224">Fetch repository</text>
+  <circle cx="543" cy="300" fill="#188357" r="14"/>
+  <polyline fill="none" points="536,300 542,306 551,293" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="23" font-weight="bold" text-anchor="start" x="575" y="308">Publish package</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="546" y="374">GITHUB_TOKEN is provided</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="546" y="399">by GitHub for this run</text>
+  <line stroke="#D6E0EA" stroke-linecap="round" stroke-width="2" x1="40" x2="860" y1="522" y2="522"/>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="44" y="551">No personal access token is needed to push from this workflow</text>
+</svg>

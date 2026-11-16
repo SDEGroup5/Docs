@@ -1,2 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><rect fill="#FFFFFF" height="570" rx="24" width="900" x="0" y="0" /><text fill="#B10B25" font-family="DejaVu Sans,Arial" font-size="29" font-weight="bold" text-anchor="start" x="44" y="68">THE FULL IMAGE ADDRESS</text><rect fill="#F6F9FD" height="135" rx="14" stroke="#D7DFE8" stroke-width="2" width="170" x="35" y="150" /><text fill="#1677BB" font-family="DejaVu Sans,Arial" font-size="20" font-weight="bold" text-anchor="middle" x="120.0" y="200">ghcr.io</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="18" font-weight="normal" text-anchor="middle" x="120.0" y="245">registry</text><rect fill="#F6F9FD" height="135" rx="14" stroke="#D7DFE8" stroke-width="2" width="185" x="213" y="150" /><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="20" font-weight="bold" text-anchor="middle" x="305.5" y="200">sdegroup5</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="18" font-weight="normal" text-anchor="middle" x="305.5" y="245">owner</text><rect fill="#F6F9FD" height="135" rx="14" stroke="#D7DFE8" stroke-width="2" width="245" x="406" y="150" /><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="20" font-weight="bold" text-anchor="middle" x="528.5" y="200">github-actions</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="18" font-weight="normal" text-anchor="middle" x="528.5" y="245">repo</text><rect fill="#F6F9FD" height="135" rx="14" stroke="#D7DFE8" stroke-width="2" width="210" x="659" y="150" /><text fill="#168657" font-family="DejaVu Sans,Arial" font-size="20" font-weight="bold" text-anchor="middle" x="764.0" y="200">app:v1.0.0</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="18" font-weight="normal" text-anchor="middle" x="764.0" y="245">image : tag</text><rect fill="#EEF5FB" height="98" rx="16" stroke="none" stroke-width="2" width="760" x="70" y="370" /><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="25" font-weight="bold" text-anchor="middle" x="450" y="410">Release v1.0.0  →  image tag v1.0.0</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="20" font-weight="normal" text-anchor="middle" x="450" y="449">Pull request → short commit SHA tag</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px">
+  <defs/>
+  <rect fill="white" height="570" width="900" x="0" y="0"/>
+  <text fill="#B10B25" font-family="DejaVu Sans" font-size="29" font-weight="bold" text-anchor="start" x="40" y="60">3 TAGS, ONE BUILT IMAGE</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="start" x="41" y="96">release v1.0.0 → ${GITHUB_REF_NAME} = v1.0.0</text>
+  <line stroke="#D6E0EA" stroke-width="2" x1="40" x2="858" y1="110" y2="110"/>
+  <rect fill="#F4F7FB" height="267" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="354" x="48" y="160"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="21" font-weight="bold" text-anchor="start" x="80" y="221">GITHUB_REPOSITORY</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="81" y="260">sdegroup5/github-actions</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="21" font-weight="bold" text-anchor="start" x="80" y="325">GITHUB_REF_NAME</text>
+  <rect fill="#B10B25" height="36" rx="17" ry="17" width="137" x="80" y="348"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="148.5" y="373">v1.0.0</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="417" x2="466" y1="282" y2="282"/>
+  <polygon fill="#B10B25" points="461,273 475,282 461,291"/>
+  <rect fill="#FFFFFF" height="267" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="359" x="488" y="160"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="23" font-weight="bold" text-anchor="start" x="516" y="207">ghcr.io/…/app:</text>
+  <rect fill="#156AAB" height="36" rx="17" ry="17" width="131" x="516" y="250"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="19" font-weight="bold" text-anchor="middle" x="581.5" y="275">1.0.0</text>
+  <rect fill="#188357" height="36" rx="17" ry="17" width="128" x="664" y="250"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="19" font-weight="bold" text-anchor="middle" x="728.0" y="275">latest</text>
+  <rect fill="#E67E22" height="36" rx="17" ry="17" width="128" x="664" y="300"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="19" font-weight="bold" text-anchor="middle" x="728.0" y="325">sha</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="517" y="379">Same image digest</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="517" y="409">Three pullable names</text>
+</svg>

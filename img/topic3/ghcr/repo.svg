@@ -1,2 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><rect fill="#FFFFFF" height="570" rx="24" width="900" x="0" y="0" /><rect fill="#F6F8FB" height="490" rx="22" stroke="#D7DFE8" stroke-width="2" width="830" x="35" y="38" /><rect fill="#142033" height="64" rx="17" stroke="none" stroke-width="2" width="830" x="35" y="38" /><text fill="white" font-family="DejaVu Sans,Arial" font-size="23" font-weight="bold" text-anchor="start" x="65" y="78">REPOSITORY  /  SDEGroup5 / github-actions</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="29" font-weight="normal" text-anchor="start" x="90" y="145">📁  .github/</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="29" font-weight="normal" text-anchor="start" x="90" y="199">    📁  workflows/</text><rect fill="#EAEFF7" height="52" rx="8" stroke="none" stroke-width="2" width="750" x="64" y="219" /><text fill="#B10B25" font-family="DejaVu Sans,Arial" font-size="29" font-weight="bold" text-anchor="start" x="90" y="256">        docker-image.yml</text><rect fill="#EAEFF7" height="52" rx="8" stroke="none" stroke-width="2" width="750" x="64" y="301" /><text fill="#B10B25" font-family="DejaVu Sans,Arial" font-size="29" font-weight="bold" text-anchor="start" x="90" y="338">Dockerfile.app</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="29" font-weight="normal" text-anchor="start" x="90" y="410">json/data.json</text><rect fill="#FDEEEE" height="107" rx="13" stroke="none" stroke-width="2" width="302" x="498" y="350" /><text fill="#B10B25" font-family="DejaVu Sans,Arial" font-size="21" font-weight="bold" text-anchor="start" x="515" y="389">TWO KEY FILES</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="17" font-weight="normal" text-anchor="start" x="515" y="422">instructions + automation</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px">
+  <defs/>
+  <rect fill="white" height="570" width="900" x="0" y="0"/>
+  <text fill="#B10B25" font-family="DejaVu Sans" font-size="29" font-weight="bold" text-anchor="start" x="40" y="60">THE FILES USED BY THE WORKFLOW</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="start" x="41" y="96">Each file has a different job</text>
+  <line stroke="#D6E0EA" stroke-width="2" x1="40" x2="858" y1="110" y2="110"/>
+  <rect fill="#F4F7FB" height="149" rx="16" ry="16" stroke="#D6E0EA" stroke-width="2" width="396" x="40" y="138"/>
+  <rect fill="#B10B25" height="36" rx="17" ry="17" width="62" x="58" y="158"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="89.0" y="183">01</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="25" font-weight="bold" text-anchor="start" x="135" y="184">Dockerfile.build</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="64" y="238">Compile Python → app binary</text>
+  <rect fill="#F4F7FB" height="149" rx="16" ry="16" stroke="#D6E0EA" stroke-width="2" width="396" x="460" y="138"/>
+  <rect fill="#B10B25" height="36" rx="17" ry="17" width="62" x="478" y="158"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="509.0" y="183">02</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="25" font-weight="bold" text-anchor="start" x="555" y="184">Dockerfile.app</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="484" y="238">Copy binary → runtime image</text>
+  <rect fill="#F4F7FB" height="149" rx="16" ry="16" stroke="#D6E0EA" stroke-width="2" width="396" x="40" y="307"/>
+  <rect fill="#B10B25" height="36" rx="17" ry="17" width="62" x="58" y="327"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="89.0" y="352">03</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="25" font-weight="bold" text-anchor="start" x="135" y="353">.github/workflows/</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="64" y="407">docker-image.yml automates steps</text>
+  <rect fill="#F4F7FB" height="149" rx="16" ry="16" stroke="#D6E0EA" stroke-width="2" width="396" x="460" y="307"/>
+  <rect fill="#B10B25" height="36" rx="17" ry="17" width="62" x="478" y="327"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="509.0" y="352">04</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="25" font-weight="bold" text-anchor="start" x="555" y="353">compose.yml</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="20" font-weight="normal" text-anchor="start" x="484" y="407">Pull image and launch locally</text>
+  <line stroke="#D6E0EA" stroke-linecap="round" stroke-width="2" x1="40" x2="860" y1="522" y2="522"/>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="44" y="551">Repository root: workflow, two Dockerfiles, and Compose</text>
+</svg>

@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
-<defs />
-<rect fill="#FFFFFF" height="570" rx="24" width="900" x="0" y="0" />
-<text fill="#B10B25" font-family="DejaVu Sans,Arial" font-size="30" font-weight="bold" text-anchor="start" x="48" y="67">
-WHEN DOES THE WORKFLOW RUN?
-</text>
-<rect fill="#F4F7FB" height="270" rx="20" stroke="#D7DFE8" stroke-width="2" width="380" x="50" y="125" />
-<rect fill="#C66A12" height="270" rx="4" stroke="none" stroke-width="2" width="10" x="50" y="125" />
-<text fill="#142033" font-family="DejaVu Sans,Arial" font-size="25" font-weight="bold" text-anchor="start" x="75" y="169">
-pull_request
-</text>
-<text fill="#697589" font-family="DejaVu Sans,Arial" font-size="17" font-weight="normal" text-anchor="start" x="75" y="201">base branch: master</text><rect fill="#F4F7FB" height="270" rx="20" stroke="#D7DFE8" stroke-width="2" width="380" x="470" y="125" /><rect fill="#168657" height="270" rx="4" stroke="none" stroke-width="2" width="10" x="470" y="125" /><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="25" font-weight="bold" text-anchor="start" x="495" y="169">release</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="17" font-weight="normal" text-anchor="start" x="495" y="201">type: published</text><rect fill="#C66A12" height="42" rx="21" stroke="none" stroke-width="2" width="260" x="106" y="278" /><text fill="white" font-family="DejaVu Sans,Arial" font-size="19" font-weight="bold" text-anchor="middle" x="236.0" y="307">CHECK / PR BUILD</text><rect fill="#168657" height="42" rx="21" stroke="none" stroke-width="2" width="265" x="528" y="278" /><text fill="white" font-family="DejaVu Sans,Arial" font-size="19" font-weight="bold" text-anchor="middle" x="660.5" y="307">PUBLISH EXERCISE</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="23" font-weight="bold" text-anchor="middle" x="450" y="474">For the proof exercise: publish a GitHub release.</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px">
+  <defs/>
+  <rect fill="white" height="570" width="900" x="0" y="0"/>
+  <text fill="#B10B25" font-family="DejaVu Sans" font-size="29" font-weight="bold" text-anchor="start" x="40" y="60">ONLY A PUBLISHED RELEASE RUNS IT</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="start" x="41" y="96">The trigger in docker-image.yml</text>
+  <line stroke="#D6E0EA" stroke-width="2" x1="40" x2="858" y1="110" y2="110"/>
+  <rect fill="#F4F7FB" height="287" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="350" x="46" y="155"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="26" font-weight="bold" text-anchor="start" x="76" y="204">GitHub Releases</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="23" font-weight="normal" text-anchor="start" x="79" y="253">Draft release</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="23" font-weight="normal" text-anchor="start" x="79" y="317">Saved draft</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="23" font-weight="normal" text-anchor="start" x="79" y="381">Published release</text>
+  <circle cx="337" cy="253" fill="#B10B25" r="14"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="23" font-weight="bold" text-anchor="middle" x="337" y="261">×</text>
+  <circle cx="337" cy="317" fill="#B10B25" r="14"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="23" font-weight="bold" text-anchor="middle" x="337" y="325">×</text>
+  <circle cx="337" cy="381" fill="#188357" r="14"/>
+  <polyline fill="none" points="330,381 336,387 345,374" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="411" x2="481" y1="329" y2="329"/>
+  <polygon fill="#B10B25" points="476,320 490,329 476,338"/>
+  <rect fill="#EAF7EE" height="223" rx="18" ry="18" stroke="#188357" stroke-width="2" width="340" x="506" y="211"/>
+  <circle cx="546" cy="253" fill="#188357" r="14"/>
+  <polyline fill="none" points="539,253 545,259 554,246" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="28" font-weight="bold" text-anchor="start" x="577" y="263">Docker Image</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="21" font-weight="normal" text-anchor="start" x="537" y="328">Event: release</text>
+  <text fill="#188357" font-family="DejaVu Sans" font-size="21" font-weight="bold" text-anchor="start" x="537" y="364">Type: published</text>
+  <line stroke="#D6E0EA" stroke-linecap="round" stroke-width="2" x1="40" x2="860" y1="522" y2="522"/>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="44" y="551">A regular push and a draft release do not trigger this workflow</text>
+</svg>

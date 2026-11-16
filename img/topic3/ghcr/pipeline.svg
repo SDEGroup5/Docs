@@ -1,2 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><rect fill="#FFFFFF" height="570" rx="24" width="900" x="0" y="0" /><text fill="#B10B25" font-family="DejaVu Sans,Arial" font-size="29" font-weight="bold" text-anchor="start" x="44" y="64">ONE RELEASE  →  ONE VERSIONED IMAGE</text><rect fill="#F6F9FD" height="233" rx="22" stroke="#D7DFE8" stroke-width="2" width="195" x="34" y="153" /><circle cx="131" cy="198" fill="#B10B25" r="25" /><text fill="white" font-family="DejaVu Sans,Arial" font-size="24" font-weight="bold" text-anchor="middle" x="131" y="206">1</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="27" font-weight="bold" text-anchor="middle" x="131" y="270">SOURCE</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="16" font-weight="normal" text-anchor="middle" x="131" y="309">Dockerfile.app</text><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="233" x2="252" y1="264" y2="264" /><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="252" x2="238" y1="264" y2="253" /><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="252" x2="238" y1="264" y2="275" /><rect fill="#F6F9FD" height="233" rx="22" stroke="#D7DFE8" stroke-width="2" width="195" x="254" y="153" /><circle cx="351" cy="198" fill="#B10B25" r="25" /><text fill="white" font-family="DejaVu Sans,Arial" font-size="24" font-weight="bold" text-anchor="middle" x="351" y="206">2</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="27" font-weight="bold" text-anchor="middle" x="351" y="270">ACTIONS</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="16" font-weight="normal" text-anchor="middle" x="351" y="309">ubuntu runner</text><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="453" x2="472" y1="264" y2="264" /><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="472" x2="458" y1="264" y2="253" /><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="472" x2="458" y1="264" y2="275" /><rect fill="#F6F9FD" height="233" rx="22" stroke="#D7DFE8" stroke-width="2" width="195" x="474" y="153" /><circle cx="571" cy="198" fill="#B10B25" r="25" /><text fill="white" font-family="DejaVu Sans,Arial" font-size="24" font-weight="bold" text-anchor="middle" x="571" y="206">3</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="27" font-weight="bold" text-anchor="middle" x="571" y="270">BUILD</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="16" font-weight="normal" text-anchor="middle" x="571" y="309">Buildx creates image</text><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="673" x2="692" y1="264" y2="264" /><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="692" x2="678" y1="264" y2="253" /><line stroke="#1677BB" stroke-linecap="round" stroke-width="6" x1="692" x2="678" y1="264" y2="275" /><rect fill="#F6F9FD" height="233" rx="22" stroke="#D7DFE8" stroke-width="2" width="195" x="694" y="153" /><circle cx="791" cy="198" fill="#168657" r="25" /><text fill="white" font-family="DejaVu Sans,Arial" font-size="24" font-weight="bold" text-anchor="middle" x="791" y="206">4</text><text fill="#142033" font-family="DejaVu Sans,Arial" font-size="27" font-weight="bold" text-anchor="middle" x="791" y="270">GHCR</text><text fill="#697589" font-family="DejaVu Sans,Arial" font-size="16" font-weight="normal" text-anchor="middle" x="791" y="309">package stored</text><rect fill="#E9F5F0" height="90" rx="16" stroke="none" stroke-width="2" width="700" x="100" y="425" /><text fill="#168657" font-family="DejaVu Sans,Arial" font-size="21" font-weight="bold" text-anchor="middle" x="450" y="478">docker pull ghcr.io/sdegroup5/github-actions/app:1.0.0</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="570px" version="1.1" viewBox="0 0 900 570" width="900px">
+  <defs/>
+  <rect fill="white" height="570" width="900" x="0" y="0"/>
+  <text fill="#B10B25" font-family="DejaVu Sans" font-size="29" font-weight="bold" text-anchor="start" x="40" y="60">ONE RELEASE → ONE VERSIONED CONTAINER</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="19" font-weight="normal" text-anchor="start" x="41" y="96">The actual two-build workflow in this repository</text>
+  <line stroke="#D6E0EA" stroke-width="2" x1="40" x2="858" y1="110" y2="110"/>
+  <rect fill="#F4F7FB" height="277" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="184" x="31" y="164"/>
+  <circle cx="123" cy="214" fill="#B10B25" r="32"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="28" font-weight="bold" text-anchor="middle" x="123" y="224">1</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="123" y="280">PUBLISH</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="middle" x="123" y="337">GitHub release</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="middle" x="123" y="372">tag v1.0.0</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="217" x2="237" y1="312" y2="312"/>
+  <polygon fill="#B10B25" points="232,303 246,312 232,321"/>
+  <rect fill="#F4F7FB" height="277" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="184" x="249" y="164"/>
+  <circle cx="341" cy="214" fill="#156AAB" r="32"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="28" font-weight="bold" text-anchor="middle" x="341" y="224">2</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="341" y="280">COMPILE</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="middle" x="341" y="337">Dockerfile.build</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="middle" x="341" y="372">Nuitka executable</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="435" x2="455" y1="312" y2="312"/>
+  <polygon fill="#B10B25" points="450,303 464,312 450,321"/>
+  <rect fill="#F4F7FB" height="277" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="184" x="467" y="164"/>
+  <circle cx="559" cy="214" fill="#156AAB" r="32"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="28" font-weight="bold" text-anchor="middle" x="559" y="224">3</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="559" y="280">PACKAGE</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="middle" x="559" y="337">Dockerfile.app</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="middle" x="559" y="372">thin runtime image</text>
+  <line stroke="#B10B25" stroke-linecap="round" stroke-width="4" x1="653" x2="673" y1="312" y2="312"/>
+  <polygon fill="#B10B25" points="668,303 682,312 668,321"/>
+  <rect fill="#F4F7FB" height="277" rx="18" ry="18" stroke="#D6E0EA" stroke-width="2" width="184" x="685" y="164"/>
+  <circle cx="777" cy="214" fill="#188357" r="32"/>
+  <text fill="white" font-family="DejaVu Sans" font-size="28" font-weight="bold" text-anchor="middle" x="777" y="224">4</text>
+  <text fill="#172538" font-family="DejaVu Sans" font-size="18" font-weight="bold" text-anchor="middle" x="777" y="280">PUSH TO GHCR</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="middle" x="777" y="337">v1.0.0</text>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="middle" x="777" y="372">and latest</text>
+  <line stroke="#D6E0EA" stroke-linecap="round" stroke-width="2" x1="40" x2="860" y1="522" y2="522"/>
+  <text fill="#556479" font-family="DejaVu Sans" font-size="18" font-weight="normal" text-anchor="start" x="44" y="551">Release event → binary export → runtime image → two GHCR tags</text>
+</svg>
