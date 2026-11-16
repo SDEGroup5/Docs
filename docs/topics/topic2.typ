@@ -136,7 +136,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Load the JSON
     ],
   )
@@ -171,7 +171,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Load the JSON #v(1em)
       + Contact the app \ and get the \ response
     ],
@@ -207,7 +207,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Load the JSON #v(1em)
       + Contact the app \ and get the \ response #v(1em)
       + Check the \ response and the status code
@@ -244,7 +244,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Parametrized \ test: execute the \ same test with \ multiple input
     ],
   )
@@ -279,7 +279,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Parametrized \ test: execute the \ same test with \ multiple input #v(1em)
       + Contact the app \ and get the \ response
     ],
@@ -315,7 +315,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Parametrized \ test: execute the \ same test with \ multiple input #v(1em)
       + Contact the app \ and get the \ response #v(1em)
       + Check the \ response and the status code
@@ -356,7 +356,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Create the app components
     ],
   )
@@ -395,7 +395,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Create the app \ components #v(1em)
       + Start the app
     ],
@@ -433,7 +433,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Create the app components #v(1em)
       + Start the app #v(1em)
       + Prepare the packet, open the connection and make the request
@@ -472,7 +472,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Create the app \ components #v(1em)
       + Start the app #v(1em)
       + Prepare the packet, open the connection and make the request #v(1em)
@@ -512,7 +512,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Create the app \ components #v(1em)
       + Start the app #v(1em)
       + Prepare the packet, open the connection and make the request #v(1em)
@@ -553,7 +553,7 @@
       ```
     ],
     [
-      #show text: set text(size: 1.5em)
+      #show text: set text(size: 1.2em)
       + Create the app \ components #v(1em)
       + Start the app #v(1em)
       + Prepare the packet, open the connection and make the request #v(1em)
@@ -623,8 +623,8 @@
       [
         #show figure.caption: set text(size: 1.4em)
         #figure(
-          caption: "A website used to upload coverage information",
-          image("../../img/topic2/coveralls.png", width: 100%),
+          caption: "An example of coverage output",
+          image("../../img/topic2/cover_output.png", width: 100%),
         )
 
       ],
@@ -819,8 +819,6 @@
     },
     [
       #text(size: 1.7em)[
-        - *Move* to the `part-2` branch by running:
-          ```sh git checkout part-2```
 
         - *Complete* the `.github/scripts/execute_tests.py` script and the GitHub action ( `.github/workflows/python-app.yml`)
 
@@ -832,7 +830,7 @@
           ```sh
           git add .
           git commit -m "Modified test scripts"
-          git push --set-upstream origin part-2
+          git push
           ```
 
         *Instructions and TODOs are found in the file itself as comments, while you can find these instructions and some tips on #link("sdegroup5.github.io")*
@@ -858,37 +856,37 @@
     columns: (70%, 30%),
     inset: 1em,
     [
-        In `execute_tests.py`:
-        ```py
+      In `execute_tests.py`:
+      ```py
       # 0 if they pass, 1 if they don't
       test_result = execute_test()                  
-      
+
       # 0 if the threshold is met, 1 if it isn't
       test_coverage_result = read_coverage_result() 
 
       # Exit with 0 if all ok, with 1 otherwise
       sys.exit(test_result or test_coverage_result) 
-        ```
-        When this is run as an action the exit code is used to
-        determine whether or not this step was successful.
+      ```
+      When this is run as an action the exit code is used to
+      determine whether or not this step was successful.
 
-        \
-        In `python-app.yml`:
-        ```yaml
-        on:
-          push:
-            branches: [ "part-2" ]
+      \
+      In `python-app.yml`:
+      ```yaml
+      - name: Test with testing script
+        run: python3 .github/scripts/execute_tests.py
 
-        ```
-        This ensures the action is run automatically whenever a
-        _push_ happens on the `part-2` branch.
+      ```
+      This ensures the action is run automatically whenever a
+      _push_ happens on the `part-2` branch.
     ],
     [
       #align(center + horizon)[
         #image("../../img/topic2/python.png")
-        This script will be used in the rest of the exercises
-        for this lab, if there's any problems raise your hand.
+        #underline()[
+          This script will be used in the rest of the exercises
+          for this lab, if there's any problems raise your hand.]
       ]
-    ]
+    ],
   )
 ]

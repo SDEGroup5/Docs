@@ -1,5 +1,7 @@
 #import "../lib/commonSlide.typ": hint, slide
 
+#import "@preview/zebra:0.1.0": qrcode
+
 /*#slide("Environment setup", 1)[
   First, connect to the laboratory website:
 
@@ -51,14 +53,55 @@
 
 ]*/
 
+#slide("Introduction", 1)[
+  #align(center + horizon)[
+    #text(size: 3em)[*Part 1*\ *Introduction*]
+  ]
+]
+
+#slide("A note about the materials", 1)[
+  #set text(1.5em)
+  #grid(
+    columns: (50%, 50%),
+    align: (x, y) => {
+      if (x == 0) {
+        left + horizon
+      } else {
+        center + horizon
+      }
+    },
+    [
+      #text(size: 1.2em)[
+        - *Before starting*, please be sure to have *already* setup the environment
+
+        - All *instructions* and *materials* are on the *laboratory website*, along with exercise *hints* and *solutions*
+
+        - We will see the exercise *together*, so we made easier to *copy* the code we will write
+        #align(center)[
+          #qrcode("https://sdegroup5.github.io", width: 5em)
+          #link("sdegroup5.github.io")
+        ]
+      ]
+    ],
+    [
+      #figure(
+        caption: "A screenshot of the laboratory website",
+        image("/img/topic1/website.png", width: 90%),
+      )
+
+    ],
+  )
+]
+
 // Slide 2: What we'll do in this lab
 #slide("What we'll do in this laboratory", 1)[
-  #text(size: 1.6em, weight: "bold")[Laboratory Overview:]
+  #text(size: 2em, weight: "bold")[Laboratory Overview:]
 
   #v(0.8em)
 
   #set list(spacing: 0.7em)
   #show list: set text(size: 2.2em)
+  #set list(marker: image("/img/topic1/mdi--menu-right.svg", width: 1em))
 
   - Learn GitHub Actions basics and syntax
   - Automate testing with a simple Python application
@@ -84,9 +127,9 @@
   #align(center + horizon)[
     #align(left)[
       #set list(spacing: 1.5em)
-      #show list: set text(size: 2.2em)
-
-      - "It works on my machine!" Environment differences break the build.
+      #show list: set text(size: 2em)
+      #text(size: 2em, weight: "bold")[Important because:]
+      - "It worked on my machine!": environment differences can break the build.
       - Missing manually installed dependencies go unnoticed until too late.
       - Forgetting to run tests before pushing breaks `main` for everyone.
       - *Continuous Integration (CI):* automated builds and tests on every change.
@@ -104,7 +147,7 @@
 
     #align(left)[
       #set list(spacing: 1.3em)
-      #show list: set text(size: 2.2em)
+      #show list: set text(size: 2em)
 
       - Every push automatically triggers a *build* and a *test* run on a remote server.
       - *Build examples:* compile the code, produce release artifacts, build Docker images.
@@ -118,7 +161,7 @@
 // Slide 4: Event-Driven Paradigm
 #slide("What are GitHub Actions?", 1)[
   #set text(size: 1.3em)
-  #show grid.cell.where(x: 0): set text(size: 1.1em)
+  #show grid.cell.where(x: 0): set text(size: 1.22em)
 
   #align(center + horizon)[
     #grid(
@@ -176,7 +219,7 @@
     ],
     [
       #set list(spacing: 0.6em)
-      #show list: set text(size: 1.1em)
+      #set text(size: 1.27em)
       #v(0.5em)
 
       *Three layers, from trigger to execution:*
@@ -187,8 +230,8 @@
 
       - *Job:* A workflow contains one or more jobs. Each job runs on its own *isolated, fresh machine* (the runner). Jobs run *in parallel by default*.
 
-      #v(0.5em)
-      #hint(txtSize: 1.3em)[
+      #v(0.1em)
+      #hint(txtSize: 1em)[
         Jobs can be made sequential using `needs`: e.g. run `deploy` only after `test` passes.
       ]
     ],
@@ -206,11 +249,11 @@
     inset: 1.2em,
     [
       #set list(spacing: 0.55em)
-      #show list: set text(size: 1.1em)
+      #show list: set text(size: 1.2em)
 
-      *Inside a Job: Steps*
+      #text(size: 1.3em)[*Inside a Job: Steps*]
 
-      A job contains a sequence of *Steps*, executed one after another on the *same runner*:
+      #text(size: 1.3em)[A job contains a sequence of *Steps*, executed one after another on the *same runner*:]
 
       - Each step is either a shell command ( `run:` ) or a pre-built Action ( `uses:` ).
       - Steps *share the filesystem*: files created in step 1 are available in step 2.
@@ -229,8 +272,6 @@
 
       *A concrete example:*
 
-      #v(0.4em)
-
       #raw(
         "jobs:
   compile:
@@ -246,9 +287,8 @@
         lang: "yaml",
       )
 
-      #v(0.6em)
-      #hint(txtSize: 0.80em)[
-        The runner starts *completely empty*: without `checkout`, your files don't exist on it! Here, `./typst compile doc.typ` compiles the documentation into a PDF.
+      #hint(txtSize: 1em)[
+        The runner starts *completely empty*: without `checkout`, your files don't exist on it! `./typst compile doc.typ` compiles the documentation into a PDF.
       ]
     ],
   )
@@ -315,10 +355,8 @@ jobs:                            # 2. JOBS: Units of work
 
 // Slide 6b: GitHub-hosted vs Self-hosted Runners
 #slide("Runners: GitHub-Hosted vs. Self-Hosted", 1)[
-  #set text(size: 1.3em)
+  #set text(size: 1.4em)
   The `runs-on:` keyword defines *where* your job executes:
-
-  #v(0.5em)
 
   #show grid: set text(size: 1.1em)
 
@@ -351,7 +389,6 @@ jobs:                            # 2. JOBS: Units of work
     )
   ]
 
-  #v(1em)
   #hint(txtSize: 1.1em)[
     *Note:* Self-hosted runners exist and are useful for advanced scenarios, but *we will focus exclusively on GitHub-hosted runners* in this laboratory.
   ]
@@ -475,16 +512,16 @@ jobs:                            # 2. JOBS: Units of work
     },
     inset: 1.5em,
     [
-     *Format:* `owner/repository@version`
+      *Format:* `owner/repository@version`
 
-  - *`owner/repository`:* which Action to use, i.e. the GitHub org and repo where it lives.
-    - `actions/` = official GitHub organization
-    - Any public repo can publish an Action
+      - *`owner/repository`:* which Action to use, i.e. the GitHub org and repo where it lives.
+        - `actions/` = official GitHub organization
+        - Any public repo can publish an Action
 
-  - *`@version`:* which version of that Action to run.
-    - *`@v7`* (major version): automatically gets the latest `v7.x` patch while keeping a stable API. Recommended.
-    - *`@v7.1.2`* (exact release): more predictable, but no auto bug fixes.
-    - *`@<commit-sha>`* (commit SHA): most secure, because a commit cannot be changed.
+      - *`@version`:* which version of that Action to run.
+        - *`@v7`* (major version): automatically gets the latest `v7.x` patch while keeping a stable API. Recommended.
+        - *`@v7.1.2`* (exact release): more predictable, but no auto bug fixes.
+        - *`@<commit-sha>`* (commit SHA): most secure, because a commit cannot be changed.
     ],
     [
       #show raw: set text(size: 1.4em)
