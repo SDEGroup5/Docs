@@ -95,11 +95,11 @@
     #v(22pt)
     #grid(columns: (1fr, 1fr, 1fr), column-gutter: 16pt,
       card("Nuitka", [Compiles the Python application into a single Linux executable.]),
-      card("Docker", [Provides the build environment: Python, Nuitka and a C compiler.]),
+      card("Docker", [Provides the build environment, with Python and Nuitka ready to use.]),
       card("GitHub Actions", [Runs the build on every push and keeps the executable as an artifact.]),
     )
     #v(22pt)
-    #result[Dockerfile → workflow → artifact → run the executable.]
+    #result[`Dockerfile.build` → workflow → downloadable artifact.]
   ]
 ]
 
@@ -109,7 +109,7 @@
     For a compiled program, it also means:
     #v(22pt)
     #list(
-      [*No local toolchain:* Nuitka and the C compiler live in the build image, not on our laptops.],
+      [*No local setup:* Python and Nuitka live in the build image, not on our laptops.],
       [*Same output for everyone:* any developer gets the same Linux executable.],
       [*Traceable:* each executable is linked to its commit, and the run keeps the build logs.],
       [*Early feedback:* if compilation breaks, the run fails and the commit is marked as failed.],
@@ -119,10 +119,10 @@
   ]
 ]
 
-#slide("Dockerfile: compile with Nuitka", 3)[
+#slide("Dockerfile.build: compile with Nuitka", 3)[
   #body(compact: true)[
-    `Dockerfile.app` has several stages: each `FROM` starts one. `builder`
-    (`python:3.14-slim-bookworm`) installs Nuitka, a C compiler and `patchelf`.
+    `Dockerfile.build` has two stages: each `FROM` starts one. The first, `builder`
+    (`python:3.14-slim-bookworm`), installs Nuitka, copies the code and compiles it.
     #v(18pt)
     #workflowPanel(focus: (5, 6, 7, 8, 9))[
       ```dockerfile
@@ -138,19 +138,19 @@
       ```
     ]
     #v(18pt)
-    #text(size: 17pt)[Nuitka translates Python into C and invokes a compiler. The JSON is external data: this build does not bundle it.]
+    #text(size: 17pt)[Nuitka compiles `src/main.py` and everything it imports into one file (`--mode=onefile`). `json/data.json` is not included: the program reads it at run time.]
     #v(18pt)
     #result[The compiled program is `/app/bin/app` inside the builder.]
   ]
 ]
 
-#slide("Dockerfile: export the executable", 3)[
+#slide("Dockerfile.build: keep only the executable", 3)[
   #body(compact: true)[
-    The `binary` stage keeps only the file we want to distribute.
+    The second stage, `app-only`, keeps only the file we want to distribute.
     #v(22pt)
     #workflowPanel(focus: (1, 2), size: 20pt)[
       ```dockerfile
-      FROM scratch AS binary
+      FROM scratch AS app-only
       COPY --from=builder /app/bin/app /app
       ```
     ]
@@ -161,19 +161,18 @@
       [`/app` is the exported file's path, not a directory here.],
     )
     #v(22pt)
-    #result[This stage contains only the executable; the compiler stays in `builder`.]
+    #result[`app-only` contains only the executable; Python, Nuitka and the sources stay in `builder`.]
   ]
 ]
 
-#slide("Workflow (1/3): trigger and checkout", 3)[
+#slide("Workflow (1/4): trigger and checkout", 3)[
   #body(compact: true)[
     #grid(columns: (1.2fr, 1fr), column-gutter: 24pt,
-      [#workflowPanel(focus: (3, 4, 9))[
+      [#workflowPanel(focus: (2, 3, 8))[
         ```yaml
         name: Build Linux binary
         on:
-          push:
-            branches: ["docker-build"]
+          push
         permissions:
           contents: read
         jobs:
@@ -187,7 +186,7 @@
       [
         *When and where?*
         #v(16pt)
-        #text(size: 18pt)[A push to `docker-build` starts this workflow on an Ubuntu runner.]
+        #text(size: 18pt)[Every push, on any branch, starts this workflow on an Ubuntu runner.]
         #v(16pt)
         #text(size: 18pt)[Checkout retrieves the repository files with read permission.]
         #v(16pt)
@@ -197,17 +196,17 @@
   ]
 ]
 
-#slide("Workflow (2/3): build and export", 3)[
+#slide("Workflow (2/4): build and export", 3)[
   #body(compact: true)[
-    In `.github/workflows/build-binary.yml`, the runner builds `Dockerfile.app` with Docker.
+    In `.github/workflows/build-binary.yml`, the runner builds `Dockerfile.build` with Docker.
     #v(20pt)
-    #workflowPanel(focus: (5, 6))[
+    #workflowPanel(focus: (4, 5, 6))[
       ```yaml
       - name: Build application with Docker
         run: |
           docker build --platform linux/amd64 \
-            -f Dockerfile.app \
-            --target binary \
+            -f Dockerfile.build \
+            --target app-only \
             --output type=local,dest=dist .
       ```
     ]
@@ -215,10 +214,10 @@
     #grid(columns: (1fr, 1fr), column-gutter: 24pt,
       [*Inside Docker*
         #v(12pt)
-        Nuitka compiles the program in `builder`; `binary` selects the resulting file.],
+        Nuitka compiles the program in `builder`; `app-only` keeps the resulting file.],
       [*On the runner*
         #v(12pt)
-        The local exporter writes `dist/app`, ready for the upload step.],
+        The local exporter writes `dist/app`, ready for the next steps.],
     )
     #v(22pt)
     #result[The build produces a Linux AMD64 executable.]
@@ -232,8 +231,8 @@
     #workflowPanel(focus: (3, 4))[
       ```sh
       docker build --platform linux/amd64 \
-        -f Dockerfile.app \
-        --target binary \
+        -f Dockerfile.build \
+        --target app-only \
         --output type=local,dest=dist .
       ```
     ]
@@ -241,17 +240,55 @@
     #list(
       [`--platform linux/amd64` selects the executable's target.],
       [`-f` selects the Dockerfile; `.` supplies the files available to the build.],
-      [`--target binary` selects the export stage.],
+      [`--target app-only` selects the stage that holds only the executable.],
       [`--output` saves its filesystem into the local `dist` directory.],
     )
     #v(18pt)
-    #result[Here, local means the runner filesystem: the next step reads dist/app.]
+    #result[Here, local means the runner filesystem: the next steps read `dist/app`.]
   ]
 ]
 
-#slide("Workflow (3/3): upload the artifact", 3)[
+#slide("Workflow (3/4): name the executable", 3)[
   #body(compact: true)[
-    Upload the output so it remains downloadable after the runner finishes.
+    Before uploading, the workflow renames the file after the platform it was built for.
+    #v(22pt)
+    #workflowPanel(focus: (2,), size: 20pt)[
+      ```yaml
+      - name: Name binary for its target platform
+        run: mv dist/app dist/app-linux-amd64
+      ```
+    ]
+    #v(22pt)
+    #grid(columns: (1fr, 1fr), column-gutter: 24pt,
+      [*Why the name matters*
+        #v(12pt)
+        The file runs only on Linux x86-64 (amd64): the name says so before anyone downloads it.],
+      [*One file per platform*
+        #v(12pt)
+        Other targets would need their own builds, e.g. `app-linux-arm64` or `app-windows-amd64.exe`.],
+    )
+    #v(22pt)
+    #result[The file to upload is now `dist/app-linux-amd64`.]
+  ]
+]
+
+#slide("What is an artifact?", 3)[
+  #body(compact: true)[
+    An *artifact* is a file produced by a workflow run and saved by GitHub together with that run.
+    #v(22pt)
+    #grid(columns: (1fr, 1fr, 1fr), column-gutter: 16pt,
+      card("Why", [The runner is deleted when the job ends, together with every file it created.]),
+      card("Where", [On the run's summary page, under *Artifacts*, ready to download.]),
+      card("How long", [90 days by default, then GitHub deletes it automatically.]),
+    )
+    #v(22pt)
+    #result[An artifact keeps a run's output for a while: good for builds, not for permanent releases.]
+  ]
+]
+
+#slide("Workflow (4/4): upload the artifact", 3)[
+  #body(compact: true)[
+    Upload the executable so it remains downloadable after the runner finishes.
     #v(16pt)
     #grid(columns: (1fr, 1fr), column-gutter: 24pt, align: horizon,
       workflowPanel(focus: (4, 5))[
@@ -259,51 +296,38 @@
         - name: Upload binary artifact
           uses: actions/upload-artifact@v7
           with:
-            path: dist/app
+            path: dist/app-linux-amd64
             archive: false
             if-no-files-found: error
         ```
       ],
       list(
-        [`path` selects the executable produced by the build.],
-        [`archive: false` uploads the single file directly.],
+        [`path` selects the renamed executable.],
+        [`archive: false` uploads the file as it is, without a zip.],
         [`if-no-files-found: error` fails the step if that file is missing.],
       ),
     )
     #v(14pt)
     #show figure.caption: set text(size: 14pt)
+    // TODO: retake this screenshot: the artifact is now called app-linux-amd64, not app.
     #figure(
       screenshot("../../img/topic3/exec/artifact.png", width: 80%),
-      caption: [The `app` artifact in the run's summary, ready to download.],
-    )
-  ]
-]
-
-#slide("Follow the workflow in Actions", 3)[
-  #body(compact: true)[
-    We open *Build Linux binary* in Actions and inspect a run on `docker-build`.
-    #v(16pt)
-    #grid(columns: (1fr, 1.5fr), column-gutter: 20pt, align: horizon,
-      enum(
-        [*Source:* the run shows the commit that triggered it.],
-        [*Build:* the longest step: a clean runner has no Docker cache, so Nuitka compiles everything again.],
-        [*Export:* the build writes `app` into the runner's `dist` directory.],
-        [*Upload:* the file appears in the run's *Artifacts* section.],
-      ),
-      screenshot("../../img/topic3/exec/build_complete.png"),
+      caption: [The `app-linux-amd64` artifact in the run's summary, ready to download.],
     )
   ]
 ]
 
 
+// Demo slide: commented out for now. Uncomment it to show how to run the executable.
+/*
 #slide("Run the executable", 3)[
   #body(compact: true)[
-    Download `app` from the run's *Artifacts*, move it to the repository root and start it:
+    Download `app-linux-amd64` from the run's *Artifacts*, move it to the repository root and start it:
     #v(16pt)
     #workflowPanel(focus: (2,), size: 15pt)[
       ```sh
-      $ chmod +x app       # browser downloads drop the executable bit
-      $ ./app
+      $ chmod +x app-linux-amd64   # browser downloads drop the executable bit
+      $ ./app-linux-amd64
       Server has started!
 
       $ curl http://localhost:5000/json/getData    # in a second terminal
@@ -320,19 +344,20 @@
     #result[The file produced by GitHub Actions works on its own.]
   ]
 ]
+*/
 
 #slide("What are the limits of the executable?", 3)[
   #body(compact: true)[
     The artifact is a single file, but it does not run everywhere on its own.
     #v(22pt)
     #grid(columns: (1fr, 1fr), column-gutter: 24pt,
-      card("Where it runs", [Linux x86-64 with a C library compatible with Debian 12, the builder's base.]),
+      card("Where it runs", [Linux x86-64, with system libraries compatible with Debian 12, the builder's base.]),
       card("What it needs", [`json/data.json` in the directory it is started from: the data is not inside the file.]),
     )
     #v(22pt)
-    #text(size: 18pt)[It runs only on that system: supporting other operating systems or CPU architectures requires one executable for each, built on a matching runner.]
+    #text(size: 18pt)[Other systems or CPU architectures need their own executable, built on a matching runner.]
     #v(18pt)
-    #result[To share a ready-to-run application, a file is not enough.]
+    #result[A file is not enough to share a ready-to-run app: next, the same `app-only` executable goes into a Docker image.]
   ]
 ]
 
@@ -366,15 +391,15 @@
     [
       *Multiple choice — Answer: C* \
       `dist` contains only the `app` executable.
-      - `--target binary` stops at the `binary` stage, which starts `FROM scratch` and copies just that file.
+      - `--target app-only` stops at the `app-only` stage, which starts `FROM scratch` and copies just that file.
       - It is not an image (A): `--output` writes files to the runner.
       - The repository files (B) stay in `builder`.
       - `--output` does not need `docker push` (D).
     ],
     [
-      *Fill in the gaps — `binary` / `upload-artifact`* \
-      - `--target binary` builds only up to the stage that contains the executable.
-      - `actions/upload-artifact` saves `dist/app` in the run, because the runner is destroyed when the job ends.
+      *Fill in the gaps — `app-only` / `upload-artifact`* \
+      - `--target app-only` builds only up to the stage that contains the executable.
+      - `actions/upload-artifact` saves the executable in the run, because the runner is destroyed when the job ends.
     ],
   )
 
