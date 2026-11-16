@@ -79,38 +79,39 @@
 
 ]
 
-// Slide 3: The Problem
+// Slide 3 (versione A): The Problem — originale senza figura
 #slide("Why do we need CI/CD?", 1)[
-  #set text(size: 1.3em)
-  #show grid.cell.where(x: 0): set text(size: 1.3em)
-
   #align(center + horizon)[
-    #grid(
-      columns: (1fr, 1fr),
-      align: (x, y) => if (x == 0) {
-        left + horizon
-      } else {
-        center + horizon
-      },
-      inset: 1.2em,
-      [
-        #set list(marker: [$arrow$])
-        *The Typical Scenario:*
-        - "It works on my machine!"
-        - Missing manually installed dependencies.
-        - Forgetting to run tests before pushing.
-        - The main branch ( `main` ) breaks for all colleagues.
+    #align(left)[
+      #set list(spacing: 1.5em)
+      #show list: set text(size: 2.2em)
 
-        *The Automated Solution:*
-        - *Objective Verification:* Neutral and reproducible environment.
-        - *Continuous Integration (CI):* Automated builds and tests on every change.
-        - *Fast Feedback:* Immediate notification of success or failure before merging.
-      ],
-      [
-        #figure(caption: "CI/CD representation", image("../../img/topic1/mdi--gear.svg", width: 60%))
+      - "It works on my machine!" Environment differences break the build.
+      - Missing manually installed dependencies go unnoticed until too late.
+      - Forgetting to run tests before pushing breaks `main` for everyone.
+      - *Continuous Integration (CI):* automated builds and tests on every change.
+      - *Fast Feedback:* immediate notification of success or failure before merging.
+    ]
+  ]
+]
 
-      ],
-    )
+// Slide 3 (versione B): focus su CI e offload
+#slide("Why do we need CI/CD?", 1)[
+  #align(center + horizon)[
+    #text(size: 2em, weight: "bold")[Continuous Integration (CI):]
+
+    #v(0.8em)
+
+    #align(left)[
+      #set list(spacing: 1.3em)
+      #show list: set text(size: 2.2em)
+
+      - Every push automatically triggers a *build* and a *test* run on a remote server.
+      - *Build examples:* compile the code, produce release artifacts, build Docker images.
+      - *Test examples:* run the unit/integration test suite in a clean environment.
+      - Offloads heavy computation, no need for powerful local machines.
+      - Guarantees reproducibility: same result for every contributor, every time.
+    ]
   ]
 ]
 
@@ -236,7 +237,7 @@
     runs-on: ubuntu-latest  # fresh machine
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         # Step 1: repo files now available
 
       - run: ./typst compile doc.typ
@@ -246,8 +247,8 @@
       )
 
       #v(0.6em)
-      #hint(txtSize: 1em)[
-        The runner starts *completely empty*: without `checkout`, your files don't exist on it!
+      #hint(txtSize: 0.80em)[
+        The runner starts *completely empty*: without `checkout`, your files don't exist on it! Here, `./typst compile doc.typ` compiles the documentation into a PDF.
       ]
     ],
   )
@@ -280,19 +281,19 @@ jobs:                            # 2. JOBS: Units of work
 
 // Slide 8b: General Syntax - Steps
 #slide("General Syntax (2/2): Steps Inside a Job", 1)[
-  #set text(size: 1.7em)
+  #set text(size: 1.5em)
   #align(center + horizon)[
     #raw(
       "    steps:                       # 3. STEPS: Sequential tasks on the SAME runner
 
       - name: Checkout code      # Step 1: label shown in GitHub UI
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
                                  # 'uses:' imports a pre-built Action
                                  # Without this, the runner is EMPTY —
                                  # your repo files do not exist yet!
                                  # Format: 'owner/repo@version'
                                  #   'actions/' = official GitHub org
-                                 #   '@v4'      = pinned major version
+                                 #   '@v7'      = pinned major version
 
       - name: Compile document   # Step 2: runs after Step 1 completes
         run: ./typst compile ./docs/main.typ
@@ -302,6 +303,11 @@ jobs:                            # 2. JOBS: Units of work
       block: true,
       lang: "yaml",
     )
+
+    #v(0.5em)
+    #hint(txtSize: 1em)[
+      *What this workflow does:* on every push to `main`, it spins up a clean Ubuntu machine, downloads the repository files, and compiles the documentation automatically, without touching anyone's local machine.
+    ]
   ]
 ]
 
@@ -425,11 +431,11 @@ jobs:                            # 2. JOBS: Units of work
     [
       *The two indispensable Actions:*
 
-      1. *`actions/checkout@v4`:*
+      1. *`actions/checkout@v7`:*
         - The runner starts completely empty.
         - Without it, the runner *does not have your files*!
 
-      2. *`actions/setup-python@v4`:*
+      2. *`actions/setup-python@v7`:*
         - Configures a specific Python version.
         - Manages pip package caching to speed up runs.
     ],
@@ -439,9 +445,9 @@ jobs:                            # 2. JOBS: Units of work
         caption: "Pre-built action example",
         raw(
           "steps:
-  - uses: actions/checkout@v4
+  - uses: actions/checkout@v7
 
-  - uses: actions/setup-python@v4
+  - uses: actions/setup-python@v7
     with:
       python-version: '3.12'",
           block: true,
@@ -476,8 +482,8 @@ jobs:                            # 2. JOBS: Units of work
     - Any public repo can publish an Action
 
   - *`@version`:* which version of that Action to run.
-    - *`@v4`* (major version): automatically gets the latest `v4.x` patch while keeping a stable API. Recommended.
-    - *`@v4.1.2`* (exact release): more predictable, but no auto bug fixes.
+    - *`@v7`* (major version): automatically gets the latest `v7.x` patch while keeping a stable API. Recommended.
+    - *`@v7.1.2`* (exact release): more predictable, but no auto bug fixes.
     - *`@<commit-sha>`* (commit SHA): most secure, because a commit cannot be changed.
     ],
     [
@@ -486,11 +492,11 @@ jobs:                            # 2. JOBS: Units of work
         caption: "Pre-built action example",
         raw(
           "# Major version (recommended)
-uses: actions/checkout@v4
-uses: actions/setup-python@v4
+uses: actions/checkout@v7
+uses: actions/setup-python@v7
 
 # Exact version (fully pinned)
-uses: actions/checkout@v4.1.2
+uses: actions/checkout@v7.1.2
 
 # Commit SHA (most secure)
 uses: actions/checkout@abc1234",
@@ -559,9 +565,9 @@ uses: actions/checkout@abc1234",
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
       - name: Run tests
@@ -612,8 +618,8 @@ uses: actions/checkout@abc1234",
     ],
     [
       *Q4 — Answer: B* \
-      - `@v4` follows the latest `v4.x` patches with a stable API, but never jumps to `v5`.
-      - `@v4.1.2` is fully predictable, but gets no automatic fixes.
+      - `@v7` follows the latest `v7.x` patches with a stable API, but never jumps to `v8`.
+      - `@v7.1.2` is fully predictable, but gets no automatic fixes.
       - A commit SHA is the *most secure* option, so D is wrong.
     ],
   )
@@ -637,7 +643,7 @@ uses: actions/checkout@abc1234",
     ],
     [
       *Gap 2 — `uses` / `run`* \
-      - `uses:` imports a pre-built Action (`owner/repo@version`), e.g. `actions/checkout@v4`.
+      - `uses:` imports a pre-built Action (`owner/repo@version`), e.g. `actions/checkout@v7`.
       - `run:` executes a shell command, e.g. `echo "Hello"`.
       - A step has one or the other, never both: here they are two separate steps.
     ],
