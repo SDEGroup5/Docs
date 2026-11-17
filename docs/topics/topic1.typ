@@ -109,7 +109,7 @@
   - Create and publish Docker containers
   - Put it all together: CI/CD pipeline from code to deployment
 
-  #v(1em)
+  #v(0.3em)
 
   #align(center)[
     #hint(txtSize: 1.5em)[
@@ -117,8 +117,23 @@
     ]
   ]
 
-  #v(0.5em)
+  
 
+  #align(center)[
+    #block(
+      fill: rgb("1e88e5").transparentize(80%),
+      inset: 6pt,
+      radius: 6pt,
+      stroke: 1pt + rgb("90caf9"),
+      width: 100%,
+    )[
+      #text(size: 1.5em)[
+        *CI applies to any software project*: web services, mobile apps, embedded systems, and more. Other popular CI tools include GitLab CI and Jenkins; we focus on GitHub Actions.
+      ]
+    ]
+  ]
+
+  #v(0.5em)
 
 ]
 
@@ -138,25 +153,6 @@
   ]
 ]
 
-// Slide 3 (versione B): focus su CI e offload
-#slide("Why do we need CI/CD?", 1)[
-  #align(center + horizon)[
-    #text(size: 2em, weight: "bold")[Continuous Integration (CI):]
-
-    #v(0.8em)
-
-    #align(left)[
-      #set list(spacing: 1.3em)
-      #show list: set text(size: 2em)
-
-      - Every push automatically triggers a *build* and a *test* run on a remote server.
-      - *Build examples:* compile the code, produce release artifacts, build Docker images.
-      - *Test examples:* run the unit/integration test suite in a clean environment.
-      - Offloads heavy computation, no need for powerful local machines.
-      - Guarantees reproducibility: same result for every contributor, every time.
-    ]
-  ]
-]
 
 // Slide 4: Event-Driven Paradigm
 #slide("What are GitHub Actions?", 1)[
@@ -287,7 +283,7 @@
         lang: "yaml",
       )
 
-      #hint(txtSize: 1em)[
+      #hint(txtSize: 0.95em)[
         The runner starts *completely empty*: without `checkout`, your files don't exist on it! `./typst compile doc.typ` compiles the documentation into a PDF.
       ]
     ],
@@ -326,7 +322,7 @@ jobs:                            # 2. JOBS: Units of work
     #raw(
       "    steps:                       # 3. STEPS: Sequential tasks on the SAME runner
 
-      - name: Checkout code      # Step 1: label shown in GitHub UI
+      - name: Checkout code      # Step 3.1: label shown in GitHub UI
         uses: actions/checkout@v7
                                  # 'uses:' imports a pre-built Action
                                  # Without this, the runner is EMPTY —
@@ -335,7 +331,7 @@ jobs:                            # 2. JOBS: Units of work
                                  #   'actions/' = official GitHub org
                                  #   '@v7'      = pinned major version
 
-      - name: Compile document   # Step 2: runs after Step 1 completes
+      - name: Compile document   # Step 3.2: runs after Step 1 completes
         run: ./typst compile ./docs/main.typ
                                  # 'run:' executes any shell command
                                  # './typst' and all repo files from Step 1
@@ -466,7 +462,7 @@ jobs:                            # 2. JOBS: Units of work
     },
     inset: 1em,
     [
-      *The two indispensable Actions:*
+      *The two mandatory Actions:*
 
       1. *`actions/checkout@v7`:*
         - The runner starts completely empty.
@@ -519,9 +515,8 @@ jobs:                            # 2. JOBS: Units of work
         - Any public repo can publish an Action
 
       - *`@version`:* which version of that Action to run.
-        - *`@v7`* (major version): automatically gets the latest `v7.x` patch while keeping a stable API. Recommended.
-        - *`@v7.1.2`* (exact release): more predictable, but no auto bug fixes.
-        - *`@<commit-sha>`* (commit SHA): most secure, because a commit cannot be changed.
+        - *`@v7`* (major version): always uses the latest `v7` release. GitHub automatically picks up bug fixes and improvements, as long as they don't break the API. Recommended.
+        - *`@v7.1.2`* (exact release): the workflow always runs the exact same version, no surprises, but bug fixes must be applied manually.
     ],
     [
       #show raw: set text(size: 1.4em)
@@ -550,7 +545,7 @@ uses: actions/checkout@abc1234",
 
 
 // Slide 10: Theoretical Exercise (Extra)
-#slide("Theoretical Exercises", 1)[
+#slide(" Self-assessment", 1)[
 
   #align(center + horizon)[
     #text(size: 2.5em, weight: "bold")[On the website!]
