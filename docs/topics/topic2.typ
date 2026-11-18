@@ -59,6 +59,8 @@
 
       \
       - Tests are already provided
+      \
+      - A .env file allow to change the JSON file path
     ],
     [
       #show text: set text(size: 0.9em)
@@ -137,6 +139,7 @@
     ],
     [
       #show text: set text(size: 1.2em)
+      #v(25%)
       + Load the JSON
     ],
   )
@@ -172,7 +175,8 @@
     ],
     [
       #show text: set text(size: 1.2em)
-      + Load the JSON #v(1em)
+      #v(25%)
+      + Load the JSON #v(15%)
       + Contact the app \ and get the \ response
     ],
   )
@@ -208,12 +212,13 @@
     ],
     [
       #show text: set text(size: 1.2em)
-      + Load the JSON #v(1em)
-      + Contact the app \ and get the \ response #v(1em)
+      #v(25%)
+      + Load the JSON #v(15%)
+      + Contact the app \ and get the \ response  #v(2%)
       + Check the \ response and the status code
     ],
   )
-  #place(dy: -3.5em)[
+  #place(dy: -6.5em)[
     #rect(stroke: 2pt + red, width: 76%, height: 12%)
   ]
 ]
@@ -280,7 +285,7 @@
     ],
     [
       #show text: set text(size: 1.2em)
-      + Parametrized \ test: execute the \ same test with \ multiple input #v(1em)
+      + Parametrized \ test: execute the \ same test with \ multiple input #v(20%)
       + Contact the app \ and get the \ response
     ],
   )
@@ -316,12 +321,12 @@
     ],
     [
       #show text: set text(size: 1.2em)
-      + Parametrized \ test: execute the \ same test with \ multiple input #v(1em)
-      + Contact the app \ and get the \ response #v(1em)
+      + Parametrized \ test: execute the \ same test with \ multiple input #v(20%)
+      + Contact the app \ and get the \ response #v(4%)
       + Check the \ response and the status code
     ],
   )
-  #place(dy: -3em)[
+  #place(dy: -5.3em)[
     #rect(stroke: 2pt + red, width: 75%, height: 10%)
   ]
 ]
@@ -357,6 +362,7 @@
     ],
     [
       #show text: set text(size: 1.2em)
+      #v(15%)
       + Create the app components
     ],
   )
@@ -396,7 +402,8 @@
     ],
     [
       #show text: set text(size: 1.2em)
-      + Create the app \ components #v(1em)
+      #v(15%)
+      + Create the app \ components #v(18%)
       + Start the app
     ],
   )
@@ -431,15 +438,17 @@
 
       return response_bytes, response_code
       ```
+      #v(1em)
+      + Create the app components #v(1em)
+      + Start the app #v(1em)
     ],
     [
       #show text: set text(size: 1.2em)
-      + Create the app components #v(1em)
-      + Start the app #v(1em)
+      #set enum(start: 3)
       + Prepare the packet, open the connection and make the request
     ],
   )
-  #place(dy: -25em)[
+  #place(dy: -32em)[
     #rect(stroke: 2pt + red, width: 55%, height: 25%)
   ]
 ]
@@ -470,16 +479,18 @@
 
       return response_bytes, response_code
       ```
+      #v(1em)
+      + Create the app components #v(1em)
+      + Start the app #v(1em)
     ],
     [
       #show text: set text(size: 1.2em)
-      + Create the app \ components #v(1em)
-      + Start the app #v(1em)
-      + Prepare the packet, open the connection and make the request #v(1em)
+      #set enum(start: 3)
+      + Prepare the packet, open the connection and make the request #v(16%)
       + Save the response data
     ],
   )
-  #place(dy: -16em)[
+  #place(dy: -23em)[
     #rect(stroke: 2pt + red, width: 55%, height: 20%)
   ]
 ]
@@ -510,17 +521,19 @@
 
       return response_bytes, response_code
       ```
+      #v(1em)
+      + Create the app components #v(1em)
+      + Start the app #v(1em)
     ],
     [
       #show text: set text(size: 1.2em)
-      + Create the app \ components #v(1em)
-      + Start the app #v(1em)
-      + Prepare the packet, open the connection and make the request #v(1em)
-      + Save the response data #v(1em)
+      #set enum(start: 3)
+      + Prepare the packet, open the connection and make the request #v(16%)
+      + Save the response data #v(16%)
       + Terminate the app
     ],
   )
-  #place(dy: -9.5em)[
+  #place(dy: -16.5em)[
     #rect(stroke: 2pt + red, width: 55%, height: 25%)
   ]
 ]
@@ -551,18 +564,20 @@
 
       return response_bytes, response_code
       ```
+      #v(1em)
+      + Create the app components #v(1em)
+      + Start the app #v(1em)
     ],
     [
       #show text: set text(size: 1.2em)
-      + Create the app \ components #v(1em)
-      + Start the app #v(1em)
-      + Prepare the packet, open the connection and make the request #v(1em)
-      + Save the response data #v(1em)
-      + Terminate the app #v(1em)
+      #set enum(start: 3)
+      + Prepare the packet, open the connection and make the request #v(16%)
+      + Save the response data #v(16%)
+      + Terminate the app #v(17%)
       + Return the data
     ],
   )
-  #place(dy: -1.5em)[
+  #place(dy: -8em)[
     #rect(stroke: 2pt + red, width: 55%, height: 5%)
   ]
 ]
@@ -612,6 +627,8 @@
         #text(size: 1.7em)[
           - The *code coverage* is the amount of the program's statements that
             is invoked by a given test suite.
+
+          - Given the total amount of *Statements* (*_Stmts_*), it shows how many line where *not executed* (*_Miss_*) and calculate how many *were executed* with respect to the total (*_Cover_*)
 
           - *Pytest* is able to compute code coverage thanks to the `pytest-cov` module
 
@@ -713,6 +730,7 @@
       )
     ],
     [
+      #v(5%)
       + Checkout and python installation using external actions
     ],
   )
@@ -755,7 +773,8 @@
       )
     ],
     [
-      + Checkout and python installation using external actions
+      #v(5%)
+      + Checkout and python installation using external actions #v(25%)
       + Installing pytest from a requirements file
     ],
   )
@@ -798,8 +817,9 @@
       )
     ],
     [
-      + Checkout and python installation using external actions
-      + Installing pytest from a requirements file
+      #v(5%)
+      + Checkout and python installation using external actions #v(25%)
+      + Installing pytest from a requirements file #v(17%)
       + Running the test script
     ],
   )
@@ -820,7 +840,7 @@
     [
       #text(size: 1.7em)[
 
-        - *Complete* the `.github/scripts/execute_tests.py` script and the GitHub action ( `.github/workflows/python-app.yml`)
+        - *Complete* the GitHub action workflow ( `.github/workflows/python-app.yml`)
 
         - *Test* the script locally with both a valid and invalid JSON file like
           in the previous exercise to ensure it works. Use:
@@ -829,7 +849,7 @@
         - *Commit* and *push* the changes to see the tests running in your GitHub repository. Use:
           ```sh
           git add .
-          git commit -m "Modified test scripts"
+          git commit -m "Modified testing workflow"
           git push
           ```
 
@@ -841,8 +861,8 @@
 
       #underline()[
         #text(size: 1.7em)[
-          This script will be used in the rest of the exercises
-          for this lab, if there's any problems raise your hand.
+          *This script will be used in the rest of the exercises
+          for this lab, if there's any problems raise your hand.*
         ]
       ]
     ],
@@ -853,24 +873,13 @@
 #slide("Solutions: exercise", 2)[
   #show text: set text(size: 1.7em)
   #grid(
-    columns: (70%, 30%),
-    inset: 1em,
+    columns: (65%, 35%),
+    align: (x, y) => if (x == 0) {
+      left + horizon
+    } else {
+      center + horizon
+    },
     [
-      In `execute_tests.py`:
-      ```py
-      # 0 if they pass, 1 if they don't
-      test_result = execute_test()                  
-
-      # 0 if the threshold is met, 1 if it isn't
-      test_coverage_result = read_coverage_result() 
-
-      # Exit with 0 if all ok, with 1 otherwise
-      sys.exit(test_result or test_coverage_result) 
-      ```
-      When this is run as an action the exit code is used to
-      determine whether or not this step was successful.
-
-      \
       In `python-app.yml`:
       ```yaml
       - name: Test with testing script
@@ -878,15 +887,24 @@
 
       ```
       This ensures the action is run automatically whenever a
-      _push_ happens on the `part-2` branch.
+      _push_ \ event is triggered.
     ],
     [
       #align(center + horizon)[
-        #image("../../img/topic2/python.png")
+        #image("../../img/topic2/python.png", width: 60%)
         #underline()[
-          This script will be used in the rest of the exercises
-          for this lab, if there's any problems raise your hand.]
+          *This script will be used in the rest of the exercises
+          for this lab, if there's any problems raise your hand.*]
       ]
     ],
   )
+]
+
+#slide("A short break", 2)[
+  #align(center + horizon)[
+    #image("/img/topic2/mdi--coffee.svg", width: 20%)
+    #text(size: 2em)[*_Roses are red, violets are blue, I need a coffee, you'll need one too._*]
+    #v(1em)
+    #text(size: 1.1em)[_Just kidding... Maybe..._]
+  ]
 ]
