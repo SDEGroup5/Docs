@@ -25,8 +25,9 @@
   #text(size: 18pt)[#content]
 ]
 
-#let workflowPanel(content, focus: (), size: 16pt) = block(
+#let workflowPanel(content, focus: (), size: 16pt, height: auto) = block(
   width: 100%,
+  height: height,
   inset: 12pt,
   radius: 7pt,
   fill: panelColor,
@@ -116,33 +117,35 @@
     For a compiled program, it also means:
     #v(22pt)
     #list(
-      [*No local setup:* Python and Nuitka live in the build image, not on our laptops.],
-      [*Any OS:* developers on Windows or Mac still get a Linux executable.],
+      [*No local setup:* Python and Nuitka live in the build image, so anyone, on any OS, gets the same Linux executable.],
+      [*Always up to date:* every push produces a new executable; nobody has to remember to rebuild it.],
       [*Traceable:* each executable is linked to its commit, and the run keeps the build logs.],
       [*Early feedback:* if compilation breaks, the run fails and the commit is marked as failed.],
     )
     #v(22pt)
-    // Before/after strip, in place of a RESULT box.
     #let compareBox(title, fill, content) = block(
-      width: 100%, inset: 12pt, radius: 6pt, fill: fill,
+      width: 100%, height: 110pt, inset: 12pt, radius: 6pt, fill: fill,
     )[
       #text(size: 16pt, weight: "bold", fill: mainColor)[#title]
       #v(6pt)
       #text(size: 16pt)[#content]
     ]
-    #grid(columns: (1fr, auto, 1fr), column-gutter: 14pt, align: horizon,
-      compareBox("Building on our laptops", panelColor,
-        [Different OS, Python and library versions.]),
-      text(size: 26pt, weight: "bold", fill: mainColor)[→],
-      compareBox("Building on GitHub", mainColor.lighten(94%),
-        [One clean runner, one recipe, on every push.]),
+  
+    #grid(columns: (1fr, 40pt, 1fr), column-gutter: 10pt,
+      align: (left + horizon, center + horizon, left + horizon),
+      compareBox("Without CI", panelColor,
+        [Each developer builds by hand, with their own OS, Python and Nuitka versions.]),
+      text(size: 20pt, weight: "bold", fill: mainColor)[vs],
+      compareBox("With GitHub Actions", mainColor.lighten(94%),
+        [Every push builds automatically, in the same clean environment, with the same tools and versions.]),
     )
   ]
 ]
 
 #slide("What is an artifact?", 3)[
   #body(compact: true)[
-    An *artifact* is a file that a workflow run uploads to GitHub, so that it is kept after the run ends.
+    An *artifact* is a file, or a set of files, that a workflow run saves on GitHub, attached to that run. \
+    Typical examples: executables, test reports, logs.
     #v(22pt)
     // Timeline of an artifact: step 3 (grey) is what gets lost without step 2.
     #let lifeStep(number, title, fill, content) = block(
@@ -158,12 +161,12 @@
       arrow,
       lifeStep("2", "UPLOAD", mainColor.lighten(94%), [A step uploads it to the run on GitHub.]),
       arrow,
-      lifeStep("3", "JOB ENDS", luma(92%), [The runner is deleted, with all its files.]),
+      lifeStep("3", "JOB ENDS", luma(92%), [The runner is deleted: files not uploaded are lost.]),
       arrow,
-      lifeStep("4", "KEPT", mainColor.lighten(94%), [90 days on the run page, under *Artifacts*, ready to download.]),
+      lifeStep("4", "KEPT", mainColor.lighten(94%), [Downloadable from the run page, under *Artifacts*, 90 days by default.]),
     )
     #v(22pt)
-    #result[An artifact keeps a run's output for a while: good for builds, not for permanent releases.]
+    #result[Artifacts keep a run's output for a while, for people to download or for later jobs to reuse: good for builds, not for permanent releases.]
   ]
 ]
 
@@ -190,8 +193,8 @@
       ],
       text(size: 17pt)[#list(
         [`--mode=onefile`: one single file, not a folder.],
-        [`--output-dir`: where to write it.],
-        [`--output-filename`: its name.],
+        [`--output-dir`: where to write it (`/app/bin`).],
+        [`--output-filename`: its name (`app`).],
         [`src/main.py`: the starting point; Nuitka follows its imports.],
       )],
     )
@@ -223,13 +226,13 @@
   ]
 ]
 
-#slide("Workflow (1/4): trigger and checkout", 3)[
+#slide("Workflow (1/4): trigger and permissions", 3)[
   #body(compact: true)[
     The workflow lives in `.github/workflows/build-binary.yml`. Its structure is the one
     seen in Part 1: trigger, job, runner, steps.
     #v(16pt)
     #grid(columns: (1.2fr, 1fr), column-gutter: 24pt,
-      [#workflowPanel(focus: (2, 3, 5))[
+      [#workflowPanel[
         ```yaml
         name: Build Linux binary
         on:
@@ -250,45 +253,48 @@
         #text(size: 18pt)[#list(
           [Every push, on any branch, starts a build.],
           [Read-only permission: the workflow changes nothing in the repository.],
-          [It does not run pytest or wait for the test workflow of Part 2.],
+          [Separate from the test workflow of Part 2: a push starts both, and a build can succeed even if the tests fail.],
         )]
       ],
     )
     #v(16pt)
-    #result[Every push produces a new executable, built from the pushed commit.]
+    #result[On every push, a fresh runner starts with a copy of the pushed commit.]
   ]
 ]
 
 #slide("Workflow (2/4): build and export", 3)[
   #body(compact: true)[
     This step runs `docker build` on the runner: Docker follows `Dockerfile.build` up to the `app-only` stage.
-    #v(16pt)
-    #grid(columns: (1.3fr, 1fr), column-gutter: 24pt, align: horizon,
-      workflowPanel(focus: (5, 6), size: 15pt)[
+    #v(24pt)
+    // Larger code and text than the other workflow slides: this step is short,
+    // so it can use the free space at the bottom of the slide.
+    #grid(columns: (1.4fr, 1fr), column-gutter: 24pt, align: horizon,
+      workflowPanel(focus: (6, 7), size: 17pt)[
         ```yaml
         - name: Build application with Docker
           run: |
-            docker build --platform linux/amd64 \
+            docker build \
+              --platform linux/amd64 \
               -f Dockerfile.build \
               --target app-only \
               --output type=local,dest=dist .
         ```
       ],
-      text(size: 17pt)[#list(
+      text(size: 18pt)[#list(spacing: 14pt,
         [`--platform`: the executable's target, Linux x86-64 (amd64).],
         [`-f`: the Dockerfile to use; `.` gives the build the repository files.],
         [`--target app-only`: stop at the stage that holds only the executable.],
-        [`--output`: copy that stage's files into `dist` on the runner.],
+        [`--output`: export that stage's files, copying them into the `dist` folder on the runner.],
       )],
     )
-    #v(16pt)
+    #v(24pt)
     #result[The build leaves a single file on the runner, instead of an image: `dist/app`.]
   ]
 ]
 
 #slide("Workflow (3/4): name the executable", 3)[
   #body(compact: true)[
-    The Dockerfile gives the file a generic name; the workflow, which chooses the platform, renames it accordingly.
+    This step only renames the executable that is still on the runner, `dist/app`, before it is uploaded: the content stays the same, the new name says where it runs.
     #v(22pt)
     #workflowPanel(focus: (2,), size: 20pt)[
       ```yaml
@@ -297,25 +303,32 @@
       ```
     ]
     #v(22pt)
+    // Why the name changes here: the Dockerfile does not know the platform,
+    // the workflow does. Same height, so the two boxes line up.
+    #let nameBox(title, content) = block(
+      width: 100%, height: 120pt, inset: 14pt, radius: 6pt, fill: panelColor,
+    )[
+      #text(size: 18pt, weight: "bold", fill: mainColor)[#title]
+      #v(10pt)
+      #text(size: 17pt)[#content]
+    ]
     #grid(columns: (1fr, 1fr), column-gutter: 24pt,
-      [*Why the name matters*
-        #v(12pt)
-        The file runs only on Linux amd64: the name says so before anyone downloads it.],
-      [*One file per platform*
-        #v(12pt)
-        Other targets would need their own builds, e.g. `app-linux-arm64` or `app-windows-amd64.exe`.],
+      nameBox([In the Dockerfile: `app`],
+        [A generic name: the Dockerfile does not choose the platform, so the same file could build for other systems too.]),
+      nameBox([In the workflow: `app-linux-amd64`],
+        [In the build step, the workflow set the platform with `--platform linux/amd64`: so now it renames the file to match.]),
     )
     #v(22pt)
-    #result[The file is now `dist/app-linux-amd64`, and this will also be the artifact's name.]
+    #result[Same file, new name: anyone can see it runs only on Linux amd64, before downloading it. It will also be the artifact's name.]
   ]
 ]
 
 #slide("Workflow (4/4): upload the artifact", 3)[
   #body(compact: true)[
-    The last step uses a ready-made action, `actions/upload-artifact`, to save the executable in the run, so it stays available after the runner is deleted.
+    The last step saves the executable in the run, so it stays available after the runner is deleted.
     #v(16pt)
     #grid(columns: (1fr, 1fr), column-gutter: 24pt, align: horizon,
-      workflowPanel(focus: (4, 5))[
+      workflowPanel[
         ```yaml
         - name: Upload binary artifact
           uses: actions/upload-artifact@v7
@@ -325,11 +338,12 @@
             if-no-files-found: error
         ```
       ],
-      list(
+      text(size: 17pt)[#list(
+        [`actions/upload-artifact`: a ready-made action by GitHub that takes files from the runner and saves them in the run.],
         [`path` selects the renamed executable.],
         [`archive: false` uploads the file as it is, without a zip, under its own name.],
         [`if-no-files-found: error` fails the step if that file is missing.],
-      ),
+      )],
     )
     #v(14pt)
     #show figure.caption: set text(size: 14pt)
@@ -374,12 +388,10 @@
     The artifact is a single file, but it does not run everywhere on its own.
     #v(22pt)
     #grid(columns: (1fr, 1fr), column-gutter: 24pt,
-      card("Where it runs", [Linux amd64 only, on systems as recent as Debian 12 (the builder's base) or newer.]),
+      card("Where it runs", [Linux amd64 only, on a system at least as recent as Debian 12 (the builder's base).]),
       card("What it needs", [`json/data.json` in the directory it is started from: the data is not inside the file.]),
     )
-    #v(16pt)
-    #hint(txtSize: 17pt)[*Note:* a browser download loses the execute permission: run `chmod +x app-linux-amd64` before starting it.]
-    #v(16pt)
+    #v(22pt)
     #result[In our case the executable is not ready to run on its own: it still needs `json/data.json` and a Linux amd64 system.]
   ]
 ]
@@ -431,11 +443,11 @@
 
 
 // Exercise: the build workflow only starts on the branch written in
-// `branches`. In the students' project it is `[TODO]`, so the workflow does not
+// `branches`. In the students' project it is `[your-branch]`, so the workflow does not
 // run during the previous parts (the build takes about two minutes).
 // Starter workflow and site text: docs/topics/topic3-exec-exercise-starter.md
 
-#slide("Exercise: start the build", 3)[
+#slide("Now you try: start the build", 3)[
   #body(compact: true)[
     In your repository, the build workflow does not start yet: it only runs on the branch written in `branches`.
     #v(16pt)
@@ -444,13 +456,13 @@
         ```yaml
         on:
           push:
-            # TODO: your branch name
-            branches: [TODO]
+            # write your branch name
+            branches: [your-branch]
         ```
       ],
       text(size: 17pt)[#enum(
-        [*Open* `.github/workflows/build-binary.yml`.],
-        [*Replace* `TODO` with the name of your branch (shown on GitHub, above the file list).],
+        [*Open* `.github/workflows/build-binary.yml` (not the test workflow, `python-app.yml`).],
+        [*Replace* `your-branch` with the name of your branch (shown on GitHub, above the file list).],
         [*Commit and push*: \ `git add .` \ `git commit -m "Start the build"` \ `git push`],
         [*Open* Actions → _Build Linux binary_ and wait about two minutes.],
         [*Check* that the run is green and that `app-linux-amd64` is under _Artifacts_.],
@@ -465,30 +477,30 @@
   #body(compact: true)[
     The trigger decides *whether* the workflow starts. Both versions below are correct.
     #v(16pt)
-    #grid(columns: (1fr, 1fr), column-gutter: 24pt,
-      [*Only your branch*
-        #v(10pt)
-        #workflowPanel(size: 16pt)[
-          ```yaml
-          on:
-            push:
-              branches: [main]
-          ```
-        ]
-        #v(10pt)
-        #text(size: 17pt)[Pushes to other branches do not start a build.]],
-      [*Every branch* (as in our workflow)
-        #v(10pt)
-        #workflowPanel(size: 16pt)[
-          ```yaml
-          on:
-            push
-          ```
-        ]
-        #v(10pt)
-        #text(size: 17pt)[Every push starts a build, on any branch.]],
+    // One row for titles, one for code, one for captions: the two captions
+    // stay aligned. Same panel height, although the right code is shorter.
+    #grid(columns: (1fr, 1fr), column-gutter: 24pt, row-gutter: 10pt,
+      [*Only your branch* (here `main`)],
+      [*Every branch* (as in our workflow)],
+      workflowPanel(size: 16pt, height: 100pt)[
+        ```yaml
+        on:
+          push:
+            branches: [main]
+        ```
+      ],
+      workflowPanel(size: 16pt, height: 100pt)[
+        ```yaml
+        on:
+          push
+        ```
+      ],
+      text(size: 17pt)[Pushes to other branches do not start a build.],
+      text(size: 17pt)[Every push starts a build, on any branch.],
     )
     #v(16pt)
     #result[A green run with `app-linux-amd64` under Artifacts: GitHub Actions built the executable from your push.]
+    #v(16pt)
+    #hint(txtSize: 17pt)[*Optional, only on Linux amd64:* a browser download loses the execute permission, so run `chmod +x app-linux-amd64` first, and start it from a folder that contains `json/data.json`.]
   ]
 ]
