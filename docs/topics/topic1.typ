@@ -650,9 +650,9 @@ uses: actions/checkout@abc1234",
     ],
     [
       *Q4 — Answer: B* \
-      - `@v7` follows the latest `v7.x` patches with a stable API, but never jumps to `v8`.
-      - `@v7.1.2` is fully predictable, but gets no automatic fixes.
-      - A commit SHA is the *most secure* option, so D is wrong.
+      - `@v4` follows the latest `v4.x` patches with a stable API, but never jumps to `v5`, so C is wrong.
+      - `@v4.1.2` is fully predictable, but gets no automatic fixes: A has the two reversed.
+      - Any public repo can publish an Action; `actions/` is just the official GitHub org, so D is wrong.
     ],
   )
 
