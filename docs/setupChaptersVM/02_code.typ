@@ -31,7 +31,7 @@ To do that:
   git push
   ```
 
-You will be prompted to log in to GitHub. Follow the steps shown on screen and in your web browser. If the procedure completed successfully, you will se the change you made in the GitHub page of your repository. Any future operations *need to be performed from this terminal* or from a *terminal open inside Visual Studio Code* if they require GitHub authentication (for example, a `git push`).
+You will be prompted to log in to GitHub. Follow the steps shown on screen and in your web browser. If the procedure completed successfully, you will see the change you made in the GitHub page of your repository. Any future operations *need to be performed from this terminal* or from a *terminal open inside Visual Studio Code* if they require GitHub authentication (for example, a `git push`).
 
 == Setting up general GitHub access <ssh>
 

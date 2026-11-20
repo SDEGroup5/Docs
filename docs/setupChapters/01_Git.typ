@@ -12,7 +12,7 @@ Git is a Version Control System originally developed by #link("https://it.wikipe
 
 == Linux
 
-If you are using a *Debian based* Linux distribution. such as *Ubuntu*, Git is available directly from the Ubuntu repositories. Please run the following command to install it:
+If you are using a *Debian-based* Linux distribution, such as *Ubuntu*, Git is available directly from the Ubuntu repositories. Please run the following command to install it:
 
 ```sh
 sudo apt install git
@@ -24,7 +24,7 @@ In case you are running an *Arch based* operating system, the pacman package man
 sudo pacman -S git
 ```
 
-For additional system please take a look to the #link("https://git-scm.com/install/linux")[official website]
+For other systems, please take a look at the #link("https://git-scm.com/install/linux")[official website]
 
 == Windows
 
@@ -34,9 +34,9 @@ Additional information can be found in the #link("https://git-scm.com/install/wi
 
 == MacOS
 
-Unfortunately, no updated binary installer are available for this operating system. However, you will be able to install the software by *compiling from source* or by using the *Homebrew* package manager.
+Unfortunately, no updated binary installers are available for this operating system. However, you will be able to install the software by *compiling from source* or by using the *Homebrew* package manager.
 
-To install Homebrew, please follow the instruction at the #link("https://brew.sh/")[official website of the project].
+To install Homebrew, please follow the instructions at the #link("https://brew.sh/")[official website of the project].
 
 After that, you will be able to install git by executing:
 

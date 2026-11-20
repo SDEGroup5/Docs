@@ -14,17 +14,19 @@ If you prefer to setup GitHub in a general way, so that you can push via your pr
 
 == Installing Visual Studio Code
 
-To install Visual Studio Code in your machine go to the #link("https://code.visualstudio.com/download")[official website] and download the version corresponding to your operating system.
+To install Visual Studio Code on your machine, go to the #link("https://code.visualstudio.com/download")[official website] and download the version corresponding to your operating system.
 
 When the package has been downloaded, install it as you would do with any other application.
 
-If your are using a *Debian based* Linux distribution such as *Ubuntu* you can install the downloaded *.deb* file by execute in Terminal (change *\<downloaded-deb-file>*) with the actual deb name:
+If you are using a *Debian-based* Linux distribution such as *Ubuntu* you can install the downloaded *.deb* file by execute in Terminal (change *\<downloaded-deb-file>*) with the actual deb name:
 
 ```sh
 sudo dpkg -i <downloaded-deb-file>.deb
 ```
 
 Confirm when asked to add Microsoft repositories.
+
+For other versions, please refer to the official website.
 
 == Signing into GitHub from Visual Studio Code
 
@@ -45,7 +47,7 @@ To do that:
   git push
   ```
 
-You will be prompted to log in to GitHub. Follow the steps shown on screen and in your web browser. If the procedure completed successfully, you will se the change you made in the GitHub page of your repository. *need to be performed from this terminal* or from a *terminal open inside Visual Studio Code* if they require GitHub authentication (for example, a `git push`).
+You will be prompted to log in to GitHub. Follow the steps shown on screen and in your web browser. If the procedure completed successfully, you will see the change you made in the GitHub page of your repository. Any future operations *need to be performed from this terminal* or from a *terminal open inside Visual Studio Code* if they require GitHub authentication (for example, a `git push`).
 
 == Setting up general GitHub access <ssh>
 

@@ -23,7 +23,7 @@ Follow this section only if you currently don't have an account with GitHub.
   #rect(stroke: 2pt + red, width: 5%)
 ]
 
-To create an account, open a web browser and connect to #link("https://github.com/"), then click the top right black box named *Sign Up*, as shown on @gmp. In the new screen follow the guided procedure and create the account: take note of the *username* you choose, as it will be needed in the next steps.
+To create an account, open a web browser and connect to #link("https://github.com/"), then click the top right black box named *Sign Up*, as shown in @gmp. In the new screen follow the guided procedure and create the account: take note of the *username* you choose, as it will be needed in the next steps.
 
 == Setup Git with the GitHub email
 

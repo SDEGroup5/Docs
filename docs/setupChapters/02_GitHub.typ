@@ -23,7 +23,7 @@ Follow this section only if you currently don't have an account with GitHub.
   #rect(stroke: 2pt + red, width: 5%)
 ]
 
-To create an account, open a web browser and connect to #link("https://github.com/"), then click the top right black box named *Sign Up*, as shown on @gmp. In the new screen follow the guided procedure and create the account: take note of the *username* you choose, as it will be needed in the next steps.
+To create an account, open a web browser and connect to #link("https://github.com/"), then click the top right black box named *Sign Up*, as shown in @gmp. In the new screen, follow the guided procedure and create the account: take note of the *username* you choose, as it will be needed in the next steps.
 
 == Setup Git with the GitHub email
 
@@ -31,7 +31,7 @@ To create an account, open a web browser and connect to #link("https://github.co
 
 When an important change has been implemented in the codebase, you should *commit* such changes and push it on GitHub. However, in order to commit, Git needs to know your identity, specifically your *username* and *email*. To allow GitHub to recognize who committed the code, it is a good practice to set as username and email the information used to create the GitHub account.
 
-Firstly, to setup your username, open a new *terminal* (in *Linux*, in *Windows* a *Command Prompt* instance can be used while on *MacOS* go to your application and open *Terminal*), then paste the following command, replacing *\<your-username>* with your *actual username*:
+Firstly, to set up your username, open a new *terminal* (in *Linux*, in *Windows* a *Command Prompt* instance can be used while on *MacOS* go to your application and open *Terminal*), then paste the following command, replacing *\<your-username>* with your *actual username*:
 
 ```sh
 git config --global user.name "<your-username>"
@@ -159,9 +159,9 @@ Once you have created a repository, you should be automatically redirected to su
 
 To clone the repository locally, please click the *Code* green button, then copy the url, as shown in the example in @repo-link-copy.
 
-Finally, move in your preferred folder, open a terminal in such folder: most of the time you can find an option in right-click menu of your operating system. In case you are using *MacOS*, you can find how to do it in the #link("https://support.apple.com/en-gb/guide/terminal/trmlb20c7888/mac")[Official Apple support] website. In *Windows* you can write *cmd* in the Windows explorer path bar.
+Finally, move in your preferred folder, open a terminal in such folder: most of the time you can find an option in the right-click menu of your operating system. In case you are using *MacOS*, you can find how to do it on the #link("https://support.apple.com/en-gb/guide/terminal/trmlb20c7888/mac")[official Apple support] website. In *Windows* you can write *cmd* in the Windows Explorer path bar.
 
-In case you are not able to open a Terminal in such way, please open your terminal application and move between directories via the *cd* command. For example, supposing that your folder is in \ "C:\\Users\\user\\Desktop\\Folder", just run:
+In case you are not able to open a Terminal in such a way, please open your terminal application and move between directories via the *cd* command. For example, supposing that your folder is in \ "C:\\Users\\user\\Desktop\\Folder", just run:
 
 ```cmd
 cd C:\Users\user\Desktop\Folder

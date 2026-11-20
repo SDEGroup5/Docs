@@ -2,19 +2,19 @@
 
 pip is a package manager that allows to install python libraries in your system: in the lab, pip is used to install pytest, the test environment.
 
-Generally speaking, is a good practice to not install python libraries in the system globally, but it is preferable to install everything in a virtual environment: venv allow to do such operation.
+Generally speaking, it is a good practice to not install python libraries in the system globally, but it is preferable to install everything in a virtual environment: venv allows to do such an operation.
 
 == Venv installation
 
 While venv is *automatically* installed in both *Windows* and *MacOS* upon python installation, this is not the same for Linux.
 
-To install venv in *Debian based* Linux distributions (such as *Ubuntu*), run:
+To install venv in *Debian-based* Linux distributions (such as *Ubuntu*), run:
 
 ```sh
 sudo apt install python3-venv
 ```
 
-Arch based distribution usually include the package during the normal python installation.
+Arch-based distributions usually include the package during the normal python installation.
 
 == pip installation
 

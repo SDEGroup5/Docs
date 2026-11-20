@@ -8,7 +8,7 @@
 
 = Getting started with the laboratory
 
-== Obtaining the files and perform mandatory changes
+== Obtaining the files and performing mandatory changes
 
 First, get the latest compressed archive containing the laboratory files at the url: #link("https://github.com/SDEGroup5/github-actions/archive/refs/tags/v1.0.0.zip")
 
