@@ -29,7 +29,7 @@ To create an account, open a web browser and connect to #link("https://github.co
 
 When an important change has been implemented in the codebase, you should *commit* such changes and push it on GitHub. However, in order to commit, Git needs to know your identity, specifically your *username* and *email*. To allow GitHub to recognize who committed the code, it is a good practice to set as username and email the information used to create the GitHub account.
 
-Firstly, to setup your username, open a new *terminal* (in *Linux*, in *Windows* a *Command Prompt* instance can be used while on *MacOS* go to your application and open *Terminal*), then paste the following command, replacing *\<your-username>* with your *actual username*:
+Firstly, to set up your username, open a new *terminal* (in *Linux*, in *Windows* a *Command Prompt* instance can be used while on *MacOS* go to your application and open *Terminal*), then paste the following command, replacing *\<your-username>* with your *actual username*:
 
 ```sh
 git config --global user.name "<your-username>"
