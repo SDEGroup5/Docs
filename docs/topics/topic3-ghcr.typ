@@ -2,7 +2,9 @@
 #import "../lib/common.typ": mainColor
 
 #let ghcrBox(contents, size: 12.5pt) = block(
-  width: 100%, inset: 11pt, radius: 7pt,
+  width: 100%,
+  inset: 11pt,
+  radius: 7pt,
   fill: rgb("F3F5F8"),
 )[
   #show raw: set text(font: "DejaVu Sans Mono", size: size)
@@ -25,15 +27,15 @@
     columns: (48%, 1fr),
     column-gutter: 17pt,
     align: (left + top, center + top),
-    [#content],
-    [#image(picture, width: 100%, height: 260pt, fit: "contain")],
+    [#content], [#image(picture, width: 100%, height: 260pt, fit: "contain")],
   )
 ]
 
 // ---------- Core teaching ----------
 
 #ghcrPage(
-  "GitHub Action to create a Docker image", "0:35",
+  "GitHub Action to create a Docker image",
+  "0:35",
   [Publish a release, get a pullable container image],
   "../../img/topic3/ghcr/pipeline.svg",
   [
@@ -47,7 +49,8 @@
 )
 
 #ghcrPage(
-  "File overview", "0:45",
+  "File overview",
+  "0:45",
   [Four files, one publishing workflow],
   "../../img/topic3/ghcr/repo.svg",
   [
@@ -62,7 +65,8 @@
 )
 
 #ghcrPage(
-  "Workflow trigger", "0:40",
+  "Workflow trigger",
+  "0:40",
   [Publishing a GitHub Release starts the run],
   "../../img/topic3/ghcr/triggers.svg",
   [
@@ -98,18 +102,19 @@
 ])
 
 #ghcrPage(
-  "As always...", "0:40",
+  "As always...",
+  "0:40",
   [Prepare a fresh Ubuntu runner],
   "../../img/topic3/ghcr/builder.svg",
   [
     #v(20pt)
     #ghcrBox[
       ```yaml
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
+      build:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v7
       ```
     ]
     #v(20pt)
@@ -118,7 +123,8 @@
 )
 
 #ghcrPage(
-  "Set up the build environment", "0:40",
+  "Set up the build environment",
+  "0:40",
   [Install Docker Buildx and prepare for building the image],
   "../../img/topic3/ghcr/builder.svg",
   [
@@ -135,7 +141,8 @@
 )
 
 #ghcrPage(
-  "Build the binary first", "1:05",
+  "Build the binary first",
+  "1:05",
   [The first Docker build exports an executable],
   "../../img/topic3/ghcr/binary.svg",
   [
@@ -158,7 +165,8 @@
 )
 
 #ghcrPage(
-  "Authentication", "0:45",
+  "Authentication",
+  "0:45",
   [GitHub logs in to the container registry],
   "../../img/topic3/ghcr/login.svg",
   [
@@ -179,7 +187,8 @@
 )
 
 #ghcrPage(
-  "Build and push image", "0:55",
+  "Build and push image",
+  "0:55",
   [The second build packages and publishes `app`],
   "../../img/topic3/ghcr/build.svg",
   [
@@ -210,7 +219,7 @@
   #v(15pt)
   This workflow lowercases the repository name.
   #v(13pt)
-  *Tags:* 
+  *Tags:*
   + `1.0.0` is the release tag
   + `latest` is a conventional alias to set the most recent release
   + `sha` is the short commit SHA.
@@ -250,7 +259,8 @@
 //)
 
 #ghcrPage(
-  "Exercise", "1:10",
+  "Exercise",
+  "1:10",
   [Publish a release and prove the image runs],
   "../../img/topic3/ghcr/exercise.svg",
   [
@@ -267,7 +277,8 @@
 // The following are illustrated example outcomes, not screenshots of a real run.
 
 #ghcrPage(
-  "Solution: release and Action", "ANSWER KEY",
+  "Solution: release and Action",
+  "ANSWER KEY",
   [Proof 1: a published release starts the build],
   "../../img/topic3/ghcr/solution-release.svg",
   [
@@ -281,7 +292,8 @@
 )
 
 #ghcrPage(
-  "Solution: GHCR and Compose", "ANSWER KEY",
+  "Solution: GHCR and Compose",
+  "ANSWER KEY",
   [Proof 2: the tags and image path match],
   "../../img/topic3/ghcr/solution-ghcr.svg",
   [
@@ -303,12 +315,13 @@
 )
 
 #ghcrPage(
-  "Solution: run and test", "ANSWER KEY",
+  "Solution: run and test",
+  "ANSWER KEY",
   [Proof 3: your container answers an HTTP request],
   "../../img/topic3/ghcr/solution-local.svg",
   [
     From the repository root, with Docker running:
-    #ghcrBox(size: 11pt)[
+    #ghcrBox(size: 13pt)[
       ```sh
       cp .env.example .env
       docker compose up -d

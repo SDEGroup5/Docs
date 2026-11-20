@@ -72,11 +72,11 @@
     },
     [
       #text(size: 1.2em)[
-        - *Before starting*, please be sure to have *already* setup the environment
+        - *Before starting*, please be sure to have *already* set up the environment
 
         - All *instructions* and *materials* are on the *laboratory website*, along with exercise *hints* and *solutions*
 
-        - We will see the exercise *together*, so we made easier to *copy* the code we will write
+        - We will see the exercises *together*, so we made it easier to *copy* the code we will write
         #align(center)[
           #qrcode("https://sdegroup5.github.io", width: 5em)
           #link("sdegroup5.github.io")
@@ -117,7 +117,7 @@
     ]
   ]
 
-  
+
 
   #align(center)[
     #block(
@@ -228,7 +228,7 @@
 
       #v(0.1em)
       #hint(txtSize: 1em)[
-        Jobs can be made sequential using `needs`: e.g. run `deploy` only after `test` passes.
+        Jobs can be made sequential using `needs`: e.g., run `deploy` only after `test` passes.
       ]
     ],
   )
@@ -351,7 +351,7 @@ jobs:                            # 2. JOBS: Units of work
 
 // Slide 6b: GitHub-hosted vs Self-hosted Runners
 #slide("Runners: GitHub-Hosted vs. Self-Hosted", 1)[
-  #set text(size: 1.4em)
+  #set text(size: 1.42em)
   The `runs-on:` keyword defines *where* your job executes:
 
   #show grid: set text(size: 1.1em)

@@ -1,4 +1,4 @@
-#import "../lib/commonSlide.typ": slide
+#import "../lib/commonSlide.typ": hint, slide
 
 #slide("Automating Testing with GitHub Actions", 2)[
   #align(center + horizon)[
@@ -60,7 +60,7 @@
       \
       - Tests are already provided
       \
-      - A .env file allow to change the JSON file path
+      - A .env file allows to change the JSON file path
     ],
     [
       #show text: set text(size: 0.9em)
@@ -254,7 +254,7 @@
     ],
   )
   #place(dy: -23.5em)[
-    #rect(stroke: 2pt + red, width: 75%, height: 42%)
+    #rect(stroke: 2pt + red, width: 75%, height: 52%)
   ]
 ]
 
@@ -608,8 +608,8 @@
 
       \
       Now, what happens if you run the tests while feeding
-      the program an _invalid_ #h(0.3em) JSON file or break something in
-      the code?
+      the program an _invalid_ #h(0.3em) JSON file or with
+      an _altered_ test?
     ]
   ]
 ]
@@ -626,9 +626,9 @@
       [
         #text(size: 1.7em)[
           - The *code coverage* is the amount of the program's statements that
-            is invoked by a given test suite.
+            are invoked by a given test suite.
 
-          - Given the total amount of *Statements* (*_Stmts_*), it shows how many line where *not executed* (*_Miss_*) and calculate how many *were executed* with respect to the total (*_Cover_*)
+          - Given the total amount of *Statements* (*_Stmts_*), it shows how many lines were *not executed* (*_Miss_*) and calculate how many *were executed* with respect to the total (*_Cover_*)
 
           - *Pytest* is able to compute code coverage thanks to the `pytest-cov` module
 
@@ -831,7 +831,8 @@
 
 #slide("Exercise", 2)[
   #grid(
-    columns: (70%, 30%),
+    columns: (50%, 50%),
+    inset: 0.5em,
     align: (x, y) => if (x == 0) {
       left + horizon
     } else {
@@ -842,10 +843,6 @@
 
         - *Complete* the GitHub action workflow ( `.github/workflows/python-app.yml`)
 
-        - *Test* the script locally with both a valid and invalid JSON file like
-          in the previous exercise to ensure it works. Use:
-          ```sh python3 .github/scripts/execute_tests.py```
-
         - *Commit* and *push* the changes to see the tests running in your GitHub repository. Use:
           ```sh
           git add .
@@ -853,18 +850,19 @@
           git push
           ```
 
-        *Instructions and TODOs are found in the file itself as comments, while you can find these instructions and some tips on #link("sdegroup5.github.io")*
+        - *Test* the GitHub action with both an invalid and a valid JSON file like
+          in the previous exercise to experiment what happens in case of success *and* failure
+
+        *Instructions and TODOs are found in the file itself as comments. You can also find everything on #link("sdegroup5.github.io")*
       ]
     ],
     [
-      #image("/img/topic2/python.png", width: 60%)
-
-      #underline()[
-        #text(size: 1.7em)[
-          *This script will be used in the rest of the exercises
-          for this lab, if there's any problems raise your hand.*
-        ]
-      ]
+      #image("/img/topic2/action.png", width: 100%)
+      #place(dy: -55%)[#rect(stroke: 3pt + red, width: 5em)]
+      #hint([
+        #align(center)[*Note*]
+        You can see the results of all runned workflow under the *Actions* tab of your repository
+      ])
     ],
   )
 ]
@@ -873,7 +871,8 @@
 #slide("Solutions: exercise", 2)[
   #show text: set text(size: 1.7em)
   #grid(
-    columns: (65%, 35%),
+    columns: (50%, 50%),
+    inset: 0.5em,
     align: (x, y) => if (x == 0) {
       left + horizon
     } else {
@@ -886,24 +885,29 @@
         run: python3 .github/scripts/execute_tests.py
 
       ```
-      This ensures the action is run automatically whenever a
-      _push_ \ event is triggered.
+      Notice how the action is run automatically whenever a
+      _push_ #h(0.2em) event is triggered.
     ],
     [
       #align(center + horizon)[
-        #image("../../img/topic2/python.png", width: 60%)
-        #underline()[
-          *This script will be used in the rest of the exercises
-          for this lab, if there's any problems raise your hand.*]
+        #image("../../img/topic2/action.png", width: 100%)
+        #place(dy: -72%)[#rect(stroke: 3pt + red, width: 5em)]
+        #hint(
+          [
+            #align(center)[*Note*]
+            You can see the results of all runned workflow under the *Actions* tab of your repository
+          ],
+          txtSize: 0.8em,
+        )
       ]
     ],
   )
 ]
 
-#slide("A short break", 2)[
+#slide("Short break", 2)[
   #align(center + horizon)[
     #image("/img/topic2/mdi--coffee.svg", width: 20%)
-    #text(size: 2em)[*_Roses are red, violets are blue, I need a coffee, you'll need one too._*]
+    #text(size: 2em)[*_Roses are red, violets are blue, I need a coffee, you'll need one too_*]
     #v(1em)
     #text(size: 1.1em)[_Just kidding... Maybe..._]
   ]
