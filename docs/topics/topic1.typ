@@ -528,10 +528,7 @@ uses: actions/checkout@v7
 uses: actions/setup-python@v7
 
 # Exact version (fully pinned)
-uses: actions/checkout@v7.1.2
-
-# Commit SHA (most secure)
-uses: actions/checkout@abc1234",
+uses: actions/checkout@v7.1.2,
           block: true,
           lang: "yaml",
         ),
