@@ -27,4 +27,18 @@ git commit -m "Uploaded lab files"
 git push
 ```
 
-Verify that the upload completed successfully, then you successfully completed the laboratory setup.
+Verify that the upload completed successfully.
+
+As for the last step, from the Visual Studio Code, run:
+
+```sh
+python3 -m venv .venv
+```
+
+Then run:
+
+```sh
+source .venv/bin/activate
+
+pip install -r requirements.txt
+```

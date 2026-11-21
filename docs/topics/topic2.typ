@@ -582,31 +582,80 @@
   ]
 ]
 
-#slide("Testing a Python program (1/2)", 2)[
+#slide("Testing a Python program: guided example (1/2)", 2)[
   #align(center)[
-    #show text: set text(size: 1.7em)
+    #show text: set text(size: 1.65em)
     *Running test locally*
 
 
+    #grid(
+      columns: (50%, 50%),
+      inset: 1em,
+      align: (x, y) => {
+        if (y == 0) {
+          center + horizon
+        } else {
+          left + horizon
+        }
+      },
+      [
+        *Linux/MacOS*
+      ],
+      [
+        *Windows*
+      ],
+
+      [
+        Create the virtual environment
+        ```sh
+        python3 -m venv .venv
+        ```
+
+        \
+        Activate the virtual environment:
+        ```sh
+        source .venv/bin/activate
+        ```
+
+        \
+        Install missing requirements:
+        ```sh
+        pip install -r requirements.txt
+        ```
+
+        \
+        Run the tests:
+        ```sh
+        python -m pytest test/test.py
+        ```
+      ],
+      [
+        Create the virtual environment
+        ```sh
+        py -m venv .venv
+        ```
+
+        \
+        Activate the virtual environment:
+        ```sh
+        .venv\Scripts\activate.bat
+        ```
+
+        \
+        Install missing requirements:
+        ```sh
+        pip install -r requirements.txt
+        ```
+
+        \
+        Run the tests:
+        ```sh
+        python -m pytest test/test.py
+        ```
+      ],
+    )
+
     #align(left)[
-      Activate the virtual environment:
-      ```sh
-      source .venv/bin/activate
-      ```
-
-      \
-      Install missing requirements:
-      ```sh
-      pip install -r requirements.txt
-      ```
-
-      \
-      Run the tests:
-      ```sh
-      python -m pytest test/test.py
-      ```
-
-      \
       Now, what happens if you run the tests while feeding
       the program an _invalid_ #h(0.3em) JSON file or with
       an _altered_ test?
@@ -614,10 +663,11 @@
   ]
 ]
 
-#slide("Testing a Python program (2/2)", 2)[
+#slide("Testing a Python program: guided example  (2/2)", 2)[
   #align(center + horizon)[
     #grid(
       columns: (50%, 50%),
+      inset: 1em,
       align: (x, y) => if (x == 0) {
         left + horizon
       } else {
@@ -641,9 +691,21 @@
         #show figure.caption: set text(size: 1.4em)
         #figure(
           caption: "An example of coverage output",
-          image("../../img/topic2/cover_output.png", width: 100%),
+          image("../../img/topic2/cover_output.png", width: 110%),
         )
 
+        #v(1em)
+
+        #hint(
+          [
+            #align(center)[*Note*]
+            You can try to calculate the code coverage yourself by running, from inside the virtual environment:
+            ```sh
+            python -m pytest test/test.py --cov=src/controller --cov=src/server --cov=src/service
+            ```
+          ],
+          txtSize: 1.5em,
+        )
       ],
     )
   ]

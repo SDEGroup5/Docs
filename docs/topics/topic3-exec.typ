@@ -508,7 +508,7 @@
 // run during the previous parts (the build takes about two minutes).
 // Starter workflow and site text: docs/topics/topic3-exec-exercise-starter.md
 
-#slide("Now you try: start the build", 3)[
+#slide("Exercise", 3)[
   #body(compact: true)[
     In your repository, the build workflow does not start yet: it only runs on the branch written in `branches`.
     #v(16pt)
@@ -545,7 +545,7 @@
   ]
 ]
 
-#slide("Solution: start the build", 3)[
+#slide("Solution: exercise", 3)[
   #body(compact: true)[
     The trigger decides *whether* the workflow starts. Both versions below are correct.
     #v(16pt)
