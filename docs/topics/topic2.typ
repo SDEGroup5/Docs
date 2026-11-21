@@ -53,11 +53,6 @@
       - The endpoint returns some sample data read from a JSON file
 
       \
-      - Run with\
-        ```sh pyhton -m src.main```\
-        *from within the `app` directory* and in the virtual environment
-
-      \
       - Tests are already provided
       \
       - A .env file allows to change the JSON file path
