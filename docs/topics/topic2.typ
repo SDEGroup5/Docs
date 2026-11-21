@@ -606,7 +606,7 @@
       ],
 
       [
-        Create the virtual environment
+        Create the virtual environment:
         ```sh
         python3 -m venv .venv
         ```
@@ -630,7 +630,7 @@
         ```
       ],
       [
-        Create the virtual environment
+        Create the virtual environment:
         ```sh
         py -m venv .venv
         ```
